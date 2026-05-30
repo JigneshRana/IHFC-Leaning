@@ -1,0 +1,6 @@
+# Analyzing Customer Orders — Python project
+# Core analysis uses the standard library only (json, pathlib, collections).
+#
+# Uncomment for Jupyter-based exploration:
+# jupyter>=1.0.0
+# notebook>=7.0.0

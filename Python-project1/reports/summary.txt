@@ -1,0 +1,98 @@
+============================================================
+TASK 1: CUSTOMER ORDER DATA
+============================================================
+Customer names (list, count=10):
+  - Alice Johnson
+  - Bob Smith
+  - Carol Williams
+  - David Brown
+  - Emma Davis
+  - Frank Miller
+  - Grace Lee
+  - Henry Wilson
+  - Ivy Martinez
+  - Jack Thompson
+
+Total orders as tuples (list, count=100):
+  Sample first order: ('Alice Johnson', 'Laptop', 899.99, 'Electronics')
+
+Customer -> products (dictionary):
+  Alice Johnson: 10 unique product(s)
+  Bob Smith: 10 unique product(s)
+  Carol Williams: 8 unique product(s)
+  David Brown: 12 unique product(s)
+  Emma Davis: 4 unique product(s)
+  Frank Miller: 11 unique product(s)
+  Grace Lee: 11 unique product(s)
+  Henry Wilson: 5 unique product(s)
+  Ivy Martinez: 10 unique product(s)
+  Jack Thompson: 12 unique product(s)
+
+Dictionary demo — keys: 10 customers
+  .get('Alice Johnson'): 10 products
+
+============================================================
+TASK 2: PRODUCT CATEGORIES
+============================================================
+Product -> category mappings: 30 products
+Unique categories (set): ['Clothing', 'Electronics', 'Home Essentials']
+  Clothing: 10 products in catalog
+  Electronics: 10 products in catalog
+  Home Essentials: 10 products in catalog
+
+============================================================
+TASK 3: CUSTOMER SPENDING & CLASSIFICATION
+============================================================
+Rules: >$100 high | $50–$100 moderate | <$50 low
+
+  Alice Johnson           $3,618.90  ->  high-value buyer
+  Bob Smith                 $516.89  ->  high-value buyer
+  Carol Williams            $180.43  ->  high-value buyer
+  David Brown             $2,681.41  ->  high-value buyer
+  Emma Davis                 $83.94  ->  moderate buyer
+  Frank Miller            $1,318.90  ->  high-value buyer
+  Grace Lee                 $871.89  ->  high-value buyer
+  Henry Wilson               $81.95  ->  moderate buyer
+  Ivy Martinez            $3,959.41  ->  high-value buyer
+  Jack Thompson             $314.88  ->  high-value buyer
+
+High-value buyers (8): Alice Johnson, Bob Smith, Carol Williams, David Brown, Frank Miller, Grace Lee, Ivy Martinez, Jack Thompson
+Moderate buyers (2): Emma Davis, Henry Wilson
+Low-value buyers (0): none
+
+============================================================
+TASK 4: BUSINESS INSIGHTS
+============================================================
+Total revenue per category:
+  Clothing             $1,367.70
+  Electronics          $11,425.70
+  Home Essentials      $835.20
+
+Unique products ordered (set, count=30):
+  Baseball Cap, Bath Towel Set, Bluetooth Headphones, Candle Set, Coffee Maker, Cookbook, Cotton T-Shirt, Cutting Board, Denim Jeans, Dress Shirt, Gaming Keyboard, Hoodie, Kitchen Blender, LED Desk Lamp, Laptop, Polo Shirt, Portable Charger, Running Shoes, Smart Watch, Smartphone, Socks Pack, Storage Baskets, Tablet, Throw Pillow, USB-C Hub, Vacuum Bags, Webcam, Winter Jacket, Wireless Mouse, Yoga Pants
+
+Customers who purchased Electronics (list comprehension):
+  Alice Johnson, David Brown, Frank Miller, Grace Lee, Ivy Martinez, Jack Thompson
+
+Top 3 highest-spending customers:
+  1. Ivy Martinez — $3,959.41
+  2. Alice Johnson — $3,618.90
+  3. David Brown — $2,681.41
+
+============================================================
+TASK 5: SET OPERATIONS & CROSS-CATEGORY ANALYSIS
+============================================================
+Customers who purchased from multiple categories:
+  David Brown, Emma Davis, Frank Miller, Grace Lee, Henry Wilson, Ivy Martinez, Jack Thompson
+
+Customers who bought BOTH Electronics AND Clothing:
+  David Brown, Frank Miller, Grace Lee, Jack Thompson
+
+============================================================
+KEY BUSINESS INSIGHTS (SUMMARY)
+============================================================
+1. Electronics generates the highest revenue ($11,425.70), suggesting inventory and marketing should prioritize this category.
+2. 8 of 10 customers are high-value buyers; target loyalty programs at the top 3 spenders to protect revenue concentration.
+3. 7 customers shop across multiple categories — ideal for cross-sell bundles and combined promotions.
+4. 4 customers buy both Electronics and Clothing — consider tech-accessory bundles with apparel campaigns.
+5. Catalog has 30 distinct products ordered across 3 categories — monitor Home Essentials for growth opportunities.

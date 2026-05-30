@@ -1,0 +1,922 @@
+{
+  "project": "Analyzing Customer Orders Using Python",
+  "version": "2.0.0",
+  "currency": "USD",
+  "description": "E-commerce customer order dataset with 10 customers and 100 orders across Electronics, Clothing, and Home Essentials.",
+  "customer_names": [
+    "Alice Johnson",
+    "Bob Smith",
+    "Carol Williams",
+    "David Brown",
+    "Emma Davis",
+    "Frank Miller",
+    "Grace Lee",
+    "Henry Wilson",
+    "Ivy Martinez",
+    "Jack Thompson"
+  ],
+  "product_categories": {
+    "Laptop": "Electronics",
+    "Wireless Mouse": "Electronics",
+    "Smartphone": "Electronics",
+    "Bluetooth Headphones": "Electronics",
+    "Smart Watch": "Electronics",
+    "USB-C Hub": "Electronics",
+    "Tablet": "Electronics",
+    "Webcam": "Electronics",
+    "Portable Charger": "Electronics",
+    "Gaming Keyboard": "Electronics",
+    "Cotton T-Shirt": "Clothing",
+    "Denim Jeans": "Clothing",
+    "Polo Shirt": "Clothing",
+    "Winter Jacket": "Clothing",
+    "Running Shoes": "Clothing",
+    "Hoodie": "Clothing",
+    "Socks Pack": "Clothing",
+    "Baseball Cap": "Clothing",
+    "Dress Shirt": "Clothing",
+    "Yoga Pants": "Clothing",
+    "Kitchen Blender": "Home Essentials",
+    "Bath Towel Set": "Home Essentials",
+    "LED Desk Lamp": "Home Essentials",
+    "Cookbook": "Home Essentials",
+    "Throw Pillow": "Home Essentials",
+    "Storage Baskets": "Home Essentials",
+    "Coffee Maker": "Home Essentials",
+    "Cutting Board": "Home Essentials",
+    "Candle Set": "Home Essentials",
+    "Vacuum Bags": "Home Essentials"
+  },
+  "unique_categories": [
+    "Electronics",
+    "Clothing",
+    "Home Essentials"
+  ],
+  "orders": [
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Laptop",
+      "price": 899.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Wireless Mouse",
+      "price": 29.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Smartphone",
+      "price": 699.0,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Bluetooth Headphones",
+      "price": 89.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "USB-C Hub",
+      "price": 45.0,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Webcam",
+      "price": 59.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Portable Charger",
+      "price": 34.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Gaming Keyboard",
+      "price": 129.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Tablet",
+      "price": 449.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Smart Watch",
+      "price": 249.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Laptop",
+      "price": 899.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Alice Johnson",
+      "product": "Wireless Mouse",
+      "price": 29.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Cotton T-Shirt",
+      "price": 24.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Denim Jeans",
+      "price": 49.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Polo Shirt",
+      "price": 34.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Running Shoes",
+      "price": 79.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Hoodie",
+      "price": 44.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Socks Pack",
+      "price": 12.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Baseball Cap",
+      "price": 19.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Dress Shirt",
+      "price": 54.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Yoga Pants",
+      "price": 38.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Winter Jacket",
+      "price": 129.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Bob Smith",
+      "product": "Cotton T-Shirt",
+      "price": 24.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Carol Williams",
+      "product": "Kitchen Blender",
+      "price": 39.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Carol Williams",
+      "product": "Bath Towel Set",
+      "price": 19.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Carol Williams",
+      "product": "Cookbook",
+      "price": 14.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Carol Williams",
+      "product": "Candle Set",
+      "price": 16.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Carol Williams",
+      "product": "Vacuum Bags",
+      "price": 11.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Carol Williams",
+      "product": "LED Desk Lamp",
+      "price": 32.5,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Carol Williams",
+      "product": "Storage Baskets",
+      "price": 18.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Carol Williams",
+      "product": "Throw Pillow",
+      "price": 24.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Smartphone",
+      "price": 699.0,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Bluetooth Headphones",
+      "price": 89.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Polo Shirt",
+      "price": 34.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Winter Jacket",
+      "price": 129.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Laptop",
+      "price": 899.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Denim Jeans",
+      "price": 49.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Kitchen Blender",
+      "price": 39.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "LED Desk Lamp",
+      "price": 32.5,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "USB-C Hub",
+      "price": 45.0,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Running Shoes",
+      "price": 79.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Tablet",
+      "price": 449.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "David Brown",
+      "product": "Gaming Keyboard",
+      "price": 129.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Emma Davis",
+      "product": "Cookbook",
+      "price": 14.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Emma Davis",
+      "product": "Candle Set",
+      "price": 16.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Emma Davis",
+      "product": "Vacuum Bags",
+      "price": 11.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Emma Davis",
+      "product": "Socks Pack",
+      "price": 12.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Emma Davis",
+      "product": "Cookbook",
+      "price": 14.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Emma Davis",
+      "product": "Vacuum Bags",
+      "price": 11.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Smart Watch",
+      "price": 249.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Winter Jacket",
+      "price": 129.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Throw Pillow",
+      "price": 24.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "USB-C Hub",
+      "price": 45.0,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Storage Baskets",
+      "price": 18.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Tablet",
+      "price": 449.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Hoodie",
+      "price": 44.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Coffee Maker",
+      "price": 79.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Gaming Keyboard",
+      "price": 129.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Dress Shirt",
+      "price": 54.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Frank Miller",
+      "product": "Bluetooth Headphones",
+      "price": 89.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Tablet",
+      "price": 449.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Wireless Mouse",
+      "price": 29.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Cotton T-Shirt",
+      "price": 24.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Polo Shirt",
+      "price": 34.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Webcam",
+      "price": 59.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Yoga Pants",
+      "price": 38.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Portable Charger",
+      "price": 34.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Hoodie",
+      "price": 44.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Bluetooth Headphones",
+      "price": 89.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Socks Pack",
+      "price": 12.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Grace Lee",
+      "product": "Denim Jeans",
+      "price": 49.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Henry Wilson",
+      "product": "Cotton T-Shirt",
+      "price": 24.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Henry Wilson",
+      "product": "Socks Pack",
+      "price": 12.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Henry Wilson",
+      "product": "Cookbook",
+      "price": 14.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Henry Wilson",
+      "product": "Candle Set",
+      "price": 16.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Henry Wilson",
+      "product": "Vacuum Bags",
+      "price": 11.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Laptop",
+      "price": 899.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Smartphone",
+      "price": 699.0,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Kitchen Blender",
+      "price": 39.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Coffee Maker",
+      "price": 79.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Bluetooth Headphones",
+      "price": 89.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Bath Towel Set",
+      "price": 19.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Tablet",
+      "price": 449.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "LED Desk Lamp",
+      "price": 32.5,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Wireless Mouse",
+      "price": 29.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Storage Baskets",
+      "price": 18.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Laptop",
+      "price": 899.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Ivy Martinez",
+      "product": "Smartphone",
+      "price": 699.0,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Kitchen Blender",
+      "price": 39.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Bath Towel Set",
+      "price": 19.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Cookbook",
+      "price": 14.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Candle Set",
+      "price": 16.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Vacuum Bags",
+      "price": 11.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Polo Shirt",
+      "price": 34.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Webcam",
+      "price": 59.99,
+      "category": "Electronics"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Socks Pack",
+      "price": 12.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Baseball Cap",
+      "price": 19.99,
+      "category": "Clothing"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Throw Pillow",
+      "price": 24.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Cutting Board",
+      "price": 22.99,
+      "category": "Home Essentials"
+    },
+    {
+      "customer_name": "Jack Thompson",
+      "product": "Portable Charger",
+      "price": 34.99,
+      "category": "Electronics"
+    }
+  ],
+  "customer_products": {
+    "Alice Johnson": [
+      "Laptop",
+      "Wireless Mouse",
+      "Smartphone",
+      "Bluetooth Headphones",
+      "USB-C Hub",
+      "Webcam",
+      "Portable Charger",
+      "Gaming Keyboard",
+      "Tablet",
+      "Smart Watch"
+    ],
+    "Bob Smith": [
+      "Cotton T-Shirt",
+      "Denim Jeans",
+      "Polo Shirt",
+      "Running Shoes",
+      "Hoodie",
+      "Socks Pack",
+      "Baseball Cap",
+      "Dress Shirt",
+      "Yoga Pants",
+      "Winter Jacket"
+    ],
+    "Carol Williams": [
+      "Kitchen Blender",
+      "Bath Towel Set",
+      "Cookbook",
+      "Candle Set",
+      "Vacuum Bags",
+      "LED Desk Lamp",
+      "Storage Baskets",
+      "Throw Pillow"
+    ],
+    "David Brown": [
+      "Smartphone",
+      "Bluetooth Headphones",
+      "Polo Shirt",
+      "Winter Jacket",
+      "Laptop",
+      "Denim Jeans",
+      "Kitchen Blender",
+      "LED Desk Lamp",
+      "USB-C Hub",
+      "Running Shoes",
+      "Tablet",
+      "Gaming Keyboard"
+    ],
+    "Emma Davis": [
+      "Cookbook",
+      "Candle Set",
+      "Vacuum Bags",
+      "Socks Pack"
+    ],
+    "Frank Miller": [
+      "Smart Watch",
+      "Winter Jacket",
+      "Throw Pillow",
+      "USB-C Hub",
+      "Storage Baskets",
+      "Tablet",
+      "Hoodie",
+      "Coffee Maker",
+      "Gaming Keyboard",
+      "Dress Shirt",
+      "Bluetooth Headphones"
+    ],
+    "Grace Lee": [
+      "Tablet",
+      "Wireless Mouse",
+      "Cotton T-Shirt",
+      "Polo Shirt",
+      "Webcam",
+      "Yoga Pants",
+      "Portable Charger",
+      "Hoodie",
+      "Bluetooth Headphones",
+      "Socks Pack",
+      "Denim Jeans"
+    ],
+    "Henry Wilson": [
+      "Cotton T-Shirt",
+      "Socks Pack",
+      "Cookbook",
+      "Candle Set",
+      "Vacuum Bags"
+    ],
+    "Ivy Martinez": [
+      "Laptop",
+      "Smartphone",
+      "Kitchen Blender",
+      "Coffee Maker",
+      "Bluetooth Headphones",
+      "Bath Towel Set",
+      "Tablet",
+      "LED Desk Lamp",
+      "Wireless Mouse",
+      "Storage Baskets"
+    ],
+    "Jack Thompson": [
+      "Kitchen Blender",
+      "Bath Towel Set",
+      "Cookbook",
+      "Candle Set",
+      "Vacuum Bags",
+      "Polo Shirt",
+      "Webcam",
+      "Socks Pack",
+      "Baseball Cap",
+      "Throw Pillow",
+      "Cutting Board",
+      "Portable Charger"
+    ]
+  },
+  "classification_rules": {
+    "high_value_buyer": {
+      "label": "high-value buyer",
+      "condition": "total_spending > 100"
+    },
+    "moderate_buyer": {
+      "label": "moderate buyer",
+      "condition": "50 <= total_spending <= 100"
+    },
+    "low_value_buyer": {
+      "label": "low-value buyer",
+      "condition": "total_spending < 50"
+    }
+  },
+  "expected_analysis": {
+    "customer_total_spending": {
+      "Alice Johnson": 3618.9,
+      "Bob Smith": 516.89,
+      "Carol Williams": 180.43,
+      "David Brown": 2681.41,
+      "Emma Davis": 83.94,
+      "Frank Miller": 1318.9,
+      "Grace Lee": 871.89,
+      "Henry Wilson": 81.95,
+      "Ivy Martinez": 3959.41,
+      "Jack Thompson": 314.88
+    },
+    "customer_classification": {
+      "Alice Johnson": "high-value buyer",
+      "Bob Smith": "high-value buyer",
+      "Carol Williams": "high-value buyer",
+      "David Brown": "high-value buyer",
+      "Emma Davis": "moderate buyer",
+      "Frank Miller": "high-value buyer",
+      "Grace Lee": "high-value buyer",
+      "Henry Wilson": "moderate buyer",
+      "Ivy Martinez": "high-value buyer",
+      "Jack Thompson": "high-value buyer"
+    },
+    "revenue_by_category": {
+      "Electronics": 11425.7,
+      "Clothing": 1367.7,
+      "Home Essentials": 835.2
+    },
+    "unique_products_ordered": [
+      "Baseball Cap",
+      "Bath Towel Set",
+      "Bluetooth Headphones",
+      "Candle Set",
+      "Coffee Maker",
+      "Cookbook",
+      "Cotton T-Shirt",
+      "Cutting Board",
+      "Denim Jeans",
+      "Dress Shirt",
+      "Gaming Keyboard",
+      "Hoodie",
+      "Kitchen Blender",
+      "LED Desk Lamp",
+      "Laptop",
+      "Polo Shirt",
+      "Portable Charger",
+      "Running Shoes",
+      "Smart Watch",
+      "Smartphone",
+      "Socks Pack",
+      "Storage Baskets",
+      "Tablet",
+      "Throw Pillow",
+      "USB-C Hub",
+      "Vacuum Bags",
+      "Webcam",
+      "Winter Jacket",
+      "Wireless Mouse",
+      "Yoga Pants"
+    ],
+    "customers_who_purchased_electronics": [
+      "Alice Johnson",
+      "David Brown",
+      "Frank Miller",
+      "Grace Lee",
+      "Ivy Martinez",
+      "Jack Thompson"
+    ],
+    "top_three_highest_spending_customers": [
+      {
+        "rank": 1,
+        "customer_name": "Ivy Martinez",
+        "total_spending": 3959.41
+      },
+      {
+        "rank": 2,
+        "customer_name": "Alice Johnson",
+        "total_spending": 3618.9
+      },
+      {
+        "rank": 3,
+        "customer_name": "David Brown",
+        "total_spending": 2681.41
+      }
+    ],
+    "customers_with_multiple_categories": [
+      "David Brown",
+      "Emma Davis",
+      "Frank Miller",
+      "Grace Lee",
+      "Henry Wilson",
+      "Ivy Martinez",
+      "Jack Thompson"
+    ],
+    "customers_electronics_and_clothing": [
+      "David Brown",
+      "Frank Miller",
+      "Grace Lee",
+      "Jack Thompson"
+    ],
+    "high_value_customers": [
+      "Alice Johnson",
+      "Bob Smith",
+      "Carol Williams",
+      "David Brown",
+      "Frank Miller",
+      "Grace Lee",
+      "Ivy Martinez",
+      "Jack Thompson"
+    ],
+    "moderate_buyers": [
+      "Emma Davis",
+      "Henry Wilson"
+    ],
+    "low_value_buyers": []
+  },
+  "statistics": {
+    "total_customers": 10,
+    "total_orders": 100,
+    "orders_per_customer": {
+      "Alice Johnson": 12,
+      "Bob Smith": 11,
+      "Carol Williams": 8,
+      "David Brown": 12,
+      "Emma Davis": 6,
+      "Frank Miller": 11,
+      "Grace Lee": 11,
+      "Henry Wilson": 5,
+      "Ivy Martinez": 12,
+      "Jack Thompson": 12
+    },
+    "total_products_in_catalog": 30,
+    "unique_products_ordered_count": 30
+  }
+}
