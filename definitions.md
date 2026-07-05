@@ -28,6 +28,17 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Machine Learning Use Case**: Descriptive statistics are used to baseline models (such as comparing MAE against standard deviation). Inferential statistics are used to compare model accuracies across cross-validation folds.
 *   **Real-world Scenario**: A supermarket analyzes last month's customer purchase histories (Descriptive) to see which items were popular, and uses that sample to estimate demand for next month's inventory (Inferential).
 
+#### Quick Comparison Table:
+| Dimension | Descriptive Statistics | Inferential Statistics |
+| :--- | :--- | :--- |
+| **Main Goal** | Summarize and describe the data we have. | Make predictions/generalizations about a larger population. |
+| **Data Scope** | Focused only on the collected sample dataset. | Extends findings from a sample to the entire population. |
+| **Outputs** | Tables, graphs, charts, and summary numbers (mean, SD). | Probability estimates, hypothesis tests, and confidence levels. |
+| **Key Tools** | Mean, Median, Mode, Range, Variance, Bar/Line charts. | t-tests, ANOVA, Chi-Square tests, Regression, p-values. |
+| **Core Question** | *"What does our current dataset look like?"* | *"What does this sample tell us about the whole group?"* |
+
+
+
 ### Mean
 *   **Layman Explanation**: The "fair share" or simple average. If you pool everyone's money together and divide it equally, this is what everyone gets.
 *   **Technical Explanation**: The sum of all values divided by the total count. 
