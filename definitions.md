@@ -121,6 +121,8 @@ This document provides intuitive, technical, and applied explanations for key Da
 
 ## 2. Data Analysis & Variables
 
+#### 📊 Foundational Disciplines & Roles
+
 ### Data Science
 *   **Layman Explanation**: Using data to solve real-world puzzles. It's like being a detective who collects clues (data), analyzes patterns, and makes predictions to help businesses make smart choices.
 *   **Technical Explanation**: An interdisciplinary field that combines scientific methods, programming algorithms, statistics, and domain expertise to extract knowledge and actionable insights from structured and unstructured data.
@@ -149,7 +151,11 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Machine Learning Use Case**: Evaluating the financial ROI of deploying an ML model versus continuing with manual operations.
 *   **Real-world Scenario**: A BA interviews warehouse staff to map out the shipping process, identifies a bottleneck in label printing, and designs requirements for a new automated sorting system.
 
+#### 🗂️ Core Data Classifications
+
 ### Numerical Data (Discrete & Continuous)
+![Classification of Data Types Tree Diagram Infographic](images/data_types_tree.jpg)
+
 *   **Layman Explanation**: 
     *   *Discrete*: Countable whole numbers, like counting coins (e.g., "I have 3 apples"). You can't have 3.5 apples.
     *   *Continuous*: Measurable decimal numbers, like temperature or weight (e.g., "The temperature is 24.5 degrees").
@@ -167,6 +173,8 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Machine Learning Use Case**: Deciding on encoding schemes: One-Hot Encoding is used for nominal categories, while Ordinal/Integer Encoding is used for ordinal categories to preserve hierarchy.
 *   **Real-world Scenario**: A surveyor asks customers for their "State of residence" (Nominal) and their "Level of education" (Ordinal: High School, Bachelor's, Master's).
 
+#### 🎯 Variables & Modeling Roles
+
 ### Target Variable (Dependent Variable)
 *   **Layman Explanation**: The "outcome" or "result" you want to guess or predict.
 *   **Technical Explanation**: The variable ($Y$) whose value is modeled and predicted by one or more independent variables ($X$).
@@ -181,7 +189,11 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Machine Learning Use Case**: The inputs fed into model training algorithms (e.g., the columns of the X_train matrix) to learn prediction patterns.
 *   **Real-world Scenario**: When predicting house prices, the features include the number of bedrooms, square footage, zip code, distance to the nearest train station, and age of the building.
 
+#### 🔍 Statistical Scopes of Analysis
+
 ### Univariate, Bivariate, and Multivariate Analysis
+![Univariate, Bivariate, and Multivariate Analysis Comparison Infographic](images/variable_analyses_comparison.jpg)
+
 *   **Layman Explanation**: 
     *   *Univariate*: Looking at one thing (e.g., "How old are our customers?").
     *   *Bivariate*: Looking at two things together to see if they relate (e.g., "Do older customers spend more money?").
@@ -199,6 +211,8 @@ This document provides intuitive, technical, and applied explanations for key Da
 ## 3. Data Cleaning & Wrangling
 
 ### Imputation
+![Data Cleaning & Missing Value Imputation Workflow Flowchart](images/wrangling_imputation_flow.jpg)
+
 *   **Layman Explanation**: Filling in the blanks. If a database is missing a customer's age, you fill it in with a smart guess (like the average age of all other customers) instead of leaving it blank.
 *   **Technical Explanation**: The process of replacing missing values (NaN, null) with substituted values based on statistics or modeling algorithms.
     *   **Imputation Thresholds**:
@@ -211,6 +225,17 @@ This document provides intuitive, technical, and applied explanations for key Da
             *   **Numerical Data**: Impute with **Mean** (if distribution is normal and has no outliers) or **Median** (if distribution contains significant outliers).
             *   **Categorical Data**: Impute with **Mode** (most frequent class).
             *   **DateTime Data**.
+
+    *   **Decision Matrix (Which Method to Use When)**:
+        | Scenario / Data Type | Recommended Action | Rationale |
+        | :--- | :--- | :--- |
+        | **Missing rate > 40%** | **Drop Column** | Too little signal to rebuild; dropping is safer (verify with RA/BA first if critical). |
+        | **Time-Series / Sequence** | **Forward Fill (`ffill`) / Backward Fill (`bfill`)** | Preserves continuous trends by copying adjacent observations. |
+        | **Numerical (Symmetrical, no outliers)** | **Mean Imputation** | Preserves the overall sum and mean when data is normally distributed. |
+        | **Numerical (Skewed / Outliers present)** | **Median Imputation** | Robust to outliers; avoids pulling the centers towards extremes. |
+        | **Categorical (Nominal or Ordinal)** | **Mode Imputation** | Replaces nulls with the most frequent category. |
+        | **Structured / Contextual missingness** | **Constant value (e.g. "Unknown" or 0)** | Marks missing status explicitly (e.g., blank field for "spouses name" means "None"). |
+
 *   **Data Science Use Case**: Querying a dataset's missing rate (e.g. `df.isnull().mean()`), dropping columns exceeding 40% nulls, and applying median imputation to skewed numeric columns.
 *   **Machine Learning Use Case**: Preprocessing step inside pipelines (such as `SimpleImputer` in Scikit-learn) to ensure no NaN values are passed to models.
 *   **Real-world Scenario**: A survey database shows that 5% of users left the "Salary" field empty. The analyst imputes these blank rows with the median salary of other respondents from the same region and job type.
@@ -218,6 +243,20 @@ This document provides intuitive, technical, and applied explanations for key Da
 ### Outlier Detection & Treatment
 *   **Layman Explanation**: Spotting the "odd ones out." In a group of normal income earners, a billionaire is an outlier. You must decide whether to keep, adjust, or remove them so they don't skew your final conclusions.
 *   **Technical Explanation**: Identifying points that lie far from other observations, often defined mathematically as values outside $[Q1 - 1.5 \times IQR, Q3 + 1.5 \times IQR]$ (IQR method) or having an absolute Z-score $> 3$ (Z-Score method).
+    *   **Common Outlier Detection Methods**:
+        1. **IQR (Interquartile Range) Method**:
+            *   *Formula*: Flags points outside $[Q_1 - 1.5 \times IQR, \ Q_3 + 1.5 \times IQR]$.
+            *   *Best for*: Skewed numerical data or distributions that do not assume normality.
+        2. **Z-Score Method**:
+            *   *Formula*: Calculates standard score $Z = \frac{x - \mu}{\sigma}$. Points with $|Z| > 3$ are flagged as outliers.
+            *   *Best for*: Symmetrical, normally distributed numerical data.
+        3. **Visual Methods (EDA)**:
+            *   *Box Plots*: Displays whiskers and single dots beyond bounds.
+            *   *Scatter Plots*: Good for identifying relationships and outliers in bivariate/multivariate spaces.
+        4. **Machine Learning / Algorithmic Methods**:
+            *   *Isolation Forest*: An anomaly detection algorithm that partitions features to isolate outliers (highly effective for high-dimensional, multivariate outliers).
+            *   *DBSCAN (Clustering)*: Unsupervised clustering where outliers are flagged as noise points (class `-1`).
+            *   *Local Outlier Factor (LOF)*: Measures the local density deviation of a given data point relative to its neighbors.
 *   **Data Science Use Case**: Finding fraud (fraudulent transactions look like outliers) or identifying data entry mistakes (like an age entered as 999).
 *   **Machine Learning Use Case**: Protecting models. Outliers can severely distort models that minimize squared errors (like Linear Regression) by pulling the decision boundary towards themselves.
 *   **Real-world Scenario**: A bank security system tracks customer ATM withdrawals. If a customer who normally withdraws $50 to $100 suddenly attempts a $10,000 withdrawal from another country, the outlier detection system flags the account for potential fraud.
@@ -226,6 +265,8 @@ This document provides intuitive, technical, and applied explanations for key Da
 
 ## 4. Feature Engineering & Preprocessing
 
+#### 💡 Feature Engineering Concepts
+
 ### Feature Engineering
 *   **Layman Explanation**: Creating new, useful clues from raw data. For example, if you have a column with a customer's birthdate, you extract their "Age" or group them into "Generations" (like Gen Z or Millennials) because that makes it easier to spot patterns.
 *   **Technical Explanation**: The process of selecting, manipulating, and transforming raw data features into new variables that better represent the underlying problem to improve model accuracy.
@@ -233,12 +274,16 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Machine Learning Use Case**: Creating interaction terms, applying log transformations to skewed columns, and reducing feature dimensions to prevent overfitting and improve model convergence.
 *   **Real-world Scenario**: A bank has transaction timestamps. They engineer a new feature: "Is_Weekend_Transaction?" (True/False) because fraud patterns are significantly different on Saturdays and Sundays.
 
+#### 🔢 Categorical Data Encoding
+
 ### Data Encoding
 *   **Layman Explanation**: Translating text labels into code numbers that a computer can read. For example, converting "Red", "Blue", and "Green" into numbers like 1, 2, and 3, or into Yes/No checklists.
 *   **Technical Explanation**: The process of transforming categorical text features into numerical values (e.g., via One-Hot Encoding, Label Encoding, or Target Encoding) so they can be processed by mathematical algorithms.
 *   **Data Science Use Case**: Converting customer satisfaction responses ("Low", "Medium", "High") into ordinal numbers (0, 1, 2) before studying correlations.
 *   **Machine Learning Use Case**: Preprocessing categorical strings into numeric tensors to prevent dimensionality mismatches or matrix errors during model training.
 *   **Real-world Scenario**: A flight booking engine encodes the categorical origin airports ("JFK", "LAX", "ORD") into binary columns (One-Hot Encoding) so a pricing prediction model can calculate the pricing impact of each airport.
+
+#### 📏 Feature Scaling Techniques
 
 ### Normalization (Min-Max Scaling)
 *   **Layman Explanation**: Shrinking values to fit on a scale from 0 to 1. E.g., converting exam scores out of 100 and out of 500 both into percentages from 0% to 100% so they can be compared directly.
@@ -249,6 +294,8 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Real-world Scenario**: A movie recommendation app compares "Movie Duration" (90 to 240 mins) and "User Rating" (1 to 5 stars). To calculate similarity between movies, it normalizes both features to [0, 1] so rating and length contribute equally.
 
 ### Standardization (Z-score Normalization)
+![Standardization Z-Score Normalization Infographic](images/standardization_chart.jpg)
+
 *   **Layman Explanation**: Re-centering data around zero. You adjust the data so that the average becomes 0, and you measure every point by how many standard steps (deviations) it is away from that average.
 *   **Technical Explanation**: Rescaling data to have a mean of 0 and standard deviation of 1:
     $$X_{std} = \frac{X - \mu}{\sigma}$$
@@ -283,6 +330,8 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Real-world Scenario**: A polling agency wants to find the average support rating of a political candidate. Rather than surveying all 50 million citizens, they take 100 different random samples of 1,000 citizens each. The averages of these 100 samples form a normal curve, allowing the agency to pinpoint the true candidate rating with high confidence.
 
 ### Hypothesis Testing (Null vs. Alternative)
+![Hypothesis Testing Decision Pipeline Infographic Flowchart](images/hypothesis_testing_flow.jpg)
+
 *   **Layman Explanation**: Innocent until proven guilty. 
     *   *Null Hypothesis*: Nothing new happened (e.g., "The new website design did NOT increase sales").
     *   *Alternative Hypothesis*: The new thing worked (e.g., "The new design DID increase sales").
@@ -301,6 +350,8 @@ This document provides intuitive, technical, and applied explanations for key Da
 
 
 ## 6. Mathematics, NumPy & Array Operations
+
+#### 📐 Vector Mathematics & Modeling Concepts
 
 ### Linear Algebra
 *   **Layman Explanation**: The math of grids and arrows. Instead of doing math one number at a time, linear algebra lets you use vectors (lists of numbers) and matrices (tables of numbers) to solve giant equations all at once.
@@ -328,6 +379,8 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Data Science Use Case**: Calculating the distance/similarity between data points (like user profiles in recommendation engines).
 *   **Machine Learning Use Case**: Used in model regularization to prevent overfitting: L1 regularization (Lasso) drives coefficients to zero for feature selection; L2 regularization (Ridge) keeps weights small.
 *   **Real-world Scenario**: A GPS navigation system calculates the straight-line distance between your car and your destination using the L2 Norm, but estimates the actual road travel distance using the L1 Norm.
+
+#### ⚙️ Array Operations & Optimization
 
 ### Vectorization
 *   **Layman Explanation**: Doing arithmetic on an entire list at once instead of going item-by-item. E.g., if you want to double the price of 1,000 items, you multiply the whole list by 2 in one single step.
@@ -422,6 +475,15 @@ This document provides intuitive, technical, and applied explanations for key Da
 ---
 
 ## 8. Statistical Plots & Graphs
+
+#### 📊 Quick Reference: Visualization Categories
+| Plot Type Category | Common Charts | Primary Data Science Use Case |
+| :--- | :--- | :--- |
+| **📊 Distribution & Comparison** | Histogram, Line Plot, Bar Chart, Pie Chart, Box Plot, Violin Plot, Swarm Plot | Comparing categories, viewing numerical spreads, checking skewness, and monitoring values over time. |
+| **🔗 Relationship & Correlation** | Scatter Plot, Heatmap, Joint Plot, Pair Plot, Scatter Matrix, 3D Scatter | Studying correlations, finding linear/non-linear patterns, identifying clusters, and checking feature multicollinearity. |
+| **🧭 Specialized & Hierarchical** | Sunburst Chart, Gauge Chart, Radar Plot, Area Plot, Treemap | Visualizing hierarchical nested shares, tracking performance progress, showing multi-variable skills, and stacked volume over time. |
+
+
 
 ### Histogram
 *   **Associated Libraries**: Matplotlib (`plt.hist`), Seaborn (`sns.histplot`), Plotly (`px.histogram`)
