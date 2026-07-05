@@ -105,6 +105,8 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Real-world Scenario**: A bank studies account transaction amounts. The distribution is highly positively skewed because the vast majority of transactions are small (under $50), while a tiny number of transactions are extremely large (thousands of dollars).
 
 ### Kurtosis
+![Kurtosis Comparison Diagram (Leptokurtic, Mesokurtic, Platykurtic)](images/kurtosis_distributions.jpg)
+
 *   **Layman Explanation**: Measuring how "pointy" and "heavy-tailed" a distribution is. If a curve is extremely tall with fat, wide tails, it means outliers (rare, extreme events) are relatively common. If it's flat with thin tails, outliers are very rare.
 *   **Technical Explanation**: A measure of the "tailedness" of the probability distribution. It describes the peak shape and tail weight relative to a normal distribution:
     *   **Mesokurtic**: Kurtosis = 3 (Normal distribution shape).
