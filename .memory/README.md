@@ -44,3 +44,12 @@ The workspace at [/media/jignesh/Data/ihfc/IHFC-Leaning](file:///media/jignesh/D
 - **[Projects & Capstones Detail](file:///media/jignesh/Data/ihfc/IHFC-Leaning/.memory/projects.md)**
 - **[Glossary & Definitions](file:///media/jignesh/Data/ihfc/IHFC-Leaning/definitions.md)**
 
+---
+
+## 📋 Glossary & Definition Standards
+Whenever a new keyword is defined in the glossary ([definitions.md](file:///media/jignesh/Data/ihfc/IHFC-Leaning/definitions.md)), it must include the following five mandatory elements:
+1. **Layman Explanation**: Simple everyday analogy or plain English description.
+2. **Technical Explanation**: Mathematical formula, statistics, or precise technical detail.
+3. **Data Science Use Case**: How an analyst uses it in Exploratory Data Analysis (EDA).
+4. **Machine Learning Use Case**: How it is used in feature preprocessing, model training, or validation.
+5. **Real-world Scenario**: A concrete business, engineering, or practical application example.
