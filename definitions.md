@@ -73,7 +73,7 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Real-world Scenario**: A quality control inspector on a soda bottling line measures the volume filled in bottles. Line A has a standard deviation of 1ml (very consistent), while Line B has a standard deviation of 15ml (highly inconsistent, leading to overflow or underfill).
 
 ### Range & Interquartile Range (IQR)
-![Box Plot Anatomy & Outlier Bounds](file:///media/jignesh/Data/ihfc/IHFC-Leaning/images/boxplot_anatomy.jpg)
+![Box Plot Anatomy & Outlier Bounds](images/boxplot_anatomy.jpg)
 
 *   **Layman Explanation**:
     *   *Range*: The total distance between the highest and lowest scores.
@@ -92,7 +92,7 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Real-world Scenario**: A retailer examines the distribution of order delivery times. While the total range is 30 days (due to a few late orders), the IQR is only 2 days, showing that 50% of orders are delivered within a very tight window of 3 to 5 days.
 
 ### Skewness
-![Skewness Distributions Diagram (Left Skewed, Symmetric, Right Skewed)](file:///media/jignesh/Data/ihfc/IHFC-Leaning/images/skewness_distributions.jpg)
+![Skewness Distributions Diagram (Left Skewed, Symmetric, Right Skewed)](images/skewness_distributions.jpg)
 
 *   **Layman Explanation**: Measuring if a bell curve leans to one side. If a class has mostly high scores and a few very low scores, the tail stretches to the left (negatively skewed). If it has mostly low scores and a few very high scores, the tail stretches to the right (positively skewed).
 *   **Technical Explanation**: A measure of the asymmetry of the probability distribution of a real-valued random variable about its mean. For univariate data $X_1, X_2, \dots, X_N$, it is given by:
@@ -454,7 +454,7 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Real-world Scenario**: A product manager uses a pie chart to display the proportion of active users visiting their website from desktop (60%), mobile (35%), and tablet (5%).
 
 ### Box Plot (Box-and-Whisker Plot)
-![Box Plot Anatomy & Outlier Bounds Diagram](file:///media/jignesh/Data/ihfc/IHFC-Leaning/images/boxplot_anatomy.jpg)
+![Box Plot Anatomy & Outlier Bounds Diagram](images/boxplot_anatomy.jpg)
 
 *   **Associated Libraries**: Matplotlib (`plt.boxplot`), Seaborn (`sns.boxplot`), Plotly (`px.box`)
 *   **Layman Explanation**: A summarizing snapshot of your data. The central box shows where the middle 50% of your data lives, the line inside shows the exact center (median), the "whiskers" show the normal range, and individual dots outside show extreme values (outliers).
