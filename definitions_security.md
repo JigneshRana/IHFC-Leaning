@@ -174,12 +174,12 @@ This document serves as an educational reference guide for Data Science, Machine
     | **Structured / Contextual missingness** | **Constant value (e.g. "Unknown" or 0)** | Marks missing status explicitly (e.g., blank field for "device ID"). |
 
 ### Outlier Detection & Treatment
-*   **Layman Explanation**: Spotting accounts with unusual metrics (e.g., a customer who logs in 100,000 times in 1 hour might be a bot, or an enterprise account paying 100x the average customer).
+*   **Layman Explanation**: Spotting systems or IPs with unusual metrics (e.g., an IP address sending 100,000 requests in 1 hour might be a DDoS attempt, or a user account downloading 100x more data than their normal average).
 *   **Technical Explanation**: Identifying observations that lie far from other data points using statistical boundaries:
     *   *IQR method*: Values outside $[Q1 - 1.5 \times IQR, Q3 + 1.5 \times IQR]$.
     *   *Z-score method*: Points where $|Z| > 3$.
-    *   *Isolation Forest*: Unsupervised algorithm to isolate anomalies (useful for multi-dimensional usage outliers).
-*   **Real-world Scenario**: An operations engineer spots a sudden customer API usage spike. The system flags it as an outlier because the Z-score of the request count exceeded +4.0.
+    *   *Isolation Forest*: Unsupervised algorithm to isolate anomalies (useful for multi-dimensional threat anomalies).
+*   **Real-world Scenario**: A security analyst spots a sudden network traffic spike. The system flags it as an outlier because the Z-score of the connection count exceeded +4.0.
 
 ---
 
@@ -188,69 +188,69 @@ This document serves as an educational reference guide for Data Science, Machine
 #### 💡 Feature Engineering Concepts
 
 ### Feature Engineering
-*   **Layman Explanation**: Transforming raw database logs into highly useful metrics (e.g., converting "login timestamps" into a new metric: "Logins per user per week").
-*   **Technical Explanation**: The process of selecting, manipulating, and transforming raw variables into new features that better represent the underlying problem to improve model performance.
-*   **Real-world Scenario**: A billing data scientist takes raw `subscription_start` and `subscription_end` dates and engineers a new feature: `Account_Age_Days`.
+*   **Layman Explanation**: Transforming raw firewall or authentication logs into highly useful security metrics (e.g., converting "connection timestamps" into a new metric: "Connection rate per IP per minute").
+*   **Technical Explanation**: The process of selecting, manipulating, and transforming raw variables into new features that better represent the underlying threat detection problem to improve model performance.
+*   **Real-world Scenario**: A security data scientist takes raw `login_timestamp` and `logout_timestamp` dates and engineers a new feature: `Session_Duration_Seconds`.
 
 #### 🔢 Categorical Data Encoding
 
 ### Data Encoding
-*   **Layman Explanation**: Converting text categories into numbers so machine learning models can read them (e.g., converting Plan Type "Free", "Pro", "Enterprise" into 0, 1, 2).
+*   **Layman Explanation**: Converting text categories into numbers so machine learning models can read them (e.g., converting Threat Severity "Low", "Medium", "High" into 0, 1, 2).
 *   **Technical Explanation**: Transforming categorical qualitative variables into quantitative numerical variables (e.g., via Ordinal Encoding or One-Hot Encoding).
-*   **Real-world Scenario**: Customer support categories ("Billing", "Technical", "Sales") are encoded into numbers before running an automated support ticket classification model.
+*   **Real-world Scenario**: Threat categories ("Malware", "Phishing", "DDoS") are encoded into numbers before running an automated security incident classification model.
 
 ### One-Hot Encoding
-*   **Layman Explanation**: Creating separate Yes/No columns for each category. Instead of a single column called "Region" with values "US", "EU", "APAC", you create three new columns: "Is_US?", "Is_EU?", and "Is_APAC?" filled with 1s and 0s.
+*   **Layman Explanation**: Creating separate Yes/No columns for each category. Instead of a single column called "Protocol" with values "TCP", "UDP", "ICMP", you create three new columns: "Is_TCP?", "Is_UDP?", and "Is_ICMP?" filled with 1s and 0s.
 *   **Technical Explanation**: Transforming a categorical variable with $k$ categories into $k$ binary columns (dummy variables) where only one column is active ("1").
-*   **Real-world Scenario**: A lead scoring model uses One-Hot Encoding to convert a prospect's nominal `Industry` field into binary columns.
+*   **Real-world Scenario**: An intrusion detection model uses One-Hot Encoding to convert an incoming request's nominal `Protocol` field into binary columns.
 
 #### 📏 Feature Scaling Techniques
 
 ### Normalization (Min-Max Scaling)
-*   **Layman Explanation**: Squishing values to fit on a scale from 0 to 1. E.g., putting customer age (18 to 70) and customer monthly spending ($10 to $1,000) on a 0-to-1 scale so they can be compared directly.
+*   **Layman Explanation**: Squishing values to fit on a scale from 0 to 1. E.g., putting connection durations (1ms to 10,000ms) and failed login counts (0 to 50) on a 0-to-1 scale so they can be compared directly.
 *   **Technical Explanation**: Rescaling the range of features to scale the data in $[0, 1]$:
     $$X_{scaled} = \frac{X - X_{min}}{X_{max} - X_{min}}$$
-*   **Real-world Scenario**: In a customer segmentation clustering model, user login frequency and billing totals are normalized to [0, 1] so that both features contribute equally to the distance calculations.
+*   **Real-world Scenario**: In an anomaly detection clustering model, connection frequency and bytes transferred are normalized to [0, 1] so that both features contribute equally to the distance calculations.
 
 ### Standardization (Z-score Normalization)
 ![Standardization Z-Score Normalization Infographic](images/standardization_chart.jpg)
 
-*   **Layman Explanation**: Adjusting metrics so the average is 0 and measuring how many standard steps (standard deviations) each customer is from that average.
+*   **Layman Explanation**: Adjusting metrics so the average is 0 and measuring how many standard steps (standard deviations) each connection or login rate is from that average.
 *   **Technical Explanation**: Rescaling data to have a mean of 0 and a standard deviation of 1:
     $$X_{std} = \frac{X - \mu}{\sigma}$$
-*   **Real-world Scenario**: A SaaS operations team standardizes the feature `Daily_Data_Storage` before feeding it to a neural network predicting account upgrade probability.
+*   **Real-world Scenario**: A security operations team standardizes the feature `Daily_Failed_Logins` before feeding it to a neural network predicting intrusion probability.
 
 ---
 
 ## 5. Probability & Statistical Inference
 
 ### Normal (Gaussian) Distribution
-*   **Layman Explanation**: A bell-shaped curve where most customer metrics cluster around the center average, and drop off symmetrically towards the extremes.
+*   **Layman Explanation**: A bell-shaped curve where most system metrics (like CPU load or login durations) cluster around the center average, and drop off symmetrically towards the extremes.
 *   **Technical Explanation**: A continuous probability distribution defined by its mean ($\mu$) and standard deviation ($\sigma$):
     $$f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$
-*   **Real-world Scenario**: Customer satisfaction survey response rates across different marketing cohorts follow a normal distribution.
+*   **Real-world Scenario**: Daily alert volumes across different server cohorts follow a normal distribution.
 
 ### Central Limit Theorem (CLT)
-*   **Layman Explanation**: If you take multiple random samples of customers, calculate their averages, and plot those averages, they will always form a perfect normal bell curve, even if individual customer behavior is highly erratic or skewed.
+*   **Layman Explanation**: If you take multiple random samples of logs, calculate their averages, and plot those averages, they will always form a perfect normal bell curve, even if individual connection behavior is highly erratic or skewed.
 *   **Technical Explanation**: The sampling distribution of the sample mean ($\bar{x}$) approaches a normal distribution as the sample size ($n$) becomes large ($n \ge 30$), regardless of the shape of the population distribution.
-*   **Real-world Scenario**: Active session lengths are highly skewed, but the average session length calculated across 100 random user groups forms a normal distribution, allowing statistical intervals to be constructed.
+*   **Real-world Scenario**: Active session lengths are highly skewed, but the average session length calculated across 100 random server cohorts forms a normal distribution, allowing statistical intervals to be constructed.
 
 ### Hypothesis Testing (Null vs. Alternative)
 ![Hypothesis Testing Decision Pipeline Infographic Flowchart](images/hypothesis_testing_flow.jpg)
 
 *   **Layman Explanation**: Innocent until proven guilty. 
-    *   *Null Hypothesis*: The new update did not make any difference.
-    *   *Alternative Hypothesis*: The new update improved conversion or retention.
+    *   *Null Hypothesis*: The new security patch did not reduce system intrusion rates.
+    *   *Alternative Hypothesis*: The new security patch significantly reduced system intrusion rates.
 *   **Technical Explanation**: A method of statistical inference where a null hypothesis ($H_0$) is tested against an alternative hypothesis ($H_a$). If the p-value is less than the significance level ($\alpha = 0.05$), $H_0$ is rejected.
-*   **Real-world Scenario**: Zoom changes its trial signup page.
-    *   $H_0$: The signup conversion rate remains at 3.0%.
-    *   $H_a$: The signup conversion rate is greater than 3.0%.
-    *   *Outcome*: A t-test yields a p-value of 0.01. The company rejects $H_0$ and launches the new page.
+*   **Real-world Scenario**: A cloud company deploys a new firewall rule.
+    *   $H_0$: The daily breach rate remains at 0.05%.
+    *   $H_a$: The daily breach rate is lower than 0.05%.
+    *   *Outcome*: A proportion z-test yields a p-value of 0.01. The team rejects $H_0$ and keeps the new firewall rule.
 
 ### Time Series & Forecasting
-*   **Layman Explanation**: Predicting future subscription metrics based on past timelines (e.g., forecasting next quarter's MRR using the last 3 years of billing data).
+*   **Layman Explanation**: Predicting future security incidents based on past timelines (e.g., forecasting next month's alert volumes using the last 3 years of incident logs).
 *   **Technical Explanation**: Modeling sequentially ordered data points to identify underlying trends, seasonality, and cyclic variations, and projecting future values.
-*   **Real-world Scenario**: A finance team builds a forecasting model to predict next month's recurring revenue and cash flow requirements.
+*   **Real-world Scenario**: A security operations center (SOC) builds a forecasting model to predict next week's threat alert volumes and staffing requirements.
 
 ---
 
@@ -259,40 +259,40 @@ This document serves as an educational reference guide for Data Science, Machine
 #### 📐 Vector Mathematics & Modeling Concepts
 
 ### Linear Algebra
-*   **Layman Explanation**: Using grids and lists of numbers to process customer accounts in bulk rather than one-by-one.
+*   **Layman Explanation**: Using grids and lists of numbers to process security logs in bulk rather than one-by-one.
 *   **Technical Explanation**: The branch of mathematics concerning vector spaces, linear transformations, matrices, and systems of linear equations.
-*   **Real-world Scenario**: A recommendation engine runs dot products on a customer-to-feature matrix to recommend specific product integrations.
+*   **Real-world Scenario**: A threat classifier runs dot products on an IP-to-feature matrix to calculate threat scores.
 
 ### Word2Vec (Word-to-Vec) Model
-*   **Layman Explanation**: Mapping text reviews (e.g., "The tool is slow") into coordinate points so similar customer support tickets end up close to each other.
+*   **Layman Explanation**: Mapping system logs (e.g., "connection timeout from IP X") into coordinate points so similar network alerts end up close to each other.
 *   **Technical Explanation**: A neural network-based NLP technique mapping words into continuous vector spaces to capture semantic similarities.
-*   **Real-world Scenario**: Customer feedback containing "fast dashboard" and "responsive UI" are mapped to similar vector spaces to help group feature requests.
+*   **Real-world Scenario**: System error logs containing "unauthorized access" and "invalid credentials" are mapped to similar vector spaces to help group security incidents.
 
 ### Vector Norm (L1 & L2 Norms)
 *   **Layman Explanation**: Calculating distances. L2 norm calculates the straight-line distance, while L1 norm calculates distance along grid lines (Manhattan distance).
 *   **Technical Explanation**: Magnitude functions mapping a vector to a scalar:
     $$\|x\|_1 = \sum |x_i| \qquad \|x\|_2 = \sqrt{\sum x_i^2}$$
-*   **Real-world Scenario**: A recommender system calculates user profile similarities using L2 distance (Euclidean distance).
+*   **Real-world Scenario**: *   **Real-world Scenario**: An anomaly detection system calculates system behavior similarities using L2 distance (Euclidean distance).
 
 #### ⚙️ Array Operations & Optimization
 
 ### Vectorization
-*   **Layman Explanation**: Performing arithmetic on millions of customer rows simultaneously in C instead of using slow Python loops.
+*   **Layman Explanation**: Performing arithmetic on millions of firewall log rows simultaneously in C instead of using slow Python loops.
 *   **Technical Explanation**: Delegating array calculations to highly optimized compiled code underneath.
-*   **Real-world Scenario**: Running `df['Active_Seats'] * df['Seat_Price']` to calculate total revenue per customer runs in milliseconds using vectorized operations.
+*   **Real-world Scenario**: Running `df['Bytes_Sent'] + df['Bytes_Received']` to calculate total network traffic per IP runs in milliseconds using vectorized operations.
 
 ### Broadcasting
-*   **Layman Explanation**: Stretches a single number to fit a whole list of numbers (e.g., adding a flat $5 discount value to all subscription rows automatically).
+*   **Layman Explanation**: Stretches a single number to fit a whole list of numbers (e.g., adding a base timestamp offset to all firewall log rows automatically).
 *   **Technical Explanation**: The rules NumPy follows to perform arithmetic operations on arrays of different dimensions.
-*   **Real-world Scenario**: A billing engine subtracts a flat discount array from a massive pricing matrix.
+*   **Real-world Scenario**: A security log parser subtracts a base timestamp offset from a massive access log matrix.
 
 ---
 
 ## 7. Core Libraries & Tools
 
-*   **Pandas**: The core library for loading, cleaning, and transforming SaaS spreadsheets (DataFrames).
+*   **Pandas**: The core library for loading, cleaning, and transforming security spreadsheets (DataFrames).
 *   **NumPy**: The core engine for high-speed mathematical array calculations.
-*   **Scikit-learn**: The primary package used to train ML models (like classification trees for churn prediction).
+*   **Scikit-learn**: The primary package used to train ML models (like classification trees for threat prediction).
 *   **Seaborn**: Built on Matplotlib, used to generate high-quality statistical plots like heatmaps of correlation metrics.
 *   **SciPy**: Used for running advanced scientific calculations and statistical tests (like calculating p-values for A/B tests).
 
@@ -309,72 +309,72 @@ This document serves as an educational reference guide for Data Science, Machine
 
 ### Histogram
 ![Histogram Example](images/histogram.png)
-*   **SaaS Use Case**: Visualizing the distribution of free trial conversion times (how many days it takes for trial signups to upgrade).
+*   **Security Use Case**: Visualizing the distribution of network connection duration (in seconds) to identify if most connections are short-lived or if there are long-lived persistent connections (potential data exfiltration).
 
 ### Line Plot
 ![Line Plot Example](images/line_plot.png)
-*   **SaaS Use Case**: Tracking Monthly Recurring Revenue (MRR) trends over a 2-year period.
+*   **Security Use Case**: Tracking the hourly rate of failed login attempts over a 7-day period to spot brute-force attack trends.
 
 ### Bar Chart
 ![Bar Chart Example](images/bar_chart.png)
-*   **SaaS Use Case**: Comparing total active seat subscriptions across different plan tiers (e.g., Basic vs. Pro vs. Enterprise).
+*   **Security Use Case**: Comparing total firewall blocks across different protocol categories (TCP vs. UDP vs. ICMP).
 
 ### Pie Chart
 ![Pie Chart Example](images/pie_chart.png)
-*   **SaaS Use Case**: Showing the percentage share of customer signups coming from different marketing channels (Google Ads, Referral, Organic).
+*   **Security Use Case**: Showing the percentage share of detected malware categories (Trojans, Ransomware, Adware, Spyware) in a month.
 
 ### Box Plot (Box-and-Whisker Plot)
 ![Box Plot Anatomy & Outlier Bounds Diagram](images/boxplot_anatomy.jpg)
-*   **SaaS Use Case**: Summarizing the spread of API response latency and highlighting extreme latency outliers.
+*   **Security Use Case**: Summarizing the spread of login response latencies and identifying outlier authentication attempts.
 
 ### Scatter Plot
 ![Scatter Plot Example](images/scatter_plot.png)
-*   **SaaS Use Case**: Plotting user session frequency against customer monthly spending to identify if high-usage accounts correlate with high revenue.
+*   **Security Use Case**: Plotting the volume of bytes sent against bytes received for external IP addresses to find data exfiltration patterns (high sent, low received).
 
 ### Violin Plot
 ![Violin Plot Example](images/violin_plot.png)
-*   **SaaS Use Case**: Displaying the density distribution of data storage usage across plan tiers, showing if the usage is multimodal (e.g., containing two peaks of low and high users).
+*   **Security Use Case**: Displaying the distribution of network traffic payload sizes across different ports, showing if port usage is multimodal.
 
 ### Heatmap
 ![Heatmap Example](images/heatmap.png)
-*   **SaaS Use Case**: Displaying a correlation matrix of features (logins, seats, support tickets, age) to find which usage patterns strongly correlate with customer retention.
+*   **Security Use Case**: Displaying a correlation matrix of threat features (failed logins, file modifications, privilege escalation alerts) to identify co-occurring indicators of compromise (IoC).
 
 ### Sunburst Chart
 ![Sunburst Chart Example](images/sunburst_chart.jpg)
-*   **SaaS Use Case**: Visualizing subscription revenue nested by Region $\rightarrow$ Plan Tier $\rightarrow$ Customer Acquisition Channel.
+*   **Security Use Case**: Visualizing security alerts nested by Alert Severity $\rightarrow$ Threat Category $\rightarrow$ Affected Asset.
 
 ### Gauge / Indicator Chart
 ![Gauge Chart Example](images/gauge_chart.jpg)
-*   **SaaS Use Case**: Presenting the current Net Promoter Score (NPS) on a dial gauge relative to a target benchmark of 75.
+*   **Security Use Case**: Presenting the current system vulnerability score or risk rating relative to a critical benchmark of 30.
 
 ### Pair Plot
 ![Pair Plot Example](images/pair_plot.png)
-*   **SaaS Use Case**: Inspecting pairwise correlations between all active usage metrics (logins, pageviews, storage) in a single grid.
+*   **Security Use Case**: Inspecting pairwise correlations between all network metrics (packets, bytes, duration, ports used) in a single grid.
 
 ### Joint Plot
 ![Joint Plot Example](images/joint_plot.png)
-*   **SaaS Use Case**: Analyzing correlation between seat utilization and total API usage, with marginal histograms on the sides showing individual densities.
+*   **Security Use Case**: Analyzing the correlation between failed logins and total account lockouts, with marginal histograms on the sides showing individual densities.
 
 ### Swarm Plot
 ![Swarm Plot Example](images/swarm_plot.png)
-*   **SaaS Use Case**: Showing the exact monthly spending of our top 100 enterprise customers grouped by account manager, ensuring no points are hidden.
+*   **Security Use Case**: Showing the exact CPU usage of our top 100 virtual machines grouped by system environment, ensuring no points are hidden.
 
 ### Scatter Matrix / Splom
 ![Scatter Matrix Example](images/scatter_matrix.png)
-*   **SaaS Use Case**: Displaying interactive multidimensional scatter grids for customer onboarding cohorts.
+*   **Security Use Case**: Displaying interactive multidimensional scatter grids for incident response triage cohorts.
 
 ### Polar / Radar Plot
 ![Radar Plot Example](images/polar_plot.png)
-*   **SaaS Use Case**: Visualizing an account's usage health across five product categories (Data Storage, API calls, Active seats, Integrations, Support satisfaction).
+*   **Security Use Case**: Visualizing a server's security health across five threat categories (Malware Detection, Network Anomalies, Failed Logins, File Integrity, Patch Status).
 
 ### Area Plot
 ![Area Plot Example](images/area_plot.png)
-*   **SaaS Use Case**: Plotting stacked monthly active users over a 12-month period, colored by platform (Web App, Mobile App, Desktop Client).
+*   **Security Use Case**: Plotting stacked firewall block volumes over a 12-month period, colored by block source (IP Blacklist, Geo-Block, Rule Violation).
 
 ### Treemap
 ![Treemap Example](images/treemap.jpg)
-*   **SaaS Use Case**: Displaying global annual revenue allocations, where rectangle sizes show the revenue contributions of different customer industries (Healthcare, Finance, Retail, Education).
+*   **Security Use Case**: Displaying annual security event allocations, where rectangle sizes show the event volumes of different server environments (Staging, Production, Dev).
 
 ### 3D Scatter / Line Plot
 ![3D Scatter Plot Example](images/3d_scatter_plot.png)
-*   **SaaS Use Case**: Evaluating cluster boundaries of user accounts across three dimensions: Monthly spend, Login frequency, and Active seat count.
+*   **Security Use Case**: Evaluating cluster boundaries of IP addresses across three dimensions: Request rate, payload size, and unique ports targeted.

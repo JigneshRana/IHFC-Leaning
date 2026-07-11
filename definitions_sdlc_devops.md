@@ -309,72 +309,72 @@ This document serves as an educational reference guide for Data Science, Machine
 
 ### Histogram
 ![Histogram Example](images/histogram.png)
-*   **SaaS Use Case**: Visualizing the distribution of free trial conversion times (how many days it takes for trial signups to upgrade).
+*   **DevOps Use Case**: Visualizing the distribution of build durations (in seconds) across all commits to identify slow build outliers.
 
 ### Line Plot
 ![Line Plot Example](images/line_plot.png)
-*   **SaaS Use Case**: Tracking Monthly Recurring Revenue (MRR) trends over a 2-year period.
+*   **DevOps Use Case**: Tracking daily server CPU utilization trends over a 2-year period.
 
 ### Bar Chart
 ![Bar Chart Example](images/bar_chart.png)
-*   **SaaS Use Case**: Comparing total active seat subscriptions across different plan tiers (e.g., Basic vs. Pro vs. Enterprise).
+*   **DevOps Use Case**: Comparing total build failures across different project repositories.
 
 ### Pie Chart
 ![Pie Chart Example](images/pie_chart.png)
-*   **SaaS Use Case**: Showing the percentage share of customer signups coming from different marketing channels (Google Ads, Referral, Organic).
+*   **DevOps Use Case**: Showing the percentage share of build failure root causes (Compilation Error, Test Failure, Environment Issue, Timeout).
 
 ### Box Plot (Box-and-Whisker Plot)
 ![Box Plot Anatomy & Outlier Bounds Diagram](images/boxplot_anatomy.jpg)
-*   **SaaS Use Case**: Summarizing the spread of API response latency and highlighting extreme latency outliers.
+*   **DevOps Use Case**: Summarizing the spread of API response latency across different microservices and highlighting extreme outliers.
 
 ### Scatter Plot
 ![Scatter Plot Example](images/scatter_plot.png)
-*   **SaaS Use Case**: Plotting user session frequency against customer monthly spending to identify if high-usage accounts correlate with high revenue.
+*   **DevOps Use Case**: Plotting build size (MB) against deploy duration (seconds) to see if larger builds correlate with longer deployment times.
 
 ### Violin Plot
 ![Violin Plot Example](images/violin_plot.png)
-*   **SaaS Use Case**: Displaying the density distribution of data storage usage across plan tiers, showing if the usage is multimodal (e.g., containing two peaks of low and high users).
+*   **DevOps Use Case**: Displaying the density distribution of memory usage across container replicas, showing if usage is multimodal.
 
 ### Heatmap
 ![Heatmap Example](images/heatmap.png)
-*   **SaaS Use Case**: Displaying a correlation matrix of features (logins, seats, support tickets, age) to find which usage patterns strongly correlate with customer retention.
+*   **DevOps Use Case**: Displaying a correlation matrix of pipeline metrics (test count, coverage, compile time, deploy time) to find which stages impact overall cycle time.
 
 ### Sunburst Chart
 ![Sunburst Chart Example](images/sunburst_chart.jpg)
-*   **SaaS Use Case**: Visualizing subscription revenue nested by Region $\rightarrow$ Plan Tier $\rightarrow$ Customer Acquisition Channel.
+*   **DevOps Use Case**: Visualizing server infrastructure cost nested by Cloud Provider $\rightarrow$ Service Type $\rightarrow$ Region.
 
 ### Gauge / Indicator Chart
 ![Gauge Chart Example](images/gauge_chart.jpg)
-*   **SaaS Use Case**: Presenting the current Net Promoter Score (NPS) on a dial gauge relative to a target benchmark of 75.
+*   **DevOps Use Case**: Presenting the current deployment success rate on a dial gauge relative to a target benchmark of 99.9%.
 
 ### Pair Plot
 ![Pair Plot Example](images/pair_plot.png)
-*   **SaaS Use Case**: Inspecting pairwise correlations between all active usage metrics (logins, pageviews, storage) in a single grid.
+*   **DevOps Use Case**: Inspecting pairwise correlations between all active container metrics (CPU, Memory, Network I/O, Disk I/O) in a single grid.
 
 ### Joint Plot
 ![Joint Plot Example](images/joint_plot.png)
-*   **SaaS Use Case**: Analyzing correlation between seat utilization and total API usage, with marginal histograms on the sides showing individual densities.
+*   **DevOps Use Case**: Analyzing the correlation between test coverage and deployment frequency, with marginal histograms on the sides showing individual densities.
 
 ### Swarm Plot
 ![Swarm Plot Example](images/swarm_plot.png)
-*   **SaaS Use Case**: Showing the exact monthly spending of our top 100 enterprise customers grouped by account manager, ensuring no points are hidden.
+*   **DevOps Use Case**: Showing the exact deployment times of our top 100 releases grouped by target environment, ensuring no points are hidden.
 
 ### Scatter Matrix / Splom
 ![Scatter Matrix Example](images/scatter_matrix.png)
-*   **SaaS Use Case**: Displaying interactive multidimensional scatter grids for customer onboarding cohorts.
+*   **DevOps Use Case**: Displaying interactive multidimensional scatter grids for build success/failure cohorts.
 
 ### Polar / Radar Plot
 ![Radar Plot Example](images/polar_plot.png)
-*   **SaaS Use Case**: Visualizing an account's usage health across five product categories (Data Storage, API calls, Active seats, Integrations, Support satisfaction).
+*   **DevOps Use Case**: Visualizing an engineering team's DORA metrics across five categories (Deployment Frequency, Lead Time for Changes, Mean Time to Recovery, Change Failure Rate, Customer Satisfaction).
 
 ### Area Plot
 ![Area Plot Example](images/area_plot.png)
-*   **SaaS Use Case**: Plotting stacked monthly active users over a 12-month period, colored by platform (Web App, Mobile App, Desktop Client).
+*   **DevOps Use Case**: Plotting stacked monthly active microservice requests over a 12-month period, colored by protocol (HTTP, gRPC, WebSocket).
 
 ### Treemap
 ![Treemap Example](images/treemap.jpg)
-*   **SaaS Use Case**: Displaying global annual revenue allocations, where rectangle sizes show the revenue contributions of different customer industries (Healthcare, Finance, Retail, Education).
+*   **DevOps Use Case**: Displaying global cloud hosting cost allocations, where rectangle sizes show the cost contributions of different services (EC2, RDS, S3, Lambda).
 
 ### 3D Scatter / Line Plot
 ![3D Scatter Plot Example](images/3d_scatter_plot.png)
-*   **SaaS Use Case**: Evaluating cluster boundaries of user accounts across three dimensions: Monthly spend, Login frequency, and Active seat count.
+*   **DevOps Use Case**: Evaluating cluster boundaries of microservices across three dimensions: CPU usage, memory utilization, and network traffic volume.

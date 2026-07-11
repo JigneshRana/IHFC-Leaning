@@ -294,6 +294,13 @@ This document serves as an educational reference guide for Data Science, Machine
 
 ## 8. Statistical Plots & Graphs
 
+#### 📊 Quick Reference: Visualization Categories
+| Plot Type Category | Common Charts | Primary Data Science Use Case |
+| :--- | :--- | :--- |
+| **📊 Distribution & Comparison** | Histogram, Line Plot, Bar Chart, Pie Chart, Box Plot, Violin Plot, Swarm Plot, Candlestick Chart, Q-Q Plot, Drawdown Plot | Comparing categories, viewing numerical spreads, checking skewness, and monitoring values or prices over time. |
+| **🔗 Relationship & Correlation** | Scatter Plot, Heatmap, Joint Plot, Pair Plot, Scatter Matrix, 3D Scatter | Studying correlations, finding linear/non-linear patterns, identifying clusters, and checking feature multicollinearity. |
+| **🧭 Specialized & Hierarchical** | Sunburst Chart, Gauge Chart, Radar Plot, Area Plot, Treemap | Visualizing hierarchical nested shares, tracking performance progress, showing multi-variable skills, and stacked volume over time. |
+
 ### Candlestick Chart
 *   **Layman Explanation**: A visual chart showing OHLC prices for a stock. Each "candle" has a body showing the open/close prices, and lines (shadows/wicks) showing the high/low range. Green means price went up; red means price went down.
 *   **Technical Explanation**: Standardized visual chart where each interval is plotted as a box showing Open-Close boundaries, colored by price direction, with upper and lower vertical wicks showing High-Low extremes.
@@ -329,6 +336,78 @@ This document serves as an educational reference guide for Data Science, Machine
 *   **Data Science Use Case**: Evaluating the psychological risk profile of a trading strategy. A strategy might have high returns but a 50% drawdown, which most investors would find unacceptable.
 *   **Machine Learning Use Case**: Used in risk reporting and optimization constraints to penalize models that achieve high profits at the cost of deep equity drawdowns.
 *   **Real-world Scenario**: An investor reviewing a backtest chart sees that while the strategy doubled the capital in 3 years, it had a maximum drawdown of 35% during the March 2020 COVID crash.
+
+### Histogram
+![Histogram Example](images/histogram.png)
+*   **Stock Market Use Case**: Visualizing the distribution of daily percentage price changes of NIFTY 50 to see if it is symmetric or exhibits negative skewness (tail risk).
+
+### Line Plot
+![Line Plot Example](images/line_plot.png)
+*   **Stock Market Use Case**: Tracking the daily closing price of Reliance Industries (RELIANCE) over a 5-year period.
+
+### Bar Chart
+![Bar Chart Example](images/bar_chart.png)
+*   **Stock Market Use Case**: Comparing the total daily volume of shares traded across different banking stocks (e.g., HDFC Bank, ICICI Bank, SBI, Kotak Bank).
+
+### Pie Chart
+![Pie Chart Example](images/pie_chart.png)
+*   **Stock Market Use Case**: Showing the percentage share of different market capitalization tiers (Large-cap, Mid-cap, Small-cap) within a specific investment portfolio.
+
+### Box Plot (Box-and-Whisker Plot)
+![Box Plot Anatomy & Outlier Bounds Diagram](images/boxplot_anatomy.jpg)
+*   **Stock Market Use Case**: Summarizing the spread of monthly log returns for Tata Motors over the last 10 years and identifying outlier months.
+
+### Scatter Plot
+![Scatter Plot Example](images/scatter_plot.png)
+*   **Stock Market Use Case**: Plotting daily log returns of HDFC Bank against NIFTY 50 index returns to visualize the stock's beta (market sensitivity).
+
+### Violin Plot
+![Violin Plot Example](images/violin_plot.png)
+*   **Stock Market Use Case**: Displaying the distribution of intraday price spreads (High - Low) across different trading hours, showing if volatility peaks during market open and close.
+
+### Heatmap
+![Heatmap Example](images/heatmap.png)
+*   **Stock Market Use Case**: Displaying a correlation matrix of returns across major NSE sectoral indices (Nifty IT, Nifty Bank, Nifty Auto, Nifty FMCG, Nifty Pharma) to evaluate portfolio diversification.
+
+### Sunburst Chart
+![Sunburst Chart Example](images/sunburst_chart.jpg)
+*   **Stock Market Use Case**: Visualizing NIFTY 50 index weightage nested by Sector $\rightarrow$ Industry $\rightarrow$ Individual Stock.
+
+### Gauge / Indicator Chart
+![Gauge Chart Example](images/gauge_chart.jpg)
+*   **Stock Market Use Case**: Presenting the current India VIX (Volatility Index) value on a dial gauge relative to a historical fear benchmark of 25.
+
+### Pair Plot
+![Pair Plot Example](images/pair_plot.png)
+*   **Stock Market Use Case**: Inspecting pairwise correlations and distributions between multiple financial ratios (P/E Ratio, P/B Ratio, Debt-to-Equity, Dividend Yield) for a basket of stocks.
+
+### Joint Plot
+![Joint Plot Example](images/joint_plot.png)
+*   **Stock Market Use Case**: Analyzing the joint relationship between daily trading volume and stock price return volatility, with marginal histograms showing their individual distributions.
+
+### Swarm Plot
+![Swarm Plot Example](images/swarm_plot.png)
+*   **Stock Market Use Case**: Showing the exact dividend yields of the top 50 dividend-paying NSE stocks grouped by sector, ensuring no points are hidden.
+
+### Scatter Matrix / Splom
+![Scatter Matrix Example](images/scatter_matrix.png)
+*   **Stock Market Use Case**: Displaying interactive multidimensional scatter grids for analyzing correlations between multiple commodity prices (Gold, Silver, Crude Oil, Copper).
+
+### Polar / Radar Plot
+![Radar Plot Example](images/polar_plot.png)
+*   **Stock Market Use Case**: Visualizing a stock's fundamental strength across five key parameters: Valuation, Profitability, Growth, Financial Health, and Dividend Yield.
+
+### Area Plot
+![Area Plot Example](images/area_plot.png)
+*   **Stock Market Use Case**: Plotting the cumulative value of a multi-asset portfolio over time, stacking the values of Equity, Debt, Gold, and Cash investments.
+
+### Treemap
+![Treemap Example](images/treemap.jpg)
+*   **Stock Market Use Case**: Displaying the entire NIFTY 50 market capitalization, where rectangle sizes show the market cap of each company and colors represent their daily percentage change (green for gains, red for losses).
+
+### 3D Scatter / Line Plot
+![3D Scatter Plot Example](images/3d_scatter_plot.png)
+*   **Stock Market Use Case**: Evaluating cluster boundaries of option contracts across three dimensions: Strike price, days to expiration, and implied volatility (creating the volatility surface).
 
 ---
 

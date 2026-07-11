@@ -174,12 +174,12 @@ This document serves as an educational reference guide for Data Science, Machine
     | **Structured / Contextual missingness** | **Constant value (e.g. "Unknown" or 0)** | Marks missing status explicitly (e.g., blank field for "promo code"). |
 
 ### Outlier Detection & Treatment
-*   **Layman Explanation**: Spotting accounts with unusual metrics (e.g., a customer who logs in 100,000 times in 1 hour might be a bot, or an enterprise account paying 100x the average customer).
+*   **Layman Explanation**: Spotting campaigns or cohorts with unusual metrics (e.g., a marketing campaign getting 100,000 clicks in 1 hour might indicate click fraud, or a high-value customer cohort spending 100x the average customer).
 *   **Technical Explanation**: Identifying observations that lie far from other data points using statistical boundaries:
     *   *IQR method*: Values outside $[Q1 - 1.5 \times IQR, Q3 + 1.5 \times IQR]$.
     *   *Z-score method*: Points where $|Z| > 3$.
-    *   *Isolation Forest*: Unsupervised algorithm to isolate anomalies (useful for multi-dimensional usage outliers).
-*   **Real-world Scenario**: An operations engineer spots a sudden customer API usage spike. The system flags it as an outlier because the Z-score of the request count exceeded +4.0.
+    *   *Isolation Forest*: Unsupervised algorithm to isolate anomalies (useful for multi-dimensional marketing anomalies).
+*   **Real-world Scenario**: A marketing analyst spots a sudden campaign registration spike. The system flags it as an outlier because the Z-score of the sign-up count exceeded +4.0.
 
 ---
 
@@ -188,16 +188,16 @@ This document serves as an educational reference guide for Data Science, Machine
 #### 💡 Feature Engineering Concepts
 
 ### Feature Engineering
-*   **Layman Explanation**: Transforming raw database logs into highly useful metrics (e.g., converting "login timestamps" into a new metric: "Logins per user per week").
-*   **Technical Explanation**: The process of selecting, manipulating, and transforming raw variables into new features that better represent the underlying problem to improve model performance.
-*   **Real-world Scenario**: A billing data scientist takes raw `subscription_start` and `subscription_end` dates and engineers a new feature: `Account_Age_Days`.
+*   **Layman Explanation**: Transforming raw database logs into highly useful metrics (e.g., converting "purchase timestamps" into a new metric: "Days since last purchase (recency)").
+*   **Technical Explanation**: The process of selecting, manipulating, and transforming raw variables into new features that better represent the underlying product marketing problem to improve model performance.
+*   **Real-world Scenario**: A marketing data scientist takes raw `campaign_start` and `lead_conversion` dates and engineers a new feature: `Conversion_Time_Days`.
 
 #### 🔢 Categorical Data Encoding
 
 ### Data Encoding
-*   **Layman Explanation**: Converting text categories into numbers so machine learning models can read them (e.g., converting Plan Type "Free", "Pro", "Enterprise" into 0, 1, 2).
+*   **Layman Explanation**: Converting text categories into numbers so machine learning models can read them (e.g., converting Lead Quality "Cold", "Warm", "Hot" into 0, 1, 2).
 *   **Technical Explanation**: Transforming categorical qualitative variables into quantitative numerical variables (e.g., via Ordinal Encoding or One-Hot Encoding).
-*   **Real-world Scenario**: Customer support categories ("Billing", "Technical", "Sales") are encoded into numbers before running an automated support ticket classification model.
+*   **Real-world Scenario**: Marketing acquisition channels ("Organic", "Social", "Paid Ads") are encoded into numbers before running an automated customer segmentation model.
 
 ### One-Hot Encoding
 *   **Layman Explanation**: Creating separate Yes/No columns for each category. Instead of a single column called "Region" with values "US", "EU", "APAC", you create three new columns: "Is_US?", "Is_EU?", and "Is_APAC?" filled with 1s and 0s.
@@ -210,7 +210,7 @@ This document serves as an educational reference guide for Data Science, Machine
 *   **Layman Explanation**: Squishing values to fit on a scale from 0 to 1. E.g., putting customer age (18 to 70) and customer monthly spending ($10 to $1,000) on a 0-to-1 scale so they can be compared directly.
 *   **Technical Explanation**: Rescaling the range of features to scale the data in $[0, 1]$:
     $$X_{scaled} = \frac{X - X_{min}}{X_{max} - X_{min}}$$
-*   **Real-world Scenario**: In a customer segmentation clustering model, user login frequency and billing totals are normalized to [0, 1] so that both features contribute equally to the distance calculations.
+*   **Real-world Scenario**: In a customer segmentation clustering model, email click rate and average purchase values are normalized to [0, 1] so that both features contribute equally to the distance calculations.
 
 ### Standardization (Z-score Normalization)
 ![Standardization Z-Score Normalization Infographic](images/standardization_chart.jpg)
@@ -218,7 +218,7 @@ This document serves as an educational reference guide for Data Science, Machine
 *   **Layman Explanation**: Adjusting metrics so the average is 0 and measuring how many standard steps (standard deviations) each customer is from that average.
 *   **Technical Explanation**: Rescaling data to have a mean of 0 and a standard deviation of 1:
     $$X_{std} = \frac{X - \mu}{\sigma}$$
-*   **Real-world Scenario**: A SaaS operations team standardizes the feature `Daily_Data_Storage` before feeding it to a neural network predicting account upgrade probability.
+*   **Real-world Scenario**: A marketing analytics team standardizes the feature `Daily_Ad_Clicks` before feeding it to a neural network predicting customer conversion probability.
 
 ---
 
@@ -272,27 +272,27 @@ This document serves as an educational reference guide for Data Science, Machine
 *   **Layman Explanation**: Calculating distances. L2 norm calculates the straight-line distance, while L1 norm calculates distance along grid lines (Manhattan distance).
 *   **Technical Explanation**: Magnitude functions mapping a vector to a scalar:
     $$\|x\|_1 = \sum |x_i| \qquad \|x\|_2 = \sqrt{\sum x_i^2}$$
-*   **Real-world Scenario**: A recommender system calculates user profile similarities using L2 distance (Euclidean distance).
+*   **Real-world Scenario**: *   **Real-world Scenario**: A recommender system calculates user profile similarities using L2 distance (Euclidean distance).
 
 #### ⚙️ Array Operations & Optimization
 
 ### Vectorization
 *   **Layman Explanation**: Performing arithmetic on millions of customer rows simultaneously in C instead of using slow Python loops.
 *   **Technical Explanation**: Delegating array calculations to highly optimized compiled code underneath.
-*   **Real-world Scenario**: Running `df['Active_Seats'] * df['Seat_Price']` to calculate total revenue per customer runs in milliseconds using vectorized operations.
+*   **Real-world Scenario**: Running `df['Click_Volume'] * df['CPC_Rate']` to calculate total ad spend runs in milliseconds using vectorized operations.
 
 ### Broadcasting
-*   **Layman Explanation**: Stretches a single number to fit a whole list of numbers (e.g., adding a flat $5 discount value to all subscription rows automatically).
+*   **Layman Explanation**: Stretches a single number to fit a whole list of numbers (e.g., adding a flat 10% coupon discount to all customer purchase rows automatically).
 *   **Technical Explanation**: The rules NumPy follows to perform arithmetic operations on arrays of different dimensions.
-*   **Real-world Scenario**: A billing engine subtracts a flat discount array from a massive pricing matrix.
+*   **Real-world Scenario**: A marketing tool subtracts a flat coupon discount from a massive sales transaction matrix.
 
 ---
 
 ## 7. Core Libraries & Tools
 
-*   **Pandas**: The core library for loading, cleaning, and transforming SaaS spreadsheets (DataFrames).
+*   **Pandas**: The core library for loading, cleaning, and transforming product marketing spreadsheets (DataFrames).
 *   **NumPy**: The core engine for high-speed mathematical array calculations.
-*   **Scikit-learn**: The primary package used to train ML models (like classification trees for churn prediction).
+*   **Scikit-learn**: The primary package used to train ML models (like classification trees for conversion prediction).
 *   **Seaborn**: Built on Matplotlib, used to generate high-quality statistical plots like heatmaps of correlation metrics.
 *   **SciPy**: Used for running advanced scientific calculations and statistical tests (like calculating p-values for A/B tests).
 
@@ -309,72 +309,72 @@ This document serves as an educational reference guide for Data Science, Machine
 
 ### Histogram
 ![Histogram Example](images/histogram.png)
-*   **SaaS Use Case**: Visualizing the distribution of free trial conversion times (how many days it takes for trial signups to upgrade).
+*   **Product & Marketing Use Case**: Visualizing the distribution of lead conversion times (how many days it takes for signed-up leads to make their first purchase).
 
 ### Line Plot
 ![Line Plot Example](images/line_plot.png)
-*   **SaaS Use Case**: Tracking Monthly Recurring Revenue (MRR) trends over a 2-year period.
+*   **Product & Marketing Use Case**: Tracking Customer Acquisition Cost (CAC) or Monthly Marketing Spend trends over a 2-year period.
 
 ### Bar Chart
 ![Bar Chart Example](images/bar_chart.png)
-*   **SaaS Use Case**: Comparing total active seat subscriptions across different plan tiers (e.g., Basic vs. Pro vs. Enterprise).
+*   **Product & Marketing Use Case**: Comparing total customer signups generated across different marketing campaigns (e.g., Summer Promo vs. Winter Sale).
 
 ### Pie Chart
 ![Pie Chart Example](images/pie_chart.png)
-*   **SaaS Use Case**: Showing the percentage share of customer signups coming from different marketing channels (Google Ads, Referral, Organic).
+*   **Product & Marketing Use Case**: Showing the percentage share of customer signups coming from different marketing acquisition channels (Google Ads, Social Media, Referral, Organic).
 
 ### Box Plot (Box-and-Whisker Plot)
 ![Box Plot Anatomy & Outlier Bounds Diagram](images/boxplot_anatomy.jpg)
-*   **SaaS Use Case**: Summarizing the spread of API response latency and highlighting extreme latency outliers.
+*   **Product & Marketing Use Case**: Summarizing the spread of customer order values and highlighting high-spending outlier purchases.
 
 ### Scatter Plot
 ![Scatter Plot Example](images/scatter_plot.png)
-*   **SaaS Use Case**: Plotting user session frequency against customer monthly spending to identify if high-usage accounts correlate with high revenue.
+*   **Product & Marketing Use Case**: Plotting campaign ad impressions against resulting sales revenue to check if higher ad exposure correlates with higher income.
 
 ### Violin Plot
 ![Violin Plot Example](images/violin_plot.png)
-*   **SaaS Use Case**: Displaying the density distribution of data storage usage across plan tiers, showing if the usage is multimodal (e.g., containing two peaks of low and high users).
+*   **Product & Marketing Use Case**: Displaying the density distribution of customer purchase frequencies across marketing cohorts, showing if purchase frequency is multimodal.
 
 ### Heatmap
 ![Heatmap Example](images/heatmap.png)
-*   **SaaS Use Case**: Displaying a correlation matrix of features (logins, seats, support tickets, age) to find which usage patterns strongly correlate with customer retention.
+*   **Product & Marketing Use Case**: Displaying a correlation matrix of marketing features (ad clicks, website pages visited, email opens, purchase value) to identify which touchpoints correlate with customer conversions.
 
 ### Sunburst Chart
 ![Sunburst Chart Example](images/sunburst_chart.jpg)
-*   **SaaS Use Case**: Visualizing subscription revenue nested by Region $\rightarrow$ Plan Tier $\rightarrow$ Customer Acquisition Channel.
+*   **Product & Marketing Use Case**: Visualizing marketing revenue nested by Region $\rightarrow$ Marketing Channel $\rightarrow$ Campaign Name.
 
 ### Gauge / Indicator Chart
 ![Gauge Chart Example](images/gauge_chart.jpg)
-*   **SaaS Use Case**: Presenting the current Net Promoter Score (NPS) on a dial gauge relative to a target benchmark of 75.
+*   **Product & Marketing Use Case**: Presenting the current Customer Satisfaction (CSAT) score on a dial gauge relative to a target benchmark of 80.
 
 ### Pair Plot
 ![Pair Plot Example](images/pair_plot.png)
-*   **SaaS Use Case**: Inspecting pairwise correlations between all active usage metrics (logins, pageviews, storage) in a single grid.
+*   **Product & Marketing Use Case**: Inspecting pairwise correlations between all active campaign metrics (ad impressions, clicks, bounce rates, conversions) in a single grid.
 
 ### Joint Plot
 ![Joint Plot Example](images/joint_plot.png)
-*   **SaaS Use Case**: Analyzing correlation between seat utilization and total API usage, with marginal histograms on the sides showing individual densities.
+*   **Product & Marketing Use Case**: Analyzing the correlation between ad frequency and customer conversion rates, with marginal histograms on the sides showing individual densities.
 
 ### Swarm Plot
 ![Swarm Plot Example](images/swarm_plot.png)
-*   **SaaS Use Case**: Showing the exact monthly spending of our top 100 enterprise customers grouped by account manager, ensuring no points are hidden.
+*   **Product & Marketing Use Case**: Showing the exact purchase values of our top 100 customers grouped by customer segment, ensuring no points are hidden.
 
 ### Scatter Matrix / Splom
 ![Scatter Matrix Example](images/scatter_matrix.png)
-*   **SaaS Use Case**: Displaying interactive multidimensional scatter grids for customer onboarding cohorts.
+*   **Product & Marketing Use Case**: Displaying interactive multidimensional scatter grids for marketing campaign cohorts.
 
 ### Polar / Radar Plot
 ![Radar Plot Example](images/polar_plot.png)
-*   **SaaS Use Case**: Visualizing an account's usage health across five product categories (Data Storage, API calls, Active seats, Integrations, Support satisfaction).
+*   **Product & Marketing Use Case**: Visualizing a campaign's performance across five marketing channels (Google Ads, Facebook, LinkedIn, Email, Organic Search).
 
 ### Area Plot
 ![Area Plot Example](images/area_plot.png)
-*   **SaaS Use Case**: Plotting stacked monthly active users over a 12-month period, colored by platform (Web App, Mobile App, Desktop Client).
+*   **Product & Marketing Use Case**: Plotting stacked monthly active website visitors over a 12-month period, colored by referral source (Organic, Paid Search, Social Media).
 
 ### Treemap
 ![Treemap Example](images/treemap.jpg)
-*   **SaaS Use Case**: Displaying global annual revenue allocations, where rectangle sizes show the revenue contributions of different customer industries (Healthcare, Finance, Retail, Education).
+*   **Product & Marketing Use Case**: Displaying global annual revenue allocations, where rectangle sizes show the revenue contributions of different customer segments or product lines.
 
 ### 3D Scatter / Line Plot
 ![3D Scatter Plot Example](images/3d_scatter_plot.png)
-*   **SaaS Use Case**: Evaluating cluster boundaries of user accounts across three dimensions: Monthly spend, Login frequency, and Active seat count.
+*   **Product & Marketing Use Case**: Evaluating cluster boundaries of customer leads across three dimensions: Lead score, email open rate, and website pages visited.
