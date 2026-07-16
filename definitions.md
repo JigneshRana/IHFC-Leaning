@@ -314,6 +314,112 @@ This document provides intuitive, technical, and applied explanations for key Da
 
 ## 5. Probability & Statistical Inference
 
+### The Statistical Modeling Progression (Stats $\to$ ML $\to$ DL $\to$ GenAI)
+*   **Layman Explanation**: Think of this as a learning ladder. First, you learn to describe and summarize what happened (Statistics). Then, you teach a computer to find patterns in that data and make predictions on its own (Machine Learning). Next, you use layers of virtual brain cells to find very complex patterns like recognizing faces or understanding speech (Deep Learning). Finally, you teach the computer to create completely new things, like writing essays or drawing pictures, based on everything it has learned (Generative AI).
+*   **Technical Explanation**: A hierarchical stack of quantitative modeling capabilities:
+    1. **Statistics**: The mathematical foundation concerned with data collection, description, exploration, hypothesis testing, and drawing inferences about populations from samples.
+    2. **Machine Learning (ML)**: A field applying statistical theories to algorithms that dynamically learn patterns from training data to make predictions/decisions without explicit programming.
+    3. **Deep Learning (DL)**: A subfield of ML utilizing artificial neural networks (ANNs) with multiple hidden layers to automatically extract high-level representations from unstructured data (e.g., images, text).
+    4. **Generative AI (GenAI)**: Advanced DL models (e.g., Transformers, Diffusion models, GANs) that learn the underlying joint probability distribution of the input training data to generate novel, synthetic data instances.
+*   **Data Science Use Case**: Starting a project with statistical exploratory analysis, scaling to machine learning for structured tabular predictions, and using deep learning or generative models for unstructured text/image solutions.
+*   **Machine Learning Use Case**: Understanding how foundational statistics (like probability distributions and gradients) are utilized to train neural networks, which form the building blocks of large language models (LLMs).
+*   **Real-world Scenario**: A healthcare company uses basic statistics to analyze patient recovery times. They build a Machine Learning model to predict which patients are at risk of readmission. They then use a Deep Learning model to analyze MRI scans for early detection of abnormalities. Finally, they implement a Generative AI assistant to draft patient discharge summaries for doctors.
+
+### The Inferential Statistics & Predictive Analytics Pipeline
+*   **Layman Explanation**: The steps to make a reliable guess. You start with the real world (Data). Since you can't look at everything, you pick a small representative group (Sample). You look at how the sample values are spread out (Distribution) and calculate the odds of different outcomes (Probability). Using those odds, you make a prediction about the future (Predict), and measure how sure you are about that guess (Confidence).
+*   **Technical Explanation**: The systematic workflow of drawing conclusions about a population and predicting future outcomes:
+    1. **Data**: Raw measurements gathered from a population.
+    2. **Sample**: A representative subset of the population used for analysis.
+    3. **Distribution**: The mathematical model (e.g., normal, binomial) describing how values of a variable are spread.
+    4. **Probability**: The quantitative measure of the likelihood that a specific outcome or event will occur.
+    5. **Predict**: Making inferences or forecasts about unknown or future observations using probability models.
+    6. **Confidence**: The statistical quantification of uncertainty (e.g., confidence intervals, prediction intervals, p-values) around the prediction.
+*   **Data Science Use Case**: Designing A/B tests and forecasting models that translate raw data points into actionable decisions with validated error rates.
+*   **Machine Learning Use Case**: Structuring the training loop where a sample is used to fit a probability distribution (density estimation), output class predictions (probabilities), and evaluate them using confidence margins or prediction boundaries.
+*   **Real-world Scenario**: An e-commerce company extracts transaction logs (Data) of 1,000 active users (Sample), models their session durations as a log-normal distribution (Distribution), calculates the odds of a user spending over 15 minutes on the site (Probability), predicts whether a new user will convert (Predict), and reports this prediction with a 95% confidence interval (Confidence).
+
+### Random Experiment, Sample Space, and Events
+*   **Layman Explanation**:
+    *   *Random Experiment*: Any action where the result is uncertain, like tossing a coin, rolling a die, or launching a marketing campaign.
+    *   *Sample Space*: A complete list of all possible outcomes. If you toss one coin, the sample space is `{Heads, Tails}`.
+    *   *Event*: The specific outcome or group of outcomes you are interested in (e.g., rolling an odd number).
+*   **Technical Explanation**:
+    *   **Random Experiment**: An observational process or trial that produces a definite outcome which cannot be predicted with certainty.
+    *   **Sample Space ($S$)**: The set of all possible outcomes of a random experiment.
+    *   **Event ($E$)**: A subset of the sample space $S$. An event is said to occur on a trial of the experiment if the observed outcome is an element of $E$.
+*   **Data Science Use Case**: Defining the boundaries of possible outcomes in probability calculations and establishing sample spaces for simulations (e.g., Monte Carlo simulations).
+*   **Machine Learning Use Case**: Defining the output prediction space (labels) for classification problems. For example, in a multi-class sentiment classifier, the sample space of outcomes is $S = \{\text{Negative}, \text{Neutral}, \text{Positive}\}$.
+*   **Real-world Scenario**:
+    *   *Single Coin Toss*: Random experiment: tossing a coin. Sample space: $S = \{H, T\}$. Event of interest: getting heads, $E = \{H\}$.
+    *   *Two Coin Tosses*: Random experiment: tossing two coins. Sample space: $S = \{HH, HT, TH, TT\}$. Event of interest "at least one heads": $E = \{HH, HT, TH\}$.
+    *   *Single Die Roll*: Random experiment: rolling a six-sided die. Sample space: $S = \{1, 2, 3, 4, 5, 6\}$. Event of interest "rolling an even number": $E = \{2, 4, 6\}$.
+
+### Probability Rule for Complements
+*   **Layman Explanation**: The math of "everything else." If there's a 60% chance of rain, there is a 40% (100% - 60%) chance of no rain. When finding the probability of a complicated event directly is too hard, it's often much easier to find the probability of it *not* happening, and subtract that from 1.
+*   **Technical Explanation**: The rule stating that the sum of the probability of an event $A$ occurring and the probability of its complement $A^c$ (the event that $A$ does not occur) is equal to 1.
+    $$P(A^c) = 1 - P(A) \quad \text{or} \quad P(A) = 1 - P(A^c)$$
+*   **Data Science Use Case**: Solving "at least one" problems. Instead of calculating the probabilities of 1, 2, 3, etc. occurrences and summing them up, you calculate the probability of 0 occurrences (the complement) and subtract it from 1.
+*   **Machine Learning Use Case**: Calculating prediction error rates in binary classification (e.g., $Error = 1 - Accuracy$), or computing probabilities in decision trees.
+*   **Real-world Scenario**: To find the probability of getting *at least one* heads in 5 coin tosses, calculating it directly requires adding up the probabilities of getting 1, 2, 3, 4, and 5 heads. Instead, we use the complement rule. The only way *not* to get at least one heads is to get all tails ($TTTTT$). Since the probability of all tails is $(1/2)^5 = 1/32$, the probability of getting at least one heads is $1 - 1/32 = 31/32 \approx 96.88\%$.
+
+### Random Variable
+*   **Layman Explanation**: A placeholder variable whose value depends on the numerical outcome of a random event (e.g., the number of heads in 3 coin flips).
+*   **Technical Explanation**: A function or rule that assigns a real numerical value to each outcome in the sample space of a random experiment. It maps qualitative outcomes to quantitative values, making them mathematically tractable.
+*   **Data Science Use Case**: Formulating business outcomes (like customer acquisition costs or total order counts) as random variables to perform simulation and probabilistic forecasting.
+*   **Machine Learning Use Case**: Framing the target labels (e.g. survival status, revenue amount) as random variables that models attempt to estimate.
+*   **Real-world Scenario**: A casino maps the outcomes of a roulette spin to a random variable $X$. If the ball lands on red, $X = 1$; if black, $X = -1$; if green (0 or 00), $X = -10$. This allows the casino to calculate the expected value (house edge) of each bet.
+
+### Probability Density Function (PDF) vs. Probability Mass Function (PMF)
+*   **Layman Explanation**:
+    *   *PMF (Discrete)*: A lookup list that gives the exact probability of getting a specific countable value (like the odds of rolling exactly a 4 on a die being 1/6).
+    *   *PDF (Continuous)*: A curve where the area under the curve between two points represents the probability of a value falling in that range. You cannot look up the probability of an exact decimal number (like exactly 25.0000 degrees temperature), which is technically zero.
+*   **Technical Explanation**:
+    *   **Probability Mass Function (PMF)**: A function $p(x) = P(X = x)$ that maps each value in the range of a discrete random variable $X$ to its exact probability. The sum of all probabilities over the range is equal to 1.
+    *   **Probability Density Function (PDF)**: A function $f(x)$ used to describe the probability distribution of a continuous random variable $X$. While $f(x)$ itself represents the density (height of the curve, which can exceed 1), the actual probability that $X$ falls within an interval $[a, b]$ is given by the area under the curve:
+        $$P(a \le X \le b) = \int_a^b f(x) dx \quad \text{where } \int_{-\infty}^{\infty} f(x) dx = 1$$
+*   **Data Science Use Case**: Choosing whether to calculate specific discrete value frequencies (using PMF) or integrate ranges for continuous distributions (using PDF) to estimate likelihoods.
+*   **Machine Learning Use Case**: Evaluating the likelihood of continuous inputs in Gaussian Mixture Models (PDF) vs. discrete input probabilities in Naive Bayes (PMF).
+*   **Real-world Scenario**: A restaurant uses a PMF to calculate the odds of receiving exactly 0, 1, or 2 complaints in a day (discrete counts). They use a PDF to estimate the odds of a customer waiting between 5 and 10 minutes for their food (continuous time).
+
+### Cumulative Distribution Function (CDF)
+*   **Layman Explanation**: A running total of probabilities. Instead of asking "What are the odds of a patient waiting exactly 10 minutes?", the CDF answers "What are the odds of a patient waiting 10 minutes *or less*?".
+*   **Technical Explanation**: A function $F(x) = P(X \le x)$ that maps a real number $x$ to the probability that the random variable $X$ will take a value less than or equal to $x$.
+    *   For a Discrete variable: $F(x) = \sum_{x_i \le x} P(X = x_i)$
+    *   For a Continuous variable: $F(x) = \int_{-\infty}^x f(t) dt$
+*   **Data Science Use Case**: Calculating percentiles and range-based probabilities (e.g. $P(a < X \le b) = F(b) - F(a)$) to assess operational performance.
+*   **Machine Learning Use Case**: Normalizing features using quantile transformation or evaluating prediction confidence scores using CDF thresholds.
+*   **Real-world Scenario**: A university uses a CDF of exam scores to assign letter grades. By finding the score $x$ where $F(x) = 0.90$, they identify the 90th percentile threshold to award the top grade (A) to the top 10% of students.
+
+### Bernoulli Distribution
+*   **Layman Explanation**: A single Yes/No trial. Like a single coin toss, you either succeed (1) or fail (0) with a certain probability of success.
+*   **Technical Explanation**: A discrete probability distribution of a random variable $X$ which takes the value 1 (success) with probability $p$ and the value 0 (failure) with probability $q = 1-p$:
+    $$P(X = x) = p^x (1-p)^{1-x} \quad \text{for } x \in \{0, 1\}$$
+    *   **Mean**: $E[X] = p$
+    *   **Variance**: $Var(X) = p(1-p)$
+*   **Data Science Use Case**: Modeling simple binary outcomes (e.g. click vs. no-click, transaction approved vs. denied).
+*   **Machine Learning Use Case**: Used in binary Logistic Regression as the underlying distribution of the target labels, and in the Bernoulli Naive Bayes classifier.
+*   **Real-world Scenario**: A marketing firm sends a single promotional email to a customer. The outcome is modeled as a Bernoulli distribution where success ($X=1$, customer opens email) has a probability $p = 0.20$, and failure ($X=0$, customer ignores it) has a probability $1-p = 0.80$.
+
+### Binomial Distribution
+*   **Layman Explanation**: Multiple independent Yes/No trials. If you flip a coin 10 times, the Binomial distribution tells you the probability of getting exactly 7 heads, or exactly 3 heads, etc.
+*   **Technical Explanation**: A discrete probability distribution of the number of successes $k$ in a sequence of $n$ independent Bernoulli trials, each with success probability $p$:
+    $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} \quad \text{where } \binom{n}{k} = \frac{n!}{k!(n-k)!}$$
+    *   **Mean**: $E[X] = np$
+    *   **Variance**: $Var(X) = np(1-p)$
+*   **Data Science Use Case**: Evaluating the success rates of batches of trials (e.g., if we send 100 emails with a 20% conversion rate, what are the odds of getting exactly 25 sales?).
+*   **Machine Learning Use Case**: Used in ensemble methods to calculate the theoretical probability that a majority vote of $n$ weak learners (each with accuracy $p$) will make a correct prediction.
+*   **Real-world Scenario**: A call center agent makes 20 cold calls. The probability of any individual call ending in a sale is $p = 0.10$. The number of sales the agent makes follows a Binomial distribution with $n = 20$ and $p = 0.10$, allowing the manager to calculate the probability of the agent making at least 3 sales.
+
+### Poisson Distribution
+*   **Layman Explanation**: Counting events over time or space. It tells you the odds of a certain number of events happening in a fixed window of time or area (e.g., how many customers walk into a store between 10 AM and 11 AM, or how many spelling mistakes are on a page), assuming they happen at a known average rate and independently.
+*   **Technical Explanation**: A discrete probability distribution that expresses the probability of a given number of events $k$ occurring in a fixed interval of time or space, if these events occur with a known constant mean rate $\lambda$ (lambda) and independently of the time since the last event:
+    $$P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}$$
+    *   **Mean**: $E[X] = \lambda$
+    *   **Variance**: $Var(X) = \lambda$
+*   **Data Science Use Case**: Modeling count data where the values are non-negative integers representing rates of occurrence.
+*   **Machine Learning Use Case**: Poisson Regression is used to model count-based target variables (like the number of insurance claims or website visits).
+*   **Real-world Scenario**: A web server receives an average of 4 requests per second ($\lambda = 4$). The operations team uses a Poisson distribution to calculate the probability of the server receiving 10 or more requests in a single second, which would overload the system.
+
 ### Normal (Gaussian) Distribution
 *   **Layman Explanation**: The classic "bell curve." Most people are average height, a few are very tall, and a few are very short. When plotted, it looks like a symmetrical bell.
 *   **Technical Explanation**: A continuous probability distribution symmetric about its mean, defined by:
@@ -322,12 +428,39 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Machine Learning Use Case**: Many ML algorithms (like Linear Discriminant Analysis or Gaussian Naive Bayes) assume that features are normally distributed. It is also the basis for assessing model residuals (errors).
 *   **Real-world Scenario**: A shoe factory studies the distribution of adult foot sizes to determine how many shoes of each size they should manufacture. The foot sizes form a normal distribution, meaning sizes 8 to 10 are highly common, while sizes 5 and 14 are rare.
 
+### Uniform Distribution
+*   **Layman Explanation**: Equal odds for everything. Like rolling a fair six-sided die—each number (1 to 6) has the exact same probability (1/6) of being rolled. On a chart, it looks like a flat rectangular block because no value is more likely than another.
+*   **Technical Explanation**: A probability distribution where all outcomes are equally likely within a specified range:
+    *   **Discrete Uniform**: For $n$ distinct outcomes, each has a probability of $\frac{1}{n}$.
+    *   **Continuous Uniform**: For a continuous variable in the interval $[a, b]$, the probability density is constant:
+        $$f(x) = \frac{1}{b - a} \quad \text{for } a \le x \le b$$
+*   **Data Science Use Case**: Simulating completely random processes or generating random baselines for control experiments.
+*   **Machine Learning Use Case**: Initializing weights in neural networks (e.g. Xavier/Glorot Uniform Initialization) to ensure balanced signal propagation across layers.
+*   **Real-world Scenario**: A bus arrives at a stop exactly every 15 minutes. A commuter arrives at a random time. The commuter's wait time follows a continuous Uniform distribution between 0 and 15 minutes, meaning they are just as likely to wait 1 minute as they are to wait 14 minutes.
+
 ### Central Limit Theorem (CLT)
 *   **Layman Explanation**: If you roll a single die, the results are flat (1 through 6 are equally likely). But if you roll 10 dice and calculate the average, and repeat this many times, the averages will form a bell curve (with most averages around 3.5).
 *   **Technical Explanation**: The distribution of the sample means will approach a normal distribution as the sample size $N$ increases (typically $N \ge 30$), regardless of the shape of the population distribution.
 *   **Data Science Use Case**: Allows analysts to calculate confidence intervals and make inferences about population averages without needing to know the exact shape of the underlying population.
 *   **Machine Learning Use Case**: Validating the statistical significance of model improvements during cross-validation or A/B testing.
 *   **Real-world Scenario**: A polling agency wants to find the average support rating of a political candidate. Rather than surveying all 50 million citizens, they take 100 different random samples of 1,000 citizens each. The averages of these 100 samples form a normal curve, allowing the agency to pinpoint the true candidate rating with high confidence.
+
+### Chebyshev's Theorem
+*   **Layman Explanation**: A guaranteed safety rule for any kind of data. The *Empirical Rule* (68-95-99.7 rule) is great, but it only works when your data forms a perfect bell curve. If your data is highly skewed or weirdly shaped, you can't use it. Chebyshev's Theorem works for **every** dataset. It guarantees that:
+    *   At least **75%** of your data lies within **2** standard deviations of the average.
+    *   At least **88.89%** of your data lies within **3** standard deviations of the average.
+    *   At least **93.75%** of your data lies within **4** standard deviations of the average.
+    *   At least **96%** of your data lies within **5** standard deviations of the average.
+*   **Technical Explanation**: A theorem in probability theory that guarantees that, for any probability distribution or numerical dataset, the proportion of observations falling within $k$ standard deviations of the mean ($\mu$) is at least:
+    $$P(|X - \mu| < k\sigma) \ge 1 - \frac{1}{k^2}$$
+    where $k > 1$ is any positive real number representing the number of standard deviations.
+    *   **$k = 2$**: At least $1 - 1/4 = 75\%$ of data lies in $[\mu - 2\sigma, \mu + 2\sigma]$.
+    *   **$k = 3$**: At least $1 - 1/9 \approx 88.89\%$ of data lies in $[\mu - 3\sigma, \mu + 3\sigma]$.
+    *   **$k = 4$**: At least $1 - 1/16 = 93.75\%$ of data lies in $[\mu - 4\sigma, \mu + 4\sigma]$.
+    *   **$k = 5$**: At least $1 - 1/25 = 96\%$ of data lies in $[\mu - 5\sigma, \mu + 5\sigma]$.
+*   **Data Science Use Case**: Establishing statistical bounds and performing outlier detection on arbitrary, unknown, or heavily skewed distributions where normality cannot be assumed.
+*   **Machine Learning Use Case**: Estimating upper bounds for error rates or setting conservative threshold limits in anomaly detection systems.
+*   **Real-world Scenario**: A quality control engineer measures the thickness of steel sheets. The average thickness is 28mm with a standard deviation of 3mm. The shape of the distribution is unknown. Using Chebyshev's Theorem with $k=2$, they can guarantee that at least 75% of all sheets produced will have a thickness between 22mm and 34mm ($28 \pm 2(3)$). Consequently, at most 25% of the sheets will fall outside this range.
 
 ### Hypothesis Testing (Null vs. Alternative)
 ![Hypothesis Testing Decision Pipeline Infographic Flowchart](images/hypothesis_testing_flow.jpg)
@@ -339,6 +472,31 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Data Science Use Case**: Conducting A/B tests to decide if a new product feature, layout change, or marketing email significantly improves customer engagement.
 *   **Machine Learning Use Case**: Feature selection (e.g., using Chi-Square tests or ANOVA to determine if a feature has a statistically significant relationship with the target class).
 *   **Real-world Scenario**: A streaming service changes its recommendations algorithm. The Null Hypothesis ($H_0$) is that users watch the same amount of video as before. The Alternative Hypothesis ($H_a$) is that users watch more. Following a trial, a t-test produces a p-value of 0.002, allowing the company to reject the null hypothesis and launch the new algorithm.
+
+### Bayes' Theorem
+*   **Layman Explanation**: Updating your beliefs when you get new evidence. If you think there's a 10% chance you have a cold, but then you start sneezing, Bayes' Theorem helps you calculate the new, updated probability that you actually have a cold given that you are sneezing.
+*   **Technical Explanation**: A mathematical formula used to calculate conditional probability. It expresses how the probability of an event $A$ occurring updates in light of new evidence $B$:
+    $$P(A|B) = \frac{P(B|A) P(A)}{P(B)}$$
+    *   **$P(A|B)$** (Posterior): Probability of event $A$ occurring given that $B$ has occurred.
+    *   **$P(B|A)$** (Likelihood): Probability of event $B$ occurring given that $A$ is true.
+    *   **$P(A)$** (Prior): Initial probability of $A$ before seeing the evidence $B$.
+    *   **$P(B)$** (Marginal Likelihood): Total probability of the evidence $B$ occurring under all possibilities.
+*   **Data Science Use Case**: Updating risk probabilities or classification likelihoods as new features/events are observed in real time.
+*   **Machine Learning Use Case**: The core formula behind the Naive Bayes classifier, which predicts target classes based on the conditional probabilities of input features.
+*   **Real-world Scenario**: A medical diagnostic test for a rare disease has a 99% accuracy rate (likelihood). Only 1 in 10,000 people have the disease (prior). If a patient tests positive, Bayes' Theorem reveals that their actual probability of having the disease is only about 1%, because the disease is so rare that false positives from the remaining 9,999 people outweigh the true positive.
+
+### Estimation Theory (Point & Interval Estimation)
+*   **Layman Explanation**: Making your best guess and setting a confidence window.
+    *   *Point Estimation*: Giving a single best-guess number (e.g., "The average customer spend is $45").
+    *   *Interval Estimation*: Giving a range that likely contains the true answer (e.g., "We are 95% confident that the average customer spend is between $42 and $48").
+*   **Technical Explanation**: A branch of statistics dealing with estimating the values of population parameters based on measured empirical data:
+    *   **Point Estimator**: A statistic (e.g., sample mean $\bar{x}$) that estimates a population parameter (e.g., population mean $\mu$) with a single value.
+    *   **Interval Estimator**: A formula that calculates a range of values (e.g. Confidence Interval) within which the true parameter is estimated to lie with a specified probability (confidence level $1 - \alpha$):
+        $$CI = \bar{x} \pm z_{\alpha/2} \left(\frac{s}{\sqrt{n}}\right)$$
+*   **Data Science Use Case**: Estimating key business metrics (like average customer lifetime value) from sample data and reporting them with confidence intervals to reflect statistical precision.
+*   **Machine Learning Use Case**: Estimating model parameters (weights) during training and estimating confidence bands for predicted values.
+*   **Real-world Scenario**: A battery manufacturer tests 100 batteries. They find the average battery life is 12 hours (Point Estimate). They then construct a 95% confidence interval of $[11.5 \text{ hours}, 12.5 \text{ hours}]$ (Interval Estimate) to print on the battery packaging, guaranteeing performance range for customers.
+
 ### Time Series & Forecasting
 *   **Layman Explanation**: Predicting future patterns based on past timelines. It is like looking at a store's sales over the last five winters to predict how many coats it will sell this coming December.
 *   **Technical Explanation**: Time series data is a sequence of data points indexed in chronological order. Forecasting involves building mathematical or statistical models (e.g. ARIMA, ETS, or machine learning sequence models) to predict future values based on historical trends, seasonal cycles, and random variation.
@@ -494,6 +652,29 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Data Science Use Case**: Checking if a numerical variable (like order values) has a normal distribution, is skewed, or has multiple peaks.
 *   **Machine Learning Use Case**: Checking feature distributions to decide if they need a log transform to reduce skewness before feeding them to algorithms like linear regression.
 *   **Real-world Scenario**: A bank plots the distribution of account balances of their customers to see if the majority of customers are concentrated in low-balance bins.
+
+### Kernel Density Plot / Kernel Density Estimation (KDE)
+*   **Associated Libraries**: SciPy (`scipy.stats.gaussian_kde`), Seaborn (`sns.kdeplot` or `sns.histplot(kde=True)`), Plotly (`ff.create_distplot`)
+*   **Layman Explanation**: A smooth wave version of a histogram. Instead of blocky, rectangular bins, it draws a smooth curve that shows where your data points are most crowded.
+*   **Technical Explanation**: A non-parametric method to estimate the probability density function (PDF) of a continuous random variable. It places a kernel function (typically a Gaussian curve) over each data point and sums them up to create a single smooth, continuous probability density estimate:
+    $$\hat{f}_h(x) = \frac{1}{nh} \sum_{i=1}^n K\left(\frac{x - x_i}{h}\right)$$
+    where $K$ is the kernel function, $n$ is the sample size, and $h$ is the bandwidth smoothing parameter.
+*   **Data Science Use Case**: Visualizing and comparing the continuous probability distributions of multiple variables to check for skewness, symmetry, or multimodal peaks.
+*   **Machine Learning Use Case**: Analyzing prediction error residuals or visualizing the output class probability distributions to inspect model calibration.
+*   **Real-world Scenario**: A data scientist plots the distribution of Bernoulli trials or numerical data in Python. By calculating the KDE with SciPy and plotting the resulting curve, they can visually inspect the density of observations:
+    ```python
+    from scipy.stats import gaussian_kde
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    # Calculate the KDE
+    kde = gaussian_kde(data_bernoulli)
+    kde_xs = np.linspace(-1, 2, 300)
+    kde_ys = kde.pdf(kde_xs)
+
+    # Plot KDE
+    plt.plot(kde_xs, kde_ys, color='red')
+    ```
 
 ### Line Plot
 ![Line Plot Example](images/line_plot.png)
