@@ -1,0 +1,20 @@
+# Ignore all CSV files across the repository and all subdirectories
+*.csv
+
+# Python / Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# System / IDE files
+.DS_Store
+.vscode/
+.idea/
+
+# Large archive files (optional common pattern)
+*.zip
