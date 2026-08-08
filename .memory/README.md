@@ -68,7 +68,9 @@ All definitions must be placed under one of these nine standard section headers:
 8. **Statistical Plots & Graphs**: Visual plot descriptions (e.g., Histogram, Scatter Plot, Box Plot, Violin Plot, Swarm Plot).
 9. **Reference Materials & External Resources**: Course books, links, and discussion topics.
 
-### 3. Image Sourcing Standard:
+### 3. Image Sourcing & Management Standard:
 *   **Source Preference**: Always check course notebooks and slide folders for existing images first. If an image is available in the course assets, use it.
 *   **Fallback Generation**: If no course image is available, generate a custom educational infographic, chart, or diagram to explain the concept.
 *   **Asset Management**: Store all images in the root `images/` directory in the repository. Always use relative links (e.g. `images/filename.jpg`) so they load correctly on GitHub.
+*   **User Screenshot Rule**: Whenever the user provides a screenshot/image, **ALWAYS store/copy it into `images/`** with a clean descriptive filename and **embed it directly in the markdown file** using `![Caption](images/filename.png)`. **NEVER replace provided images with ASCII text art/analogies.**
+
