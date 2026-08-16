@@ -83,3 +83,54 @@ Below is the mapping of lessons to files, topics, and associated datasets.
 * **Notebooks**:
   1. [10.01 Feature Engineering](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python/Instructor_Slide_and_Notebooks/Lesson_10_Feature_Engineering/10.01_Feature_Engineering.ipynb)
 * **Assessment**: [Lesson_10_Knowledge_Checks.pdf](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python/Instructor_Slide_and_Notebooks/Lesson_10_Feature_Engineering/Lesson_10_Knowledge_Checks.pdf)
+
+---
+
+## Module 4: IHFC AIML — Machine Learning Curriculum
+
+### Lesson 01: Course Introduction
+* **Folder**: [Lesson_01_Course_Introduction](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_01_Course_Introduction)
+* **Slides/PDF**: [Lesson_1_Course_Introduction.pdf](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_01_Course_Introduction/Lesson_1_Course_Introduction.pdf)
+
+### Lesson 02: Introduction to Machine Learning
+* **Folder**: [Lesson_02_Introduction_to_Machine_Learning](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_02_Introduction_to_Machine_Learning)
+* **Slides/PDF**: [Lesson_2_Introduction_to_Machine_Learning.pdf](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_02_Introduction_to_Machine_Learning/Lesson_2_Introduction_to_Machine_Learning.pdf)
+
+### Lesson 03: Supervised Learning — Regression and its Application
+* **Folder**: [Lesson_03_Supervised_Learning_ Regression_and_its_Application](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_03_Supervised_Learning_%20Regression_and_its_Application)
+* **Notebooks**:
+  1. [3.1_Supervised_Learning.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_03_Supervised_Learning_%20Regression_and_its_Application/3.1_Supervised_Learning.ipynb)
+  2. [3.2_Supervised_Learning_Regression_and_Its_Applications.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_03_Supervised_Learning_%20Regression_and_its_Application/3.2_Supervised_Learning_Regression_and_Its_Applications.ipynb)
+* **Assessment**: [Lesson_3_Knowledge_Checks.pdf](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_03_Supervised_Learning_%20Regression_and_its_Application/Lesson_3_Knowledge_Checks.pdf)
+* **Datasets**: [Dataset](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_03_Supervised_Learning_%20Regression_and_its_Application/Dataset) (`Hitters.csv`, `housing.csv`, `tvmarketing.csv`, `position_salaries.csv`, `diabetes_dataset.csv`)
+
+### Lesson 04: Supervised Learning — Classification and its Application
+* **Folder**: [Lesson_04_Supervised_Learning_ Classification_and_its_Application](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_04_Supervised_Learning_%20Classification_and_its_Application)
+* **Notebooks**:
+  1. [4.1_Classification_and_Its_Applications_Part_1.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_04_Supervised_Learning_%20Classification_and_its_Application/4.1_Classification_and_Its_Applications_Part_1.ipynb)
+  2. [4.2_Classification_and_Its_Applications_Part_2.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_04_Supervised_Learning_%20Classification_and_its_Application/4.2_Classification_and_Its_Applications_Part_2.ipynb)
+  3. [4.3_Classification_and_Its_Applications_Part_3.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_04_Supervised_Learning_%20Classification_and_its_Application/4.3_Classification_and_Its_Applications_Part_3.ipynb)
+* **Assessment**: [Lesson_4_Knowledge_Checks.pdf](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_04_Supervised_Learning_%20Classification_and_its_Application/Lesson_4_Knowledge_Checks.pdf)
+* **Datasets**: [Dataset](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_04_Supervised_Learning_%20Classification_and_its_Application/Dataset) (`Breast_cancer_dataset.csv`, `creditcard.csv`, `online_gaming_behavior_dataset.csv`)
+
+### Lesson 05: Ensemble Learning
+* **Folder**: [Lesson_05_Ensemble_Learning](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_05_Ensemble_Learning)
+* **Notebooks**:
+  1. [5.1_Ensemble_Learning.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_05_Ensemble_Learning/5.1_Ensemble_Learning.ipynb)
+* **Assessment**: [Lesson_5_Knowledge_Checks.pdf](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_05_Ensemble_Learning/Lesson_5_Knowledge_Checks.pdf)
+
+### Lesson 06: Unsupervised Learning Algorithms
+* **Folder**: [Lesson_06_Unsupervised_Learning_Algorithms](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_06_Unsupervised_Learning_Algorithms)
+* **Notebooks**:
+  1. [6.01_Unsupervised_Learning_Algorithms.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_06_Unsupervised_Learning_Algorithms/6.01_Unsupervised_Learning_Algorithms.ipynb)
+  2. [6.02_Unsupervised_Learning_Algorithms.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_06_Unsupervised_Learning_Algorithms/6.02_Unsupervised_Learning_Algorithms.ipynb)
+* **Assessment**: [Lesson_6_Knowledge_Checks.pdf](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_06_Unsupervised_Learning_Algorithms/Lesson_6_Knowledge_Checks.pdf)
+* **Datasets**: [Dataset](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_06_Unsupervised_Learning_Algorithms/Dataset) (`Mall_customers.csv`, `Market_Basket_Optimisation.csv`, `credit_card_fraud.csv`, `mnist.csv`)
+
+### Lesson 07: Recommendation Systems
+* **Folder**: [Lesson_07_Recommendation_Systems](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_07_Recommendation_Systems)
+* **Notebooks**:
+  1. [7.01_Recommendation_Systems.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_07_Recommendation_Systems/7.01_Recommendation_Systems.ipynb)
+  2. [7.1_Recommendation_Systems.ipynb](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_07_Recommendation_Systems/7.1_Recommendation_Systems.ipynb)
+* **Assessment**: [Lesson_7_Knowledge_Checks.pdf](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_07_Recommendation_Systems/Lesson_7_Knowledge_Checks.pdf)
+* **Datasets**: [Dataset](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_07_Recommendation_Systems/Dataset) (`anime.csv`, `movies.csv`, `ratings.csv`)

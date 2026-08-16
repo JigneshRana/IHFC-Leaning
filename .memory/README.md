@@ -4,45 +4,31 @@ This directory stores the context and memory of the workspace to guide agent exe
 
 ## Workspace Overview
 
-The workspace at [/media/jignesh/Data/ihfc/IHFC-Leaning](file:///media/jignesh/Data/ihfc/IHFC-Leaning) contains materials, datasets, and projects related to the **IHFC Applied Data Science with Python** course.
+The workspace at [/media/jignesh/Data/ihfc/IHFC-Leaning](file:///media/jignesh/Data/ihfc/IHFC-Leaning) contains materials, datasets, and projects related to the **IHFC Applied Data Science with Python** and **IHFC Machine Learning** courses.
 
 ### Core Modules
 
-1. **[Curriculum Materials](file:///media/jignesh/Data/ihfc/IHFC-Leaning/.memory/curriculum.md)**
-   - Located in: [3. IHFC AIML: Applied Data Science with Python/Instructor_Slide_and_Notebooks](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python/Instructor_Slide_and_Notebooks)
-   - Covers 10 distinct lessons from numpy basics to feature engineering.
-   - Includes datasets, slides, Jupyter notebooks (`.ipynb`), and knowledge checks.
-
-2. **[Practice Projects & Capstones](file:///media/jignesh/Data/ihfc/IHFC-Leaning/.memory/projects.md)**
-   - Includes multiple Python projects, sales and marketing data analyses, and incremental capstones.
-   - Project details, datasets, and objectives are tracked for easy reference.
+1. **[Module 3: Applied Data Science with Python](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python)** (10 Lessons, Datasets, Capstones 1-4)
+2. **[Module 4: Machine Learning](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning)** (7 Lessons, Capstones 5-8, Master Guide, Infographics)
+3. **[Active Learning Progress & Session Memory](file:///media/jignesh/Data/ihfc/IHFC-Leaning/.memory/learning_progress.md)** (Real-time progress, questions discussed, next resume points)
 
 ---
 
 ## Workspace Directory Tree
 
 - [3. IHFC AIML: Applied Data Science with Python](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python)
-  - [Datasets](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python/Datasets): Datasets mapped to individual lessons (4, 5, 7, 8, 9, 10).
-  - [Incremental_Capstone](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python/Incremental_Capstone): Sub-capstones (Capstone 1 to 4).
-  - [Instructor_Slide_and_Notebooks](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python/Instructor_Slide_and_Notebooks): Lesson PDFs and notebooks.
-  - [Python_Installation_Document](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python/Python_Installation_Document): Setup guidelines.
-- [Python-project1](file:///media/jignesh/Data/ihfc/IHFC-Leaning/Python-project1)
-  - Python-based customer order analysis ([customer_order_analysis.py](file:///media/jignesh/Data/ihfc/IHFC-Leaning/Python-project1/src/customer_order_analysis.py)).
-- [Python-project2](file:///media/jignesh/Data/ihfc/IHFC-Leaning/Python-project2)
-  - Contains course-end project problem statement PDF ([1745495202_course_end_project_02_problem_statement_pr.pdf](file:///media/jignesh/Data/ihfc/IHFC-Leaning/Python-project2/1745495202_course_end_project_02_problem_statement_pr.pdf)).
-- [project3 - SalesAnalysis](file:///media/jignesh/Data/ihfc/IHFC-Leaning/project3%20-%20SalesAnalysis)
-  - Retail apparel sales analysis based on CSV data ([AusApparalSales4thQrt2020.csv](file:///media/jignesh/Data/ihfc/IHFC-Leaning/project3%20-%20SalesAnalysis/problem_description/AusApparalSales4thQrt2020.csv)).
-- [project4 - MarketingCampaigns](file:///media/jignesh/Data/ihfc/IHFC-Leaning/project4%20-%20MarketingCampaigns)
-  - Analysis of marketing campaign responsiveness ([marketing_data.csv](file:///media/jignesh/Data/ihfc/IHFC-Leaning/project4%20-%20MarketingCampaigns/problem_description/marketing_data.csv)).
-- [Project5 - Incremental_Capstone](file:///media/jignesh/Data/ihfc/IHFC-Leaning/Project5%20-%20Incremental_Capstone)
-  - Sessions 1 to 4 containing data analysis PDFs and [NSMES1988.csv](file:///media/jignesh/Data/ihfc/IHFC-Leaning/Project5%20-%20Incremental_Capstone/Capstone%201/NSMES1988.csv).
+- [4. IHFC AIML: Machine Learning](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning)
+- [ClassnoteMachineLearning.md](file:///media/jignesh/Data/ihfc/IHFC-Leaning/ClassnoteMachineLearning.md)
+- [definitions.md](file:///media/jignesh/Data/ihfc/IHFC-Leaning/definitions.md)
 
 ---
 
 ## Detailed Memory Links
+- **[Active Learning Progress Tracker](file:///media/jignesh/Data/ihfc/IHFC-Leaning/.memory/learning_progress.md)**
 - **[Curriculum & Lessons Detail](file:///media/jignesh/Data/ihfc/IHFC-Leaning/.memory/curriculum.md)**
 - **[Projects & Capstones Detail](file:///media/jignesh/Data/ihfc/IHFC-Leaning/.memory/projects.md)**
 - **[Glossary & Definitions](file:///media/jignesh/Data/ihfc/IHFC-Leaning/definitions.md)**
+- **[Machine Learning Master Guide](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/Machine_Learning_Complete_Master_Guide.md)**
 
 ---
 

@@ -504,6 +504,37 @@ This document provides intuitive, technical, and applied explanations for key Da
 *   **Machine Learning Use Case**: Transforming temporal data into supervised learning datasets using sliding windows (lag features) to train regression models like XGBoost, or sequence models like LSTM.
 *   **Real-world Scenario**: An electricity provider reviews historical power consumption logs alongside temperature records. They build a forecasting model to predict daily power demand for the next two weeks, helping them schedule power plant outputs.
 
+### Naive Bayes Classifier
+*   **Layman Explanation**: A fast guessing machine based on probability. It looks at clues individually (assuming they don't affect each other, like "red" and "round" for an apple) and multiplies their chances together to pick the most likely answer.
+*   **Technical Explanation**: A probabilistic supervised classifier based on Bayes' Theorem with the strong (naive) assumption of conditional independence among features given the class label:
+    $$P(y|x_1, \dots, x_n) \propto P(y) \prod_{i=1}^n P(x_i|y)$$
+*   **Data Science Use Case**: Rapid baseline modeling for text data, document topic assignment, and spam filtering.
+*   **Machine Learning Use Case**: Training ultra-fast classification models (`GaussianNB`, `MultinomialNB`, `BernoulliNB`) on high-dimensional sparse feature spaces.
+*   **Real-world Scenario**: An email provider filters spam by calculating the probability that an incoming message containing words like "Free", "Winner", and "Claim" is spam vs legitimate inbox mail.
+
+### K-Nearest Neighbors (KNN)
+*   **Layman Explanation**: "Birds of a feather flock together." To classify a new person or item, look at the $K$ closest people already on the map and follow whatever the majority of them are doing.
+*   **Technical Explanation**: A non-parametric, instance-based "lazy learning" algorithm that calculates distance (e.g., Euclidean metric) between query instances and training points, assigning classes via majority vote or continuous targets via local averaging.
+*   **Data Science Use Case**: Exploring localized clustering patterns and creating similarity-based benchmarks during exploratory analysis.
+*   **Machine Learning Use Case**: Non-linear classification and regression where decision boundaries are irregular; requires feature scaling (`StandardScaler`) to prevent distance distortion.
+*   **Real-world Scenario**: A bank decides whether to approve a ₹5 Lakh loan by finding the 7 historical borrowers whose financial profiles are closest to the applicant; if 6 of them repaid reliably, the loan is approved.
+
+### Youden's J Statistic (Optimal Classification Threshold)
+*   **Layman Explanation**: The sweet spot on a dial. Instead of assuming 50% is always the cutoff, Youden's J finds the exact decision cutoff that maximizes caught cases while minimizing false alarms.
+*   **Technical Explanation**: A summary metric representing the performance of a binary diagnostic test across ROC thresholds, defined as the vertical distance from the diagonal chance line:
+    $$J = \text{Sensitivity} + \text{Specificity} - 1 = \text{TPR} - \text{FPR}$$
+*   **Data Science Use Case**: Selecting the optimal probability threshold in imbalanced classification tasks rather than blindly defaulting to 0.50.
+*   **Machine Learning Use Case**: Calibrating binary classifier output probabilities to maximize diagnostic effectiveness.
+*   **Real-world Scenario**: In a hospital cancer screening system, Youden's J identifies an optimal threshold of 0.42 probability to catch 98% of malignant cases while keeping unnecessary re-biopsies low.
+
+### Minimal Cost-Complexity Pruning (`ccp_alpha`)
+*   **Layman Explanation**: Trimming the overgrown branches of a decision bush. It cuts off weak, noisy branches so the tree focuses only on big, reliable rules and doesn't overfit.
+*   **Technical Explanation**: A post-pruning technique for Decision Trees that balances tree size ($|T|$) against misclassification error ($R(T)$) using a complexity cost parameter $\alpha$:
+    $$R_\alpha(T) = R(T) + \alpha |T|$$
+*   **Data Science Use Case**: Simplifying complex decision logic so stakeholders can interpret the tree flowchart easily.
+*   **Machine Learning Use Case**: Regularizing Decision Tree classifiers and regressors to close the gap between 100% training accuracy and lower test accuracy.
+*   **Real-world Scenario**: An insurance underwriting model prunes hundreds of minor rules into 5 core risk decision splits, boosting its accuracy on new unseen customer claims from 88% to 94%.
+
 ---
 
 
