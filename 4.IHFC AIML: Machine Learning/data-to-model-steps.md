@@ -123,7 +123,11 @@ graph TD
     * [5.1 Missing Value Treatment (Imputation)](#51-missing-value-treatment-imputation)
     * [5.2 Outlier Detection & Treatment](#52-outlier-detection--treatment)
     * [5.3 Duplicate and Trivial Columns Removal](#53-duplicate-and-trivial-columns-removal)
-    * [5.4 🧠 Logical Reasoning: Imputation & Outlier Strategies](#54--logical-reasoning-imputation--outlier-strategies)
+    * [5.4 Structural Errors & Inconsistent Casing](#54-structural-errors--inconsistent-casing)
+    * [5.5 String to Numeric Conversion & Format Cleaning](#55-string-to-numeric-conversion--format-cleaning)
+    * [5.6 Value Mapping & Garbage Codes Resolution](#56-value-mapping--garbage-codes-resolution)
+    * [5.7 Data Type Casting](#57-data-type-casting)
+    * [5.8 🧠 Logical Reasoning: Data Cleaning & Wrangling Decisions](#58--logical-reasoning-data-cleaning--wrangling-decisions)
 6. [Step 6: Feature Engineering & Preprocessing](#step-6-feature-engineering--preprocessing)
     * [6.1 Numeric Feature Scaling](#61-numeric-feature-scaling)
     * [6.2 Categorical Feature Encoding](#62-categorical-feature-encoding)
@@ -383,11 +387,11 @@ plt.show()
 ### 5.1 Missing Value Treatment (Imputation)
 ```python
 # Option A: Simple Median Imputation
-# [Reasoning Detail: See Step 5.4 for Median vs. Mean]
+# [Reasoning Detail: See Step 5.8 for Median vs. Mean]
 df['Age'] = df['Age'].fillna(df['Age'].median())
 
 # Option B: Advanced KNN Imputation
-# [Reasoning Detail: See Step 5.4 for KNN rules]
+# [Reasoning Detail: See Step 5.8 for KNN rules]
 imputer = KNNImputer(n_neighbors=5)
 df_imputed = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
 ```
@@ -406,7 +410,7 @@ upper_limit = Q3 + 1.5 * IQR
 df_clean = df[(df['Income'] >= lower_limit) & (df['Income'] <= upper_limit)]
 
 # Alternatively: Cap/Clip Outliers (Winsorize)
-# [Reasoning Detail: See Step 5.4]
+# [Reasoning Detail: See Step 5.8]
 df['Income'] = df['Income'].clip(lower=lower_limit, upper=upper_limit)
 ```
 
@@ -416,11 +420,57 @@ df['Income'] = df['Income'].clip(lower=lower_limit, upper=upper_limit)
 df = df.drop_duplicates()
 
 # Drop ID columns that contain no statistical signal
-# [Reasoning Detail: See Step 5.4]
+# [Reasoning Detail: See Step 5.8]
 df = df.drop(columns=['TransactionID', 'UserID'])
 ```
 
-### 5.4 🧠 Logical Reasoning: Imputation & Outlier Strategies
+### 5.4 Structural Errors & Inconsistent Casing
+Clean misspelled strings, whitespace issues, or casing inconsistencies to prevent artificial unique groups:
+```python
+# Strip whitespaces and force uniform lowercase
+df['Country'] = df['Country'].str.strip().str.lower()
+
+# Map and standardize inconsistent spellings
+# [Reasoning Detail: See Step 5.8]
+spelling_map = {
+    'usa': 'united states',
+    'us': 'united states',
+    'u.s.a.': 'united states',
+    'uk': 'united kingdom',
+    'u.k.': 'united kingdom'
+}
+df['Country'] = df['Country'].replace(spelling_map)
+```
+
+### 5.5 String to Numeric Conversion & Format Cleaning
+Clean raw object columns containing numbers with text symbols so they can be cast to correct numeric formats:
+```python
+# Strip currency symbols and commas, then convert to float
+# [Reasoning Detail: See Step 5.8]
+df['Income'] = df['Income'].astype(str).str.replace('$', '').str.replace(',', '')
+df['Income'] = pd.to_numeric(df['Income'], errors='coerce')
+```
+
+### 5.6 Value Mapping & Garbage Codes Resolution
+Replace arbitrary dummy values (e.g. `?`, `-999`) with proper null flags so that estimators can process them cleanly:
+```python
+# Replace common placeholder strings with numpy NaN
+# [Reasoning Detail: See Step 5.8]
+df = df.replace(['?', '-999', 'N/A', 'nan'], np.nan)
+```
+
+### 5.7 Data Type Casting
+Ensure correct column types to optimize memory and align with pipeline expectations:
+```python
+# Cast object columns to categorical type
+# [Reasoning Detail: See Step 5.8]
+df['Country'] = df['Country'].astype('category')
+
+# Cast boolean flags
+df['HasCreditCard'] = df['HasCreditCard'].astype(bool)
+```
+
+### 5.8 🧠 Logical Reasoning: Data Cleaning & Wrangling Decisions
 *   **Mean Imputation**: Only valid if the feature follows a perfect normal distribution.
 *   **Median Imputation**: Preferred for skewed features because the median is robust to outliers and will not shift the feature center incorrectly.
 *   **KNN Imputation**: Preferred when missing values have a logical relationship with other features (e.g., missing Income is estimated using similar Age and Education). *Note: Scale your data before KNN Imputation because distance calculations are scale-sensitive.*
@@ -428,6 +478,10 @@ df = df.drop(columns=['TransactionID', 'UserID'])
 *   **Z-Score Method**: ($\ge 3$ standard deviations) assumes a normal distribution.
 *   **Outlier Treatment**: If outliers are data-entry errors, drop them. If they are genuine extreme values (e.g., high-income earners), cap/clip them (Winsorization) to keep the sample size intact without biasing the model.
 *   **Unique IDs**: Unique IDs have 100% cardinality. They provide no generalization capability and cause decision trees to overfit heavily by creating trivial branches for individual rows.
+*   **Casing & Spellings**: String comparison is exact. For example, "USA" and "usa" are treated as two distinct categories, reducing model generalization. Forcing lowercase and mapping spellings resolves this structural error.
+*   **Format Stripping**: Raw files often store prices as `$1,200` (string object type). Standardizers and estimators cannot run math on strings; stripping non-numeric symbols and casting to float/int is mandatory.
+*   **Placeholder Value Mapping**: Raw databases often represent missing values as `-999`, `?` or `N/A`. Estimators treat `-999` as a valid extreme negative number, which completely distorts statistical statistics like Mean and Median. Mapping placeholders to `np.nan` ensures proper null-imputation pipelines.
+*   **Category Casting**: Converting high-cardinality string columns to category type drastically reduces memory usage (storing integers instead of repeated strings) and allows algorithms like LightGBM to natively split categorical parameters.
 
 ---
 
