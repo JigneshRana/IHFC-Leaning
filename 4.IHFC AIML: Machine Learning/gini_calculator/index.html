@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gini Index & Entropy Split Calculator - Decision Tree Visualization</title>
+  <meta name="description" content="Interactive visual calculator to calculate Gini Index, Gini Impurity, Entropy, and Information Gain splits in Decision Trees.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 id="app-title">Split Impurity & Gain Visualizer</h1>
+      <p id="app-desc">Understand how Decision Trees split data using Gini Index and Entropy / Information Gain.</p>
+      
+      <div class="toggle-container">
+        <div class="toggle-group" role="tablist" aria-label="Metric Selection">
+          <button id="toggle-gini" class="toggle-btn active" role="tab" aria-selected="true" aria-controls="math-walkthrough">Gini Index</button>
+          <button id="toggle-entropy" class="toggle-btn" role="tab" aria-selected="false" aria-controls="math-walkthrough">Entropy / Info Gain</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-grid">
+      <!-- Left Panel: Interactive Sliders & Inputs -->
+      <section class="card" aria-labelledby="controls-title">
+        <h2 id="controls-title" class="card-title">1. Node Configuration</h2>
+        
+        <!-- Parent Node Setups -->
+        <div class="control-group">
+          <div class="control-label">
+            <span class="class-a-label">Parent Class A (Good)</span>
+            <span id="val-parent-a" class="value-highlight">4</span>
+          </div>
+          <input type="range" id="slider-parent-a" class="slider-a" min="0" max="15" value="4" aria-label="Parent Class A (Good)">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span class="class-b-label">Parent Class B (Bad)</span>
+            <span id="val-parent-b" class="value-highlight">3</span>
+          </div>
+          <input type="range" id="slider-parent-b" class="slider-b" min="0" max="15" value="3" aria-label="Parent Class B (Bad)">
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 0.5rem 0;">
+
+        <!-- Left Node Splits Setup -->
+        <div class="control-group">
+          <div class="control-label">
+            <span class="class-a-label">Send Class A to Left Node</span>
+            <span><strong id="val-split-a" class="value-highlight">3</strong> / <span id="max-split-a">4</span></span>
+          </div>
+          <input type="range" id="slider-split-a" class="slider-a" min="0" max="4" value="3" aria-label="Class A sent to Left Node">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span class="class-b-label">Send Class B to Left Node</span>
+            <span><strong id="val-split-b" class="value-highlight">0</strong> / <span id="max-split-b">3</span></span>
+          </div>
+          <input type="range" id="slider-split-b" class="slider-b" min="0" max="3" value="0" aria-label="Class B sent to Left Node">
+        </div>
+      </section>
+
+      <!-- Right Panel: Visualizer & Math calculations -->
+      <main class="card" aria-labelledby="viz-title">
+        <h2 id="viz-title" class="card-title">2. Tree Split & Calculations</h2>
+        
+        <div class="viz-workspace">
+          <!-- Connector lines SVG -->
+          <svg class="tree-connectors" id="connectors-svg">
+            <path id="left-path" d="M 0 0 Q 0 0 0 0" />
+            <path id="right-path" d="M 0 0 Q 0 0 0 0" />
+          </svg>
+
+          <div class="nodes-container">
+            <!-- Parent Node -->
+            <div class="parent-row">
+              <div class="node parent" id="node-parent">
+                <div class="node-header">Parent Node</div>
+                <div class="node-metric" id="metric-parent">0.4898</div>
+                <div class="node-counts">
+                  <span class="count-a">A: <span id="count-parent-a">4</span></span>
+                  <span class="count-b">B: <span id="count-parent-b">3</span></span>
+                </div>
+                <div class="node-items" id="items-parent" aria-label="Parent node visual items"></div>
+              </div>
+            </div>
+
+            <!-- Children Nodes -->
+            <div class="children-row">
+              <!-- Left Child Node -->
+              <div class="node left" id="node-left">
+                <div class="node-header">Left Node (High)</div>
+                <div class="node-metric" id="metric-left">0.0000</div>
+                <div class="node-counts">
+                  <span class="count-a">A: <span id="count-left-a">3</span></span>
+                  <span class="count-b">B: <span id="count-left-b">0</span></span>
+                </div>
+                <div class="node-items" id="items-left" aria-label="Left child node visual items"></div>
+              </div>
+
+              <!-- Right Child Node -->
+              <div class="node right" id="node-right">
+                <div class="node-header">Right Node (Low)</div>
+                <div class="node-metric" id="metric-right">0.3750</div>
+                <div class="node-counts">
+                  <span class="count-a">A: <span id="count-right-a">1</span></span>
+                  <span class="count-b">B: <span id="count-right-b">3</span></span>
+                </div>
+                <div class="node-items" id="items-right" aria-label="Right child node visual items"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gain Banner -->
+          <div class="gain-banner" id="gain-banner-card">
+            <div class="gain-label" id="gain-type-label">Gini Gain</div>
+            <div class="gain-value" id="gain-metric-value">0.2755</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">
+              Weighted Children Impurity: <span id="weighted-impurity-val" style="font-weight: 600;">0.2143</span>
+            </div>
+          </div>
+        </div>
+
+        <section class="math-panel" id="math-walkthrough" aria-labelledby="math-title">
+          <h3 id="math-title" class="card-title" style="font-size: 1.1rem; border-bottom: none; margin: 0; padding: 0;">3. Step-by-Step Mathematics</h3>
+          
+          <!-- Parent Step -->
+          <div class="math-step">
+            <div class="math-step-title" id="math-step-parent-title">Parent Node Impurity</div>
+            <div class="formula-block" id="formula-parent">Gini = 1 - (p_A^2 + p_B^2)</div>
+            <div class="substitution-block" id="sub-parent">1 - ((4/7)^2 + (3/7)^2) = 0.4898</div>
+          </div>
+
+          <!-- Left Node Step -->
+          <div class="math-step">
+            <div class="math-step-title" id="math-step-left-title">Left Child Node Impurity</div>
+            <div class="formula-block" id="formula-left">Gini = 1 - (p_A^2 + p_B^2)</div>
+            <div class="substitution-block" id="sub-left">1 - ((3/3)^2 + (0/3)^2) = 0.0000</div>
+          </div>
+
+          <!-- Right Node Step -->
+          <div class="math-step">
+            <div class="math-step-title" id="math-step-right-title">Right Child Node Impurity</div>
+            <div class="formula-block" id="formula-right">Gini = 1 - (p_A^2 + p_B^2)</div>
+            <div class="substitution-block" id="sub-right">1 - ((1/4)^2 + (3/4)^2) = 0.3750</div>
+          </div>
+
+          <!-- Weighted Node Step -->
+          <div class="math-step">
+            <div class="math-step-title">Weighted Children Impurity</div>
+            <div class="formula-block" id="formula-weighted">Weighted = (N_Left/N) * Imp_Left + (N_Right/N) * Imp_Right</div>
+            <div class="substitution-block" id="sub-weighted">(3/7) * 0.0000 + (4/7) * 0.3750 = 0.2143</div>
+          </div>
+
+          <!-- Gain Step -->
+          <div class="math-step">
+            <div class="math-step-title" id="math-step-gain-title">Gain (Reduction in Impurity)</div>
+            <div class="formula-block" id="formula-gain">Gain = Imp_Parent - Weighted_Children</div>
+            <div class="substitution-block" id="sub-gain">0.4898 - 0.2143 = 0.2755</div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -33,16 +33,20 @@ This document maintains real-time tracking of our learning journey, the exact fi
    - Odd $K$ selection, $K = \sqrt{N}$ thumb rule, and bias-variance tradeoff ($K=1$ overfits, large $K$ underfits).
    - Why Feature Scaling is strictly mandatory for KNN.
    - Hyperparameter tuning using `GridSearchCV`.
+6. **Decision Trees (CART) Fundamentals & Calculations**
+   - Anatomy of a tree: Root, Decision, and Leaf nodes.
+   - Impurity measures: Gini Impurity ($1 - \sum p_i^2$) and Entropy ($-\sum p_i \log_2 p_i$).
+   - Information Gain (IG) calculation and split decision rules.
+   - Created an interactive web-based visual calculator for real-time Gini and Entropy splits at [gini_calculator](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/gini_calculator/index.html).
 
 ---
 
 ## ⏩ Next Topics in Line to Resume (ત્યારપછીના વિષયો)
 
-1. **Decision Trees (CART)**:
-   - How Decision Trees split nodes (Tree anatomy: Root, Decision, Leaf nodes).
-   - Splitting criteria: **Gini Impurity** vs **Entropy / Information Gain**.
+1. **Decision Trees Pruning & Hyperparameter Tuning**:
    - Overfitting in raw trees (Train Acc 100% vs Test Acc drop).
    - **Cost-Complexity Pruning (`ccp_alpha`)** and `max_depth` constraints.
+   - Tuning Decision Trees in [`4.1_Classification_and_Its_Applications_Part_1.ipynb`](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ReferanceMaterials/Instructor_Slides_and_Notebooks/Lesson_04_Supervised_Learning_%20Classification_and_its_Application/4.1_Classification_and_Its_Applications_Part_1.ipynb).
 2. **Support Vector Machines (SVM)**:
    - Maximum Margin Classifier, Hyperplane, and Support Vectors.
    - Linear SVM vs Non-linear SVM.

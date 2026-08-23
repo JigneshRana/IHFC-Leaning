@@ -18,7 +18,7 @@ The workspace at [/media/jignesh/Data/ihfc/IHFC-Leaning](file:///media/jignesh/D
 
 - [3. IHFC AIML: Applied Data Science with Python](file:///media/jignesh/Data/ihfc/IHFC-Leaning/3.%20IHFC%20AIML:%20Applied%20Data%20Science%20with%20Python)
 - [4. IHFC AIML: Machine Learning](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning)
-- [ClassnoteMachineLearning.md](file:///media/jignesh/Data/ihfc/IHFC-Leaning/ClassnoteMachineLearning.md)
+- [ClassnoteMachineLearning.md](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC%20AIML:%20Machine%20Learning/ClassnoteMachineLearning.md)
 - [definitions.md](file:///media/jignesh/Data/ihfc/IHFC-Leaning/definitions.md)
 
 ---

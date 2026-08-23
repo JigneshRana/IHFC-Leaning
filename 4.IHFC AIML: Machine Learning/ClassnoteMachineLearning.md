@@ -85,44 +85,139 @@ Pioneering AI educator **Andrew Ng** illustrated a fundamental law of AI scalabi
 #### ⏳ Complete Chronological Timeline of Machine Learning & AI
 
 ```mermaid
-timeline
-    title Journey & Milestones of Machine Learning
-    1950 : Turing Test (Alan Turing)
-    1957 : Perceptron (Frank Rosenblatt)
-    1959 : "Machine Learning" Coined (Arthur Samuel - IBM Checkers)
-    1969 : XOR Limitation & 1st AI Winter (Minsky & Papert)
-    1986 : Backpropagation Breakthrough (Rumelhart, Hinton, Williams)
-    1990s : Statistical ML Era (SVMs, Random Forests, Decision Trees)
-    1997 : Deep Blue beats Kasparov | LSTM Invented (Schmidhuber)
-    2012 : AlexNet & Deep Learning Revolution (Hinton et al. ImageNet)
-    2014 : GANs (Goodfellow) & Adam Optimizer
-    2017 : Transformer Architecture ("Attention Is All You Need" - Google)
-    2018 : BERT (Google) & GPT-1 (OpenAI)
-    2020 : GPT-3 Emergence (175B Parameters)
-    2022 : ChatGPT (GPT-3.5) & RLHF Alignment Mainstream Wave
-    2023-2026 : GPT-4, Gemini (Google), Llama 3 (Meta), RAG & Autonomous AI Agents
+flowchart TD
+    title[Journey & Milestones of Machine Learning]
+    
+    subgraph Era1["Foundations & Symbolic AI"]
+        Turing["1950: Turing Test (Alan Turing)"]
+        Perceptron["1957: Perceptron (Frank Rosenblatt)"]
+        Coined["1959: 'Machine Learning' Coined (Arthur Samuel)"]
+        Winter["1969: XOR Limitation & AI Winter (Minsky & Papert)"]
+        
+        Turing --> Perceptron --> Coined --> Winter
+    end
+    
+    subgraph Era2["Connectionism & Lexical Foundations"]
+        WordNet["1985: WordNet Created (Princeton)"]
+        Backprop["1986: Backpropagation Breakthrough"]
+        
+        Winter --> WordNet --> Backprop
+    end
+    
+    subgraph Era3["Statistical ML Era"]
+        StatML["1990s: Statistical ML Era (SVMs, RFs, DTs)"]
+        SVM["1995: SVM Soft Margin (Cortes & Vapnik)"]
+        Chess["1997: Deep Blue beats Kasparov | LSTM Invented"]
+        
+        Backprop --> StatML --> SVM --> Chess
+    end
+
+    subgraph Era4["Deep Learning & Computer Vision Revolution"]
+        ILSVRC["2010-2011: ILSVRC Baselines"]
+        AlexNet["2012: AlexNet (ImageNet Victory)"]
+        ZFNet["2013: ZFNet Tuning"]
+        GoogLeNet["2014: VGG & GoogLeNet (Going Deeper)"]
+        ResNet["2015: ResNet (Beating Human Vision)"]
+        SENet["2017: SENet (Final ILSVRC)"]
+        
+        Chess --> ILSVRC --> AlexNet --> ZFNet --> GoogLeNet --> ResNet --> SENet
+    end
+
+    subgraph Era5["LLMs & Generative AI Era"]
+        Transformer["2017: Transformer Architecture ('Attention Is All You Need')"]
+        BERT["2018: BERT (Google) & GPT-1 (OpenAI)"]
+        GPT3["2020: GPT-3 Emergence (175B Parameters)"]
+        ChatGPT["2022: ChatGPT & RLHF Alignment"]
+        Multimodal["2023-2026: Multimodal LLMs & AI Agents"]
+        
+        SENet --> Transformer --> BERT --> GPT3 --> ChatGPT --> Multimodal
+    end
+
+    %% Styles for subgraphs
+    style Era1 fill:#f9f,stroke:#333,stroke-width:2px
+    style Era2 fill:#dfd,stroke:#333,stroke-width:2px
+    style Era3 fill:#bbf,stroke:#333,stroke-width:2px
+    style Era4 fill:#fdd,stroke:#333,stroke-width:2px
+    style Era5 fill:#ffd,stroke:#333,stroke-width:2px
 ```
 
-| Era / Year | Milestone / Breakthrough | Significance & Impact |
-| :--- | :--- | :--- |
-| **1950** | **Turing Test (Alan Turing)** | Introduced the concept of machine intelligence testing ("Can machines think?"). |
-| **1957** | **Perceptron (Frank Rosenblatt)** | First hardware implementation of an artificial single-layer neural network. |
-| **1959** | **Arthur Samuel Coined "Machine Learning"** | Demonstrated self-learning software using an IBM Checkers program. |
-| **1969** | **Minsky & Papert's "Perceptrons" Book** | Proved single-layer perceptrons couldn't solve XOR; triggered the 1st "AI Winter". |
-| **1986** | **Backpropagation Algorithm** | Popularized by Geoffrey Hinton et al., enabling efficient training of multi-layer neural networks. |
-| **1990s** | **Statistical Machine Learning Era** | Vapnik's Support Vector Machines (SVM) and Breiman's Random Forests dominated industry applications. |
-| **1997** | **Deep Blue & LSTM Networks** | IBM's Deep Blue beat chess champion Kasparov; Hochreiter & Schmidhuber introduced LSTMs. |
-| **2012** | **AlexNet (ImageNet Victory)** | GPU-accelerated deep CNN smashed vision benchmarks; kicked off the **Deep Learning Revolution**. |
-| **2017** | **Transformer Architecture (Google)** | Paper *"Attention Is All You Need"* replaced RNNs/LSTMs with parallel self-attention mechanisms. |
-| **2018 - 2020** | **BERT & GPT Series (OpenAI/Google)** | Self-supervised pre-training at scale; GPT-3 demonstrated zero-shot and few-shot language capabilities. |
-| **2022** | **ChatGPT & RLHF Alignment** | Reinforcement Learning from Human Feedback (RLHF) made conversational GenAI accessible globally. |
-| **2023 - 2026+** | **Multimodal LLMs & AI Agents** | GPT-4, Gemini, Claude, Llama 3, RAG systems, and autonomous multi-agent tool execution. |
+---
+
+### 📂 Chronological History by Era & Category
+
+#### 🏛️ Category 1: The Foundations & Symbolic AI Era (1950s – 1970s)
+
+##### 1.1 Foundations of Artificial Intelligence
+*   **1950 — [Turing Test](https://en.wikipedia.org/wiki/Turing_test) (Alan Turing)**: Alan Turing published *"Computing Machinery and Intelligence"*, proposing the Turing Test as a standard for machine thought.
+
+##### 1.2 Early Connectionism (Neural Networks)
+*   **1957 — [Perceptron](https://en.wikipedia.org/wiki/Perceptron) (Frank Rosenblatt)**: Built the Perceptron, the first hardware artificial neural network capable of learning linear binary classification rules.
+
+##### 1.3 Game Playing & The First AI Winter
+*   **1959 — Arthur Samuel Coined ["Machine Learning"](https://en.wikipedia.org/wiki/Arthur_Samuel#Checkers_play_program)**: Samuel built a self-learning Checkers program that could defeat its creator, demonstrating self-learning software.
+*   **1969 — Minsky & Papert's ["Perceptrons" Book](https://en.wikipedia.org/wiki/Perceptrons_(book))**: Mathematically proved that single-layer perceptrons could not solve non-linear separations like the XOR function, triggering the 1st "AI Winter" (funding freeze).
+
+---
+
+#### 🧬 Category 2: Connectionism & Lexical Foundations (1980s)
+
+##### 2.1 Lexical Semantics
+*   **1985 — [WordNet](https://en.wikipedia.org/wiki/WordNet) Created**: George A. Miller at Princeton University launched WordNet, a large lexical database of English linking nouns, verbs, and adjectives into semantic hierarchies.
+
+##### 2.2 Multi-Layer Neural Training
+*   **1986 — [Backpropagation](https://en.wikipedia.org/wiki/Backpropagation) Algorithm**: Popularized by Rumelhart, Hinton, and Williams, showing that backpropagation through multiple hidden layers could learn complex non-linear representations.
+
+---
+
+#### 📊 Category 3: The Statistical Machine Learning Era (1990s – 2000s)
+
+##### 3.1 Kernel Methods & Randomization
+*   **1995 — [Support Vector Machine (SVM)](https://en.wikipedia.org/wiki/Support_vector_machine) Soft Margin**: Vladimir Vapnik & Corinna Cortes published the soft-margin SVM classifier, popularizing robust kernel-based margin classification.
+*   **2001 — Random Forests**: Leo Breiman introduced Random Forests, combining parallel decision trees with bootstrap aggregation (Bagging) and random feature subsets to reduce overfitting.
+
+##### 3.2 Chess Benchmarks & Sequence Modeling
+*   **1997 — Deep Blue beats Kasparov**: IBM's [Deep Blue](https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)) defeated chess champion Garry Kasparov in a 6-game match under tournament conditions, demonstrating a milestone for symbolic heuristics.
+*   **1997 — Sepp Hochreiter & Jürgen Schmidhuber Invented [LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory)**: Introduced Long Short-Term Memory networks, resolving the vanishing/exploding gradient problems in recurrent neural networks.
+
+---
+
+#### 👁️ Category 4: The Deep Learning Revolution & Computer Vision Era (2010s)
+
+##### 4.1 The ImageNet & Convolutional Neural Networks Era (ILSVRC 2010 – 2017)
+The [ImageNet](https://en.wikipedia.org/wiki/ImageNet) Large Scale Visual Recognition Challenge (ILSVRC) evaluated algorithms on 1,000 object classes. The year-by-year subset performance represents the rise of Deep Learning:
+*   **2010 - 2011 — Pre-Deep Learning Baselines**: Won by shallow models using SIFT/Fisher Vectors. Error rates hovered around **25.8% to 28.2%**.
+*   **2012 — [AlexNet](https://en.wikipedia.org/wiki/AlexNet) (CNN Breakthrough)**: Alex Krizhevsky, Ilya Sutskever, & Geoffrey Hinton trained an 8-layer GPU-accelerated CNN, slashing error rate to **15.3%** and initiating the deep learning revolution.
+*   **2013 — ZFNet (Activations & Tuning)**: Zeiler & Fergus adjusted hyperparameters using Deconvolutional Networks to visualize layer activations, dropping error to **11.7%**.
+*   **2014 — VGG & GoogLeNet (Going Deeper)**:
+    *   **GoogLeNet** (Inception v1, 22 layers, parallel inception blocks) won the challenge with **6.7%** error rate.
+    *   **VGGNet** (VGG-16/VGG-19, small $3\times3$ filters) stood second with **7.3%** error rate.
+*   **2015 — [Residual Neural Network (ResNet)](https://en.wikipedia.org/wiki/Residual_neural_network)**: Kaiming He et al. introduced skip connections (ResNet-152), dropping error rate to **3.57%**, surpassing human-level visual accuracy (~5%).
+*   **2017 — SENet (Final ILSVRC)**: Squeeze-and-Excitation Networks won the final challenge with **2.25%** error rate by dynamically weighting channels.
+
+##### 4.2 Generative Models & Optimizers
+*   **2014 — Generative Adversarial Networks (GANs)**: Ian Goodfellow introduced GANs, pitting a Generator against a Discriminator in a minimax game to generate realistic data.
+*   **2014 — Adam Optimizer**: Kingma & Ba introduced Adam, an adaptive learning rate optimization algorithm combining AdaGrad and RMSProp.
+
+---
+
+#### 💬 Category 5: The Large Language Models (LLM) & Generative AI Era (2017 – Present)
+
+##### 5.1 The Transformer Revolution
+*   **2017 — [Transformer](https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)) Architecture**: Google published *"Attention Is All You Need"*, introducing self-attention mechanisms and replacing LSTMs for sequence tasks.
+
+##### 5.2 Pre-training & Scaling Laws
+*   **2018 — [BERT](https://en.wikipedia.org/wiki/BERT_(language_model))**: Google introduced BERT, popularizing bi-directional encoder pre-training.
+*   **2018 - 2020 — [GPT Series](https://en.wikipedia.org/wiki/Generative_pre-trained_transformer)**: OpenAI demonstrated autoregressive decoder-only pre-training, culminating in GPT-3 (175B parameters) showing zero/few-shot learning.
+
+##### 5.3 Alignment, Multimodality & Agentic AI
+*   **2022 — [ChatGPT](https://en.wikipedia.org/wiki/ChatGPT) & [RLHF](https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback) Alignment**: OpenAI launched ChatGPT, using Reinforcement Learning from Human Feedback to align LLMs for conversational tasks.
+*   **2023 - Present — [Multimodal LLMs](https://en.wikipedia.org/wiki/Large_language_model) & [AI Agents](https://en.wikipedia.org/wiki/AI_agent)**: Proliferation of multimodal models (GPT-4, Gemini, Claude, Llama 3) integrated with tools, RAG, and autonomous agentic loops.
 
 ---
 
 ### 1.1 Hierarchy of Artificial Intelligence, Machine Learning & Deep Learning
 
-![Artificial Intelligence, Machine Learning, and Deep Learning Hierarchy](images/ai_ml_dl_hierarchy.png)
+![Artificial Intelligence, Machine Learning, and Deep Learning Hierarchy](../images/ai_ml_dl_hierarchy.png)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
@@ -147,7 +242,7 @@ timeline
 
 ### 1.2 Classical Programming vs. Machine Learning Paradigm
 
-![Classical Programming vs Machine Learning Paradigm](images/classical_vs_machine_learning.png)
+![Classical Programming vs Machine Learning Paradigm](../images/classical_vs_machine_learning.png)
 
 ```
 Classical Programming Paradigm (Software 1.0):
@@ -185,7 +280,7 @@ Machine Learning Paradigm (Software 2.0):
 
 #### 💡 How Machine Learning Works: Representation Learning & Coordinate Transformations
 
-![Data Representation Learning & Coordinate Change](images/coordinate_change_representation.png)
+![Data Representation Learning & Coordinate Change](../images/coordinate_change_representation.png)
 
 ```
 Step 1: Raw Data                    Step 2: Coordinate Change              Step 3: Better Representation
@@ -210,7 +305,7 @@ Step 1: Raw Data                    Step 2: Coordinate Change              Step 
 
 ### 1.3 Modern AI Industry Architectural Spectrum & Learning Path
 
-![Modern AI & MLOps Architectural Spectrum](images/ai_mlops_agent_architecture.png)
+![Modern AI & MLOps Architectural Spectrum](../images/ai_mlops_agent_architecture.png)
 
 ```mermaid
 flowchart TD
@@ -314,7 +409,7 @@ flowchart TD
 
 ## 2. Supervised Learning
 
-![Supervised Learning Method & Workflow](images/supervised_learning_diagram.png)
+![Supervised Learning Method & Workflow](../images/supervised_learning_diagram.png)
 
 > **Key Rule**: A supervised learning method uses labeled data to predict outcomes guided by specific input-output pairs. Here, both inputs and outputs are known.
 
@@ -324,7 +419,7 @@ Supervised Learning is divided into two primary categories based on the nature o
 
 ### 2.0 Complete End-to-End Supervised Machine Learning Pipeline
 
-![Complete End-to-End Supervised Machine Learning Pipeline](images/end_to_end_ml_pipeline_handwritten.png)
+![Complete End-to-End Supervised Machine Learning Pipeline](../images/end_to_end_ml_pipeline_handwritten.png)
 
 Every real-world Machine Learning project follows an iterative 5-phase end-to-end lifecycle, encompassing crucial **Pre-Preprocessing Steps** before model training:
 
@@ -411,7 +506,7 @@ Classification often works internally by predicting a **continuous probability s
 
 #### 🌳 Machine Learning & Regression Taxonomy Tree
 
-![Machine Learning & Regression Taxonomy Tree](images/ml_regression_tree_handwritten.png)
+![Machine Learning & Regression Taxonomy Tree](../images/ml_regression_tree_handwritten.png)
 
 ```mermaid
 flowchart TD
@@ -587,26 +682,269 @@ Predicting discrete class labels $y \in \{0, 1, \dots, K-1\}$.
 
 ---
 
+#### Naive Bayes Classifier
+* **Bayes' Theorem**:
+  $$P(y|X) = \frac{P(X|y)P(y)}{P(X)}$$
+* **Naive Assumption**: Assumes conditional independence between features given the class:
+  $$P(x_1, \dots, x_n|y) = \prod_{i=1}^{n} P(x_i|y)$$
+
+---
+
+#### K-Nearest Neighbors (KNN)
+* **Mechanism**: Distance-based instance learning (lazy learner). Computes distance (Euclidean, Manhattan) from test point to all training points and votes among $K$ nearest neighbors.
+* **Minkowski Distance**:
+  $$D(x, y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{1/p}$$
+  *(where $p=1$ is Manhattan distance, and $p=2$ is Euclidean distance).*
+* **Key Guidelines**:
+  - Always apply feature scaling (`StandardScaler`) before running KNN.
+  - Pick odd $K$ to break ties (rule of thumb: $K \approx \sqrt{N}$).
+
+---
+
+#### Decision Tree Classifier (CART)
+A non-parametric supervised learning algorithm that splits data recursively based on feature thresholds to maximize node purity.
+
+##### 1. Anatomy of a Decision Tree
+* **Root Node**: The top node containing the entire dataset, representing the first feature split.
+* **Decision Nodes**: Intermediate nodes representing conditions (splits) on features.
+* **Leaf Nodes**: Endpoints containing the final class prediction or label.
+
+##### 2. Splitting Criteria Formulas
+To determine the best split, the algorithm calculates impurity at each node:
+
+* **Gini Impurity (Gini Index)**: Measures the probability of misclassification.
+  $$\text{Gini}(D) = 1 - \sum_{i=1}^{C} (p_i)^2$$
+  *(Ranges from $0$ for perfect purity to $0.5$ for maximum impurity in binary splits).*
+
+* **Entropy**: Measures the uncertainty or information disorder.
+  $$\text{Entropy}(D) = - \sum_{i=1}^{C} p_i \log_2(p_i)$$
+  *(Ranges from $0$ for perfect purity to $1$ for maximum uncertainty).*
+
+* **Information Gain (IG)**: The reduction in entropy (or impurity) after a split.
+  $$\text{Information Gain} = \text{Entropy(Parent)} - \sum_{j=1}^{k} \left( \frac{|D_j|}{|D|} \times \text{Entropy}(D_j) \right)$$
+  *(The tree splits on the feature and threshold that yields the maximum Information Gain).*
+
+##### 3. Overfitting & Pruning
+Because Decision Trees split recursively until leaf nodes are pure, they are highly prone to overfitting (100% train accuracy but poor generalization). We control this via:
+* **Pre-Pruning (Early Stopping)**: Parameters like `max_depth` (maximum tree height), `min_samples_split` (minimum samples required to split), and `min_samples_leaf` (minimum samples allowed in a leaf).
+* **Post-Pruning (Minimal Cost-Complexity Pruning)**: Uses the complexity parameter `ccp_alpha` ($\alpha \ge 0$) to balance tree size ($|T|$) and error rate ($R(T)$):
+  $$R_\alpha(T) = R(T) + \alpha |T|$$
+
+##### 4. Python Implementation & Tuning
+```python
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+# Create pipeline with scaler and decision tree
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('dt', DecisionTreeClassifier(random_state=42))
+])
+
+# Define grid of hyperparameters (including ccp_alpha for post-pruning)
+param_grid = {
+    'dt__max_depth': [None, 5, 10, 15],
+    'dt__min_samples_split': [2, 5, 10],
+    'dt__min_samples_leaf': [1, 2, 4],
+    'dt__ccp_alpha': [0.0, 0.005, 0.01, 0.05]
+}
+
+# Run grid search
+grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy')
+grid_search.fit(X_train, y_train)
+
+best_model = grid_search.best_estimator_
+print(f"Best Parameters: {grid_search.best_params_}")
+```
+
+##### 5. Interactive Split Calculator
+An interactive, animated visual calculator for Gini Index and Entropy splits has been created at [4.IHFC AIML: Machine Learning/gini_calculator/index.html](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC AIML: Machine Learning/gini_calculator/index.html). It displays real-time item animations and step-by-step mathematical substitutions.
+
+---
+
+#### Support Vector Machine (SVM)
+A powerful supervised machine learning algorithm used for classification, regression, and outlier detection. It constructs an optimal decision boundary (hyperplane) that separates classes with the maximum possible margin.
+
+##### 1. Historical Background
+*   **1963 (Linear SVM)**: Vladimir Vapnik and Alexey Chervonenkis proposed the original linear support vector optimal hyperplane algorithm (hard-margin).
+*   **1992 (Non-linear Kernel SVM)**: Bernhard Boser, Isabelle Guyon, and Vladimir Vapnik introduced the **Kernel Trick**, allowing the algorithm to fit non-linear decision boundaries.
+*   **1995 (Soft-Margin SVM)**: Corinna Cortes and Vladimir Vapnik published the modern **[Soft-Margin Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine#Soft-margin)**, which uses slack variables ($\xi_i$) to allow controlled misclassifications on noisy datasets.
+
+##### 2. Mathematical Optimization Formulations
+
+###### A. The Primal Formulation (Hard-Margin)
+For linearly separable binary classification where labels $y_i \in \{-1, 1\}$, the SVM seeks to solve:
+$$\min_{\mathbf{w}, b} \frac{1}{2} \|\mathbf{w}\|^2 \quad \text{subject to} \quad y_i(\mathbf{w}^T \mathbf{x}_i + b) \ge 1 \quad \forall i$$
+
+###### B. The Soft-Margin Formulation (With Slack Variables)
+To handle non-separable or noisy datasets, we introduce slack variables $\xi_i \ge 0$ and a regularization parameter $C > 0$:
+$$\min_{\mathbf{w}, b, \boldsymbol{\xi}} \left( \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^{n} \xi_i \right) \quad \text{subject to} \quad y_i(\mathbf{w}^T \mathbf{x}_i + b) \ge 1 - \xi_i, \quad \xi_i \ge 0 \quad \forall i$$
+
+###### C. The Dual Formulation (Applying Lagrange Multipliers)
+Using Lagrange multipliers $\alpha_i \ge 0$, the primal is transformed into its Wolfe Dual representation. This formulation is critical because it only depends on the dot product of input vectors, enabling the **Kernel Trick**:
+$$\max_{\boldsymbol{\alpha}} \left( \sum_{i=1}^{n} \alpha_i - \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} \alpha_i \alpha_j y_i y_j K(\mathbf{x}_i, \mathbf{x}_j) \right)$$
+$$\text{subject to} \quad \sum_{i=1}^{n} \alpha_i y_i = 0 \quad \text{and} \quad 0 \le \alpha_i \le C \quad \forall i$$
+
+##### 3. The Kernel Trick (Non-linear projections)
+By replacing the dot product $K(\mathbf{x}_i, \mathbf{x}_j) = \phi(\mathbf{x}_i)^T \phi(\mathbf{x}_j)$, SVM operates in an infinite-dimensional feature space without explicitly calculating coordinates:
+*   **Linear Kernel**: $K(\mathbf{x}_i, \mathbf{x}_j) = \mathbf{x}_i^T \mathbf{x}_j$
+*   **Polynomial Kernel**: $K(\mathbf{x}_i, \mathbf{x}_j) = (\gamma \mathbf{x}_i^T \mathbf{x}_j + r)^d$
+*   **Radial Basis Function (RBF) Kernel**: $K(\mathbf{x}_i, \mathbf{x}_j) = \exp(-\gamma \|\mathbf{x}_i - \mathbf{x}_j\|^2)$
+
+##### 4. Multiclass SVM Extensions
+Since the core SVM optimization is natively a binary classifier ($y_i \in \{-1, 1\}$), multiclass classification ($K > 2$ classes) is achieved using meta-strategies:
+*   **One-vs-Rest (OvR / One-vs-All)**: Trains $K$ separate binary classifiers (each class against all other classes combined). The class with the highest decision score is predicted.
+*   **One-vs-One (OvO)**: Trains $\frac{K(K-1)}{2}$ binary classifiers for every possible pair of classes. The final class is decided by majority vote (preferred for SVM as it scales better with smaller subset sizes, despite having more classifiers).
+
+##### 5. Key Hyperparameters
+*   **$C$ (Regularization)**: Controls the tradeoff between margin maximization and training error minimization (Softness).
+*   **Gamma ($\gamma$)**: Controls the reach/radius of influence of individual support vectors (high $\gamma \implies$ tight boundary, low $\gamma \implies$ smooth boundary).
+
+##### 6. Python Implementation
+```python
+from sklearn.svm import SVC
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+# SVM is highly distance-sensitive; feature scaling is strictly mandatory
+svm_pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('svm', SVC(kernel='rbf', C=1.0, gamma='scale', decision_function_shape='ovo'))
+])
+# svm_pipeline.fit(X_train, y_train)
+```
+
+##### 7. Interactive Hyperplane Classification Demo
+An interactive, 3D visual demonstration of SVM Hyperplane Classification has been created. It features real-time 3D coordinate space rotation, dimension toggling (2D vs. 3D), margin width tuning, active support vector highlighting, and real-time classification accuracy calculations.
+*   **Local File**: [4.IHFC AIML: Machine Learning/svm-hyperplan-classification/index.html](file:///media/jignesh/Data/ihfc/IHFC-Leaning/4.IHFC AIML: Machine Learning/svm-hyperplan-classification/index.html)
+*   **GitHub Preview**: [Live Interactive Hyperplane Visualizer (Preview Mode)](https://htmlpreview.github.io/?https://github.com/JigneshRana/IHFC-Leaning/blob/Master/4.IHFC%20AIML:%20Machine%20Learning/svm-hyperplan-classification/index.html)
+
+---
+
 ## 3. Unsupervised Learning
 
-![Unsupervised Learning Method & Workflow](images/unsupervised_learning_diagram.png)
+![Unsupervised Learning Method & Workflow](../images/unsupervised_learning_diagram.png)
 
 > **Key Concept**: Unsupervised Learning automatically groups raw unlabeled data into distinct categories or clusters based on inherent similarities (such as age group, demographic traits, or feature density) without any prior target labels.
 
 ---
 
-### Clustering
-#### K-Means Clustering
-1. Initialize $K$ cluster centroids randomly.
-2. **Assignment Step**: Assign each data point to the nearest centroid.
-3. **Update Step**: Recompute the centroid of each cluster as the mean of all points assigned to it.
-4. Repeat until centroids converge.
+### 3.1 Clustering Techniques
+
+#### A. K-Means Clustering
+1.  **Initialize**: Randomly choose $K$ initial cluster centroids in the feature space.
+2.  **Assignment Step**: Assign each data point to its nearest centroid using distance metrics (typically Euclidean distance).
+3.  **Update Step**: Recompute the centroid of each cluster as the mean of all points assigned to it.
+4.  **Repeat**: Iterate steps 2 and 3 until centroids converge (no longer shift significantly) or max iterations are reached.
+
+##### Choosing the Optimal Number of Clusters ($K$):
+*   **The Elbow Method**: Plot the **Within-Cluster Sum of Squares (WCSS) / Inertia** against different values of $K$. WCSS measures the compactness of clusters. The "elbow" point is where WCSS decrease slows down dramatically, indicating the optimal balance.
+*   **Silhouette Score**: Measures how similar a point is to its own cluster compared to other clusters. The score ranges from $-1$ to $+1$:
+    $$s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}$$
+    *(where $a(i)$ is the mean distance between point $i$ and all other points in the same cluster, and $b(i)$ is the mean distance from $i$ to the nearest cluster it is not a part of).*
+    *   A high average Silhouette Score near $+1$ indicates well-separated, dense clusters.
+
+#### B. Hierarchical Clustering
+Unlike K-Means, Hierarchical Clustering does not require specifying the number of clusters in advance. It builds a hierarchical tree representation called a **Dendrogram**.
+
+##### Approaches:
+1.  **Agglomerative (Bottom-Up)**: Starts with each data point as a single cluster and successively merges the closest pairs of clusters until only one cluster remains.
+2.  **Divisive (Top-Down)**: Starts with all data points in one single cluster and recursively splits clusters into smaller sub-clusters.
+
+##### Linkage Criteria:
+Determines how the distance between two clusters is calculated during merging/splitting:
+*   **Single Linkage**: Minimum distance between any point in Cluster A and any point in Cluster B.
+*   **Complete Linkage**: Maximum distance between any point in Cluster A and any point in Cluster B.
+*   **Average Linkage**: Average distance between all pairs of points from Cluster A and Cluster B.
+*   **Centroid Linkage**: Distance between the centroids (mean vectors) of Cluster A and Cluster B.
+
+##### Reading a Dendrogram:
+*   **Leaves**: The individual data points at the bottom.
+*   **Branches**: Represent cluster merges; the vertical height of a horizontal merge line represents the distance between the merged clusters.
+*   **Determining Clusters**: Identify the longest vertical line in the dendrogram that does not cross any horizontal merge lines. Drawing a horizontal line through this section determines the optimal number of clusters.
+
+#### C. DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
+A density-based clustering algorithm that groups points together that are close to each other, while identifying outliers (noise points).
+
+##### Key Parameters:
+*   `eps` ($\epsilon$): The maximum distance (radius) within which to search for neighboring points.
+*   `min_samples`: The minimum number of points required within the `eps` radius to form a dense region.
+
+##### Core Point Classification:
+1.  **Core Point**: Has $\ge \text{min\_samples}$ within its `eps` radius.
+2.  **Border Point**: Has fewer than `min\_samples` within its `eps` radius but is reachable from a Core Point.
+3.  **Noise Point (Outlier)**: Neither a Core nor a Border point.
+
+##### Advantages:
+*   Does not require specifying the number of clusters beforehand.
+*   Can find clusters of arbitrary, non-linear shapes (unlike K-Means).
+*   Robust to outliers and noise.
 
 ---
 
-### Semi-Supervised Learning
+### 3.2 Dimensionality Reduction Techniques
 
-![Semi-Supervised Learning Method & Workflow](images/semi_supervised_learning_diagram.png)
+#### A. Feature Selection vs Feature Extraction
+*   **Feature Selection**: Selecting a subset of original features without modifying them (e.g., SelectKBest, VarianceThreshold).
+*   **Feature Extraction**: Transforming original features into a new, lower-dimensional space (e.g., PCA, LDA).
+
+#### B. Principal Component Analysis (PCA)
+An unsupervised linear transformation technique that projects data into a lower-dimensional space while maximizing variance.
+
+##### Mathematical Steps:
+1.  **Standardization**: Scale the features to have a mean of 0 and variance of 1.
+2.  **Covariance Matrix**: Compute the covariance matrix $\mathbf{\Sigma}$ to capture linear dependencies between feature pairs:
+    $$\mathbf{\Sigma} = \frac{1}{n-1}\mathbf{X}^T\mathbf{X}$$
+3.  **Eigenvalue Decomposition**: Solve for eigenvalues ($\lambda$) and eigenvectors ($\mathbf{v}$) of the covariance matrix:
+    $$\mathbf{\Sigma}\mathbf{v} = \lambda\mathbf{v}$$
+4.  **Selecting Principal Components**: Sort eigenvalues in descending order. Select the top $k$ eigenvectors corresponding to the largest eigenvalues to form the projection matrix $\mathbf{W}$.
+5.  **Recasting Data**: Project original data $\mathbf{X}$ into the new space:
+    $$\mathbf{X}_{\text{new}} = \mathbf{X}\mathbf{W}$$
+
+#### C. Linear Discriminant Analysis (LDA)
+A supervised dimensionality reduction method that projects features to maximize class separability.
+*   **Objective**: Maximize between-class variance ($S_B$) while minimizing within-class variance ($S_W$).
+
+#### D. t-SNE (t-Distributed Stochastic Neighbor Embedding)
+A non-linear dimensionality reduction technique primarily used for 2D/3D visualization of high-dimensional data.
+*   **Objective**: Maps similarities between points in high-dimensional space to conditional probabilities, preserving local structure (close neighbors stay close in the projection).
+
+---
+
+### 3.3 Association Rule Learning
+
+Used to discover interesting relationships (rules) between variables in large databases (e.g., Market Basket Analysis).
+
+#### A. Key Metrics
+*   **Support**: The probability of a transaction containing items $A$ and $B$:
+    $$\text{Support}(A \rightarrow B) = P(A \cap B) = \frac{\text{Transactions containing } A \text{ and } B}{\text{Total Transactions}}$$
+*   **Confidence**: The conditional probability of buying $B$ given $A$ was bought:
+    $$\text{Confidence}(A \rightarrow B) = P(B | A) = \frac{\text{Transactions containing } A \text{ and } B}{\text{Transactions containing } A}$$
+*   **Lift**: Measures the strength of the rule compared to random chance:
+    $$\text{Lift}(A \rightarrow B) = \frac{P(A \cap B)}{P(A)P(B)} = \frac{\text{Confidence}(A \rightarrow B)}{\text{Support}(B)}$$
+    *   $\text{Lift} > 1$: Strong positive relationship.
+    *   $\text{Lift} = 1$: Independence.
+    *   $\text{Lift} < 1$: Negative relationship (substitute goods).
+
+#### B. Algorithms
+*   **Apriori Algorithm**: Uses a bottom-up approach where frequent subsets are extended one at a time. Employs the *Apriori property*: any subset of a frequent itemset must also be frequent.
+*   **Eclat Algorithm**: Equivalence Class Transformation. Uses a depth-first search approach on a vertical data layout (lists of transaction IDs containing each item) to quickly count support.
+
+---
+
+### 3.4 Anomaly Detection Techniques
+
+#### Isolation Forest
+An unsupervised anomaly detection algorithm that isolates anomalies rather than profiling normal data points.
+*   **Mechanism**: Builds an ensemble of isolation trees (randomly partitioning features). Because anomalies have unusual feature values, they require fewer random splits to isolate and appear much closer to the root of the tree (shorter average path lengths).
+
+---
+
+### 3.5 Semi-Supervised Learning
+
+![Semi-Supervised Learning Method & Workflow](../images/semi_supervised_learning_diagram.png)
 
 > **Key Concept**: Semi-Supervised Learning combines a **small amount of labeled data** with a **large volume of unlabeled raw data**. The machine learning model uses the labeled points as anchors and leverages the structural distribution of the unlabeled data to infer labels across fine-grained target categories (e.g. Babies, Teens, Tweens, Adults, Youth, Senior citizens).
 
@@ -615,7 +953,61 @@ Predicting discrete class labels $y \in \{0, 1, \dots, K-1\}$.
 
 ---
 
-## 4. Feature Engineering & Data Preprocessing
+## 4. Recommendation Systems
+
+Recommendation Systems predict the rating or preference a user would give to an item.
+
+### 4.1 Collaborative Filtering
+Recommends items based on user-item interaction histories.
+
+#### A. Memory-Based Collaborative Filtering
+Calculates similarity between users or items directly from the interaction matrix:
+*   **User-Based Collaborative Filtering**: Recommends items liked by users who are similar to the target user. Cosine Similarity between user vectors $u$ and $v$:
+    $$\text{Sim}(u, v) = \frac{\mathbf{r}_u \cdot \mathbf{r}_v}{\|\mathbf{r}_u\| \|\mathbf{r}_v\|} = \frac{\sum_i r_{u,i} r_{v,i}}{\sqrt{\sum_i r_{u,i}^2} \sqrt{\sum_i r_{v,i}^2}}$$
+*   **Item-Based Collaborative Filtering**: Recommends items similar to those the target user has interacted with in the past. Calculates similarity between item rating vectors.
+
+#### B. Model-Based Collaborative Filtering
+Learns underlying mathematical patterns (latent factors) to predict missing ratings.
+*   **Matrix Factorization**: Decomposes the user-item rating matrix $\mathbf{R} \in \mathbb{R}^{M \times N}$ into two lower-rank matrices: user latent factors $\mathbf{P} \in \mathbb{R}^{M \times K}$ and item latent factors $\mathbf{Q} \in \mathbb{R}^{K \times N}$ such that:
+    $$\mathbf{R} \approx \mathbf{P} \times \mathbf{Q}$$
+*   **Singular Value Decomposition (SVD)**: Decomposes the rating matrix $\mathbf{R}$ into three matrices:
+    $$\mathbf{R} \approx \mathbf{U} \mathbf{\Sigma} \mathbf{V}^T$$
+    *   $\mathbf{U}$: User-to-latent-factor association.
+    *   $\mathbf{\Sigma}$: Singular values indicating factor importance.
+    *   $\mathbf{V}^T$: Item-to-latent-factor association.
+
+---
+
+### 4.2 Content-Based Filtering
+Recommends items similar to those a user liked in the past based on item descriptors (features) and user preferences:
+*   Uses **Cosine Similarity** between the **User Profile Vector** (aggregated vector of features of items the user liked) and **Item Feature Vectors** (TF-IDF keyword vectors, genre tags).
+
+---
+
+### 4.3 Hybrid Filtering
+Combines collaborative and content-based filtering strategies to leverage the advantages of both and overcome individual limitations (e.g., blending scores linearly or using meta-classifiers).
+
+---
+
+### 4.4 Metrics & Evaluation
+*   **GetTopN**: Extracts the top $N$ items with the highest predicted scores for a user.
+*   **Hit Rate**: Evaluates whether the top $N$ recommendations contain at least one item that the user actually interacted with/liked:
+    $$\text{Hit Rate} = \frac{\text{Number of Hits}}{\text{Total Users Evaluated}}$$
+
+---
+
+### 4.5 Challenges in Recommenders
+*   **Cold Start Problem**:
+    *   *User Cold Start*: Unable to recommend items to new users because they have no interaction history.
+    *   *Item Cold Start*: New items have no user ratings/interactions, so they are not recommended.
+    *   *Mitigation*: Ask for initial user preferences during onboarding, use popular items as fallbacks, or rely on content-based filtering until enough data is collected.
+*   **Feedback Types**:
+    *   *Explicit Feedback*: Direct actions indicating preference (ratings, reviews, likes).
+    *   *Implicit Feedback*: Indirect behavioral signals (page views, clicks, purchase history, dwell time).
+
+---
+
+## 5. Feature Engineering & Data Preprocessing
 
 * **Scaling Techniques**:
   * **Standardization (Z-Score)**: $x' = \frac{x - \mu}{\sigma}$ (Mean = 0, Std = 1)
@@ -626,7 +1018,7 @@ Predicting discrete class labels $y \in \{0, 1, \dots, K-1\}$.
 
 ---
 
-## 5. Model Evaluation & Validation
+## 6. Model Evaluation & Validation
 
 ### Classification Metrics
 | Metric | Formula | Interpretation |
@@ -638,7 +1030,7 @@ Predicting discrete class labels $y \in \{0, 1, \dots, K-1\}$.
 
 ---
 
-## 6. Bias-Variance Tradeoff & Regularization
+## 7. Bias-Variance Tradeoff & Regularization
 
 * **High Bias (Underfitting)**: Model is too simple, fails to capture underlying patterns.
 * **High Variance (Overfitting)**: Model is too complex, fits noise in training data.
@@ -648,15 +1040,87 @@ Predicting discrete class labels $y \in \{0, 1, \dots, K-1\}$.
 
 ---
 
-## 7. Ensemble Techniques
+## 8. Ensemble Techniques
 
-* **Bagging (Bootstrap Aggregating)**: Trains parallel models on random bootstrap samples (e.g., Random Forest). Reduces variance.
-* **Boosting**: Trains sequential models where each model corrects errors of previous models (e.g., XGBoost, LightGBM, AdaBoost). Reduces bias.
-* **Stacking**: Combines predictions of diverse base models using a meta-learner.
+Ensemble methods combine multiple base models (weak learners) to construct a superior predictive model (strong learner).
+
+### 📂 Ensemble Taxonomy Hierarchy
+Below is the structural map of Ensemble Methods, classifying them into **Parallel (Bagging)** and **Sequential (Boosting)** workflows, their base estimators, and execution relative speeds:
+
+```mermaid
+graph TD
+    Ensemble[Ensemble Learning] --> Bagging[Bagging <br/> Parallel Execution <br/> Reduces Variance]
+    Ensemble --> Boosting[Boosting <br/> Sequential / Serial Execution <br/> Reduces Bias]
+
+    Bagging --> RF[Random Forest]
+    Bagging --> VC[Voting Classifier <br/> Any Chosen Model]
+    Bagging --> BC[Bagging Classifier <br/> Default: Decision Tree]
+
+    RF --> RF_DT[Base Estimator: Decision Tree]
+
+    Boosting --> Slow[Standard Boosting <br/> Slow to Train]
+    Boosting --> Fast[Optimized Boosting <br/> Extremely Fast]
+
+    Slow --> Ada[AdaBoost]
+    Slow --> GBM[Gradient Boost]
+    Ada & GBM --> Stump[Base Estimator: Decision Tree = 1 / Stump]
+
+    Fast --> XGB[XGBoost]
+    Fast --> Cat[CatBoost]
+    XGB --> XGB_Features[Handles Nulls & Auto-Encoding]
+```
+
+![Hand-drawn Complete Ensemble Hierarchy](../images/ensemble_complete_handdrawn.png)
+
+![Bagging vs Boosting (Parallel vs Sequential)](../images/bagging_vs_boosting.png)
 
 ---
 
-## 8. Practical Machine Learning Workflow
+### 8.1 Bagging (Bootstrap Aggregating) — **Parallel Execution**
+Bagging reduces the model's **variance** (overfitting) by training multiple estimators **independently and in parallel** on bootstrapped subsets of the training data.
+
+![Ensemble Voting (Bagging Parallel Trees)](../images/ensemble_voting.png)
+
+#### Random Forest
+*   **Mechanism**: A bagging ensemble of Decision Trees. Randomness is injected in two ways:
+    1.  **Row Bootstrap**: Each tree is trained on a random sample of the training data with replacement.
+    2.  **Feature Subsets**: At each split, only a random subset of features is considered (typically $\sqrt{P}$ features, where $P$ is total features).
+*   **Result**: Averaging predictions (by majority voting for classification, or averaging for regression) cancels out individual tree errors, preventing overfitting.
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+rf = RandomForestClassifier(n_estimators=100, max_features='sqrt', random_state=42)
+# rf.fit(X_train, y_train)
+```
+
+---
+
+### 8.2 Boosting — **Sequential Execution**
+Boosting reduces the model's **bias** (underfitting) by training models **sequentially (in series)**. Each subsequent model is trained to predict the mistakes (errors/residuals) made by previous models, functioning as a feedback loop.
+
+![Boosting Algorithms](../images/boosting_algorithms.png)
+
+#### AdaBoost (Adaptive Boosting)
+*   **Mechanism**: Adjusts weights of samples. Data points misclassified by the previous estimator are given higher weights, forcing the next estimator to focus on these harder cases.
+
+#### Gradient Boosting Machine (GBM)
+*   **Mechanism**: Instead of adjusting weights, GBM trains new models to fit the **residuals** (actual - predicted values) of the previous model using a gradient descent approach on a specified loss function.
+
+#### XGBoost (Extreme Gradient Boosting)
+*   **Mechanism**: An advanced, highly optimized GBDT algorithm that features:
+    *   **Regularization**: L1 and L2 regularization to control model complexity and prevent overfitting.
+    *   **Parallel Processing**: Fast execution by scanning features in parallel to determine the best splits.
+    *   **Handling Missing Values**: Learns a default direction for missing values.
+
+```python
+import xgboost as xgb
+xgb_model = xgb.XGBClassifier(n_estimators=100, learning_rate=0.1, max_depth=5, random_state=42)
+# xgb_model.fit(X_train, y_train)
+```
+
+---
+
+## 9. Practical Machine Learning Workflow
 
 ```mermaid
 flowchart TD
@@ -673,7 +1137,7 @@ flowchart TD
 
 ---
 
-## 9. Code Snippets & Cheatsheets
+## 10. Code Snippets & Cheatsheets
 
 ### Python Baseline Model Template
 ```python
@@ -709,7 +1173,7 @@ from sklearn.metrics import classification_report, roc_auc_score
 
 ---
 
-## 10. Reference Links & External Learning Resources
+## 11. Reference Links & External Learning Resources
 
 | Resource Name | Website URL | Description & Key Focus |
 | :--- | :--- | :--- |
@@ -721,6 +1185,8 @@ from sklearn.metrics import classification_report, roc_auc_score
 | **SciPy Scientific Computing** | [scipy.org](https://scipy.org) | Official portal for scientific computing, numerical optimization, integration, and statistics in Python. |
 | **DeepLearning.AI** | [deeplearning.ai](https://www.deeplearning.ai) | Andrew Ng's education platform featuring comprehensive courses on ML fundamentals, Deep Learning specialization, and LLMs. |
 | **Hugging Face Hub & Docs** | [huggingface.co](https://huggingface.co) | Open-source platform for pre-trained Transformers, LLMs, datasets, and model evaluations. |
+| **UCI Pima Indians Diabetes Dataset** | [UCI Archive](https://archive.ics.uci.edu/datasets/?search=pima+dataset) | Classic baseline binary classification dataset for training ML models to predict diabetes. |
+| **Vecstack Package** | [vecstack PyPI](https://pypi.org/project/vecstack/) | A Python library for Stacking (Stacked Generalization) that enables stacking ensemble modeling in Scikit-Learn. |
 
 ---
 

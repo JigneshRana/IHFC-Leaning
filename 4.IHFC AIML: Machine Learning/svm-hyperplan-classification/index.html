@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperplane Classification Demo (SVM)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- OrbitControls CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        /* Custom styling for a clean, modern UI */
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            transition: background 0.15s ease-in-out;
+        }
+        .slider-thumb::-webkit-slider-thumb:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <!-- Container -->
+    <div class="max-w-5xl w-full bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden flex flex-col">
+        
+        <!-- Header -->
+        <div class="p-6 border-b border-gray-100 bg-gray-50 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Hyperplane Classification</h1>
+                <p class="text-sm text-gray-500 mt-1">Interactive 2D/3D Support Vector Machine (SVM) Visualizer</p>
+            </div>
+            <button id="regen-btn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg shadow-sm transition text-sm">
+                Regenerate Points
+            </button>
+        </div>
+
+        <!-- Main Body: Canvas + Explanation -->
+        <div class="flex flex-col lg:flex-row border-b border-gray-100">
+            <!-- 3D Canvas Area -->
+            <div class="relative flex-1 bg-gray-950 aspect-video lg:aspect-square max-h-[600px] overflow-hidden">
+                <div id="canvas-container" class="w-full h-full"></div>
+                <!-- Interactive Mouse Instruction overlay -->
+                <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2.5 py-1.5 rounded-md pointer-events-none">
+                    🖱️ Drag to rotate | Scroll to zoom
+                </div>
+            </div>
+
+            <!-- Mathematical Explanation Sidebar -->
+            <div class="w-full lg:w-80 p-6 bg-gray-50 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-gray-100">
+                <div class="space-y-4">
+                    <h3 class="font-bold text-gray-900 text-lg">SVM Math Concept</h3>
+                    
+                    <div class="space-y-3 text-sm text-gray-600 leading-relaxed">
+                        <p>
+                            A <strong>hyperplane</strong> is a decision boundary that separates classes:
+                        </p>
+                        <div class="bg-gray-900 text-emerald-400 font-mono p-3 rounded-lg text-center font-bold border border-gray-800 shadow-inner">
+                            w · x + b = 0
+                        </div>
+                        <p>
+                            The <strong>margin</strong> is the distance between the hyperplane and the closest data points, called <strong>support vectors</strong>.
+                        </p>
+                        <p>
+                            SVM maximizes this margin, defined by:
+                        </p>
+                        <div class="bg-gray-900 text-emerald-400 font-mono p-2.5 rounded-lg text-center text-xs font-bold border border-gray-800">
+                            Margin = 2 / ||w||
+                        </div>
+                        <p class="text-xs text-gray-500">
+                            Adjust the weights (slope) and bias (offset) sliders below to see how the classifier boundary separates red and blue dots, and how support vectors update.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Custom Legend -->
+                <div class="mt-6 pt-4 border-t border-gray-200 space-y-2 text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3.5 h-3.5 rounded-full bg-red-500 border border-white shadow-sm block"></span>
+                        <span class="text-gray-600 font-medium">Class +1 (Red Points)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3.5 h-3.5 rounded-full bg-blue-500 border border-white shadow-sm block"></span>
+                        <span class="text-gray-600 font-medium">Class -1 (Blue Points)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3.5 h-3.5 border border-emerald-400 bg-emerald-500/20 block rounded-sm"></span>
+                        <span class="text-gray-600 font-medium">Separating Hyperplane</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3.5 h-3.5 border border-dashed border-emerald-500/50 bg-emerald-500/5 block rounded-sm"></span>
+                        <span class="text-gray-600 font-medium">Margin Boundaries</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-5 divide-x divide-y md:divide-y-0 divide-gray-100 bg-gray-50 border-b border-gray-100 text-center py-4">
+            <div class="py-2 px-4">
+                <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block">Separator</span>
+                <span id="stat-separator" class="text-lg font-black text-gray-900 block mt-1">3D Plane</span>
+            </div>
+            <div class="py-2 px-4">
+                <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block">Points</span>
+                <span id="stat-points" class="text-lg font-black text-gray-900 block mt-1">100</span>
+            </div>
+            <div class="py-2 px-4">
+                <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block">Margin</span>
+                <span id="stat-margin" class="text-lg font-black text-gray-900 block mt-1">±0.20</span>
+            </div>
+            <div class="py-2 px-4">
+                <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block">Support Vectors</span>
+                <span id="stat-sv" class="text-lg font-black text-emerald-600 block mt-1">0</span>
+            </div>
+            <div class="py-2 px-4 col-span-2 md:col-span-1">
+                <span class="text-xs text-gray-400 font-bold uppercase tracking-wider block">Accuracy</span>
+                <span id="stat-accuracy" class="text-lg font-black text-gray-900 block mt-1">100%</span>
+            </div>
+        </div>
+
+        <!-- Controls Container -->
+        <div class="p-6 md:p-8 bg-white space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Dimension Selector -->
+                <div class="flex flex-col justify-center">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Dimension View</span>
+                    <div class="flex items-center bg-gray-100 rounded-xl p-1 shadow-inner border border-gray-200">
+                        <button id="dim-prev" class="p-2.5 text-gray-500 hover:text-gray-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+                        <span id="dim-label" class="flex-1 text-center font-bold text-gray-700 text-sm select-none">3D View</span>
+                        <button id="dim-next" class="p-2.5 text-gray-500 hover:text-gray-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" /></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Margin Width Slider -->
+                <div class="flex flex-col justify-center">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Margin Width</span>
+                        <span id="val-margin" class="text-sm font-bold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">0.20</span>
+                    </div>
+                    <input id="slider-margin" type="range" min="0.05" max="0.5" step="0.01" value="0.20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-500 slider-thumb">
+                </div>
+
+                <!-- Auto-Rotation speed -->
+                <div class="flex flex-col justify-center">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">3D Auto-Rotation</span>
+                        <span id="val-rotation" class="text-sm font-bold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">0.5</span>
+                    </div>
+                    <input id="slider-rotation" type="range" min="0" max="2" step="0.1" value="0.5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-500 slider-thumb">
+                </div>
+            </div>
+
+            <!-- Hyperplane Parameter Adjustments -->
+            <div class="pt-6 border-t border-gray-100">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-4">Hyperplane Boundary Tuning</span>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <!-- Weight X -->
+                    <div class="flex flex-col">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="text-xs font-semibold text-gray-500">Weight X (w₁)</span>
+                            <span id="val-wx" class="text-xs font-bold text-gray-700">1.0</span>
+                        </div>
+                        <input id="slider-wx" type="range" min="-2.0" max="2.0" step="0.1" value="1.0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-500 slider-thumb">
+                    </div>
+                    
+                    <!-- Weight Y -->
+                    <div class="flex flex-col">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="text-xs font-semibold text-gray-500">Weight Y (w₂)</span>
+                            <span id="val-wy" class="text-xs font-bold text-gray-700">1.0</span>
+                        </div>
+                        <input id="slider-wy" type="range" min="-2.0" max="2.0" step="0.1" value="1.0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-500 slider-thumb">
+                    </div>
+
+                    <!-- Weight Z (3D only) -->
+                    <div id="ctrl-wz" class="flex flex-col">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="text-xs font-semibold text-gray-500">Weight Z (w₃)</span>
+                            <span id="val-wz" class="text-xs font-bold text-gray-700">1.0</span>
+                        </div>
+                        <input id="slider-wz" type="range" min="-2.0" max="2.0" step="0.1" value="1.0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-500 slider-thumb">
+                    </div>
+
+                    <!-- Bias -->
+                    <div class="flex flex-col">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="text-xs font-semibold text-gray-500">Bias (b)</span>
+                            <span id="val-bias" class="text-xs font-bold text-gray-700">0.0</span>
+                        </div>
+                        <input id="slider-bias" type="range" min="-1.5" max="1.5" step="0.05" value="0.0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-500 slider-thumb">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script Block -->
+    <script>
+        // --- 1. CONFIGURATION & STATE ---
+        const STATE = {
+            viewMode: '3D', // '2D' or '3D'
+            pointsCount: 100,
+            marginWidth: 0.20,
+            rotationSpeed: 0.5,
+            hyperplane: {
+                wx: 1.0,
+                wy: 1.0,
+                wz: 1.0,
+                bias: 0.0
+            },
+            points: [] // Array of {x, y, z, label, mesh, line, svOutline}
+        };
+
+        // DOM elements
+        const container = document.getElementById('canvas-container');
+        const dimLabel = document.getElementById('dim-label');
+        const dimPrevBtn = document.getElementById('dim-prev');
+        const dimNextBtn = document.getElementById('dim-next');
+        const sliderMargin = document.getElementById('slider-margin');
+        const valMargin = document.getElementById('val-margin');
+        const sliderRotation = document.getElementById('slider-rotation');
+        const valRotation = document.getElementById('val-rotation');
+        const regenBtn = document.getElementById('regen-btn');
+
+        // Parameter sliders
+        const sliderWx = document.getElementById('slider-wx');
+        const sliderWy = document.getElementById('slider-wy');
+        const sliderWz = document.getElementById('slider-wz');
+        const sliderBias = document.getElementById('slider-bias');
+        const valWx = document.getElementById('val-wx');
+        const valWy = document.getElementById('val-wy');
+        const valWz = document.getElementById('val-wz');
+        const valBias = document.getElementById('val-bias');
+        const ctrlWz = document.getElementById('ctrl-wz');
+
+        // Stats elements
+        const statSeparator = document.getElementById('stat-separator');
+        const statPoints = document.getElementById('stat-points');
+        const statMargin = document.getElementById('stat-margin');
+        const statSV = document.getElementById('stat-sv');
+        const statAccuracy = document.getElementById('stat-accuracy');
+
+        // --- 2. THREE.JS INITIALIZATION ---
+        let scene, camera, renderer, controls;
+        let pointsGroup, planeGroup, gridHelper3D, gridHelper2D, axesHelper;
+        let separatingPlane, positiveMarginPlane, negativeMarginPlane;
+
+        function initEngine() {
+            // Setup scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x030712); // Tailwind gray-950
+
+            // Setup camera
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 50);
+            camera.position.set(3.5, 3.5, 4.5);
+
+            // Setup renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Orbit controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.maxPolarAngle = Math.PI;
+
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+
+            const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight1.position.set(5, 10, 7);
+            scene.add(dirLight1);
+
+            // Groups
+            pointsGroup = new THREE.Group();
+            planeGroup = new THREE.Group();
+            scene.add(pointsGroup);
+            scene.add(planeGroup);
+
+            // Helpers
+            gridHelper3D = new THREE.GridHelper(4, 20, 0x4b5563, 0x1f2937); // xz grid
+            gridHelper3D.position.y = -2;
+            scene.add(gridHelper3D);
+
+            gridHelper2D = new THREE.GridHelper(4, 20, 0x4b5563, 0x1f2937); // xy grid rotated
+            gridHelper2D.rotation.x = Math.PI / 2;
+            gridHelper2D.visible = false;
+            scene.add(gridHelper2D);
+
+            axesHelper = new THREE.AxesHelper(2.5);
+            scene.add(axesHelper);
+
+            // Build planes
+            setupPlanes();
+
+            // Create initial data points
+            generateDataPoints();
+
+            // Window resize handler
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        // --- 3. SEPARATING PLANES CREATION ---
+        function setupPlanes() {
+            const size = 5;
+            const geom = new THREE.PlaneGeometry(size, size);
+
+            // Separating Hyperplane (emerald color)
+            const sepMat = new THREE.MeshLambertMaterial({
+                color: 0x10b981,
+                transparent: true,
+                opacity: 0.35,
+                side: THREE.DoubleSide,
+                depthWrite: false
+            });
+            separatingPlane = new THREE.Mesh(geom, sepMat);
+            planeGroup.add(separatingPlane);
+
+            // Positive Margin Plane (dashed-looking or soft color)
+            const marginMatPos = new THREE.MeshLambertMaterial({
+                color: 0x059669,
+                transparent: true,
+                opacity: 0.1,
+                side: THREE.DoubleSide,
+                depthWrite: false,
+                wireframe: true
+            });
+            positiveMarginPlane = new THREE.Mesh(geom, marginMatPos);
+            planeGroup.add(positiveMarginPlane);
+
+            // Negative Margin Plane
+            const marginMatNeg = new THREE.MeshLambertMaterial({
+                color: 0x059669,
+                transparent: true,
+                opacity: 0.1,
+                side: THREE.DoubleSide,
+                depthWrite: false,
+                wireframe: true
+            });
+            negativeMarginPlane = new THREE.Mesh(geom, marginMatNeg);
+            planeGroup.add(negativeMarginPlane);
+        }
+
+        // --- 4. DATA GENERATION & SEPARABILITY ---
+        function generateDataPoints() {
+            // Clear existing point meshes
+            while (pointsGroup.children.length > 0) {
+                pointsGroup.remove(pointsGroup.children[0]);
+            }
+            STATE.points = [];
+
+            // True separator line/plane chosen randomly to separate points cleanly
+            const trueWx = 0.8;
+            const trueWy = -0.5;
+            const trueWz = STATE.viewMode === '3D' ? 0.6 : 0.0;
+            const trueBias = 0.1;
+            const norm = Math.sqrt(trueWx * trueWx + trueWy * trueWy + trueWz * trueWz);
+
+            const sphereGeom = new THREE.SphereGeometry(0.06, 16, 16);
+            const outlineGeom = new THREE.SphereGeometry(0.09, 16, 16);
+
+            const redMat = new THREE.MeshLambertMaterial({ color: 0xef4444 }); // Class +1
+            const blueMat = new THREE.MeshLambertMaterial({ color: 0x3b82f6 }); // Class -1
+            
+            const svOutlineMat = new THREE.MeshBasicMaterial({
+                color: 0xfacc15, // Yellow outline for Support Vectors
+                wireframe: true,
+                transparent: true,
+                opacity: 0.6
+            });
+
+            for (let i = 0; i < STATE.pointsCount; i++) {
+                let x, y, z, val;
+                
+                // Keep generating points until we get a clear gap
+                let tries = 0;
+                do {
+                    x = (Math.random() * 2 - 1) * 1.5;
+                    y = (Math.random() * 2 - 1) * 1.5;
+                    z = STATE.viewMode === '3D' ? (Math.random() * 2 - 1) * 1.5 : 0.0;
+                    
+                    // Value relative to true separating boundary
+                    val = (trueWx * x + trueWy * y + trueWz * z + trueBias) / norm;
+                    tries++;
+                } while (Math.abs(val) < 0.25 && tries < 100); // 0.25 safety gap
+
+                const label = val >= 0 ? 1 : -1;
+
+                // Create mesh
+                const mesh = new THREE.Mesh(sphereGeom, label === 1 ? redMat : blueMat);
+                mesh.position.set(x, y, z);
+                pointsGroup.add(mesh);
+
+                // Outline mesh for Support Vectors (hidden initially)
+                const svOutline = new THREE.Mesh(outlineGeom, svOutlineMat);
+                svOutline.position.set(x, y, z);
+                svOutline.visible = false;
+                pointsGroup.add(svOutline);
+
+                // Create projection line (hidden initially)
+                const lineGeom = new THREE.BufferGeometry().setFromPoints([
+                    new THREE.Vector3(x, y, z),
+                    new THREE.Vector3(x, y, z)
+                ]);
+                const lineMat = new THREE.LineBasicMaterial({ color: 0xfacc15, transparent: true, opacity: 0.8 });
+                const line = new THREE.Line(lineGeom, lineMat);
+                line.visible = false;
+                pointsGroup.add(line);
+
+                STATE.points.push({ x, y, z, label, mesh, line, svOutline });
+            }
+
+            // Sync baseline tuning parameters
+            STATE.hyperplane.wx = trueWx;
+            STATE.hyperplane.wy = trueWy;
+            STATE.hyperplane.wz = STATE.viewMode === '3D' ? trueWz : 0.0;
+            STATE.hyperplane.bias = trueBias;
+
+            updateSlidersUI();
+            updateVisualization();
+        }
+
+        // --- 5. VISUALIZATION UPDATER (MATH TO MESHES) ---
+        function updateVisualization() {
+            const { wx, wy, wz, bias } = STATE.hyperplane;
+            const wLen = Math.sqrt(wx * wx + wy * wy + wz * wz);
+            
+            if (wLen === 0) return;
+
+            // 1. Orient Hyperplane Plane Mesh
+            const normal = new THREE.Vector3(wx, wy, wz).normalize();
+            const up = new THREE.Vector3(0, 0, 1);
+            const quaternion = new THREE.Quaternion().setFromUnitVectors(up, normal);
+
+            // Plane offset distance: d = -b / ||w||
+            const dist = -bias / wLen;
+            const originProjection = normal.clone().multiplyScalar(dist);
+
+            separatingPlane.position.copy(originProjection);
+            separatingPlane.quaternion.copy(quaternion);
+
+            // 2. Position Margin Planes
+            // Margin offset plane = ( -bias ± marginWidth * ||w|| ) / ||w||
+            const posOffset = normal.clone().multiplyScalar(dist + STATE.marginWidth);
+            const negOffset = normal.clone().multiplyScalar(dist - STATE.marginWidth);
+
+            positiveMarginPlane.position.copy(posOffset);
+            positiveMarginPlane.quaternion.copy(quaternion);
+
+            negativeMarginPlane.position.copy(negOffset);
+            negativeMarginPlane.quaternion.copy(quaternion);
+
+            // 3. Evaluate points (Check correct classifications & Support Vectors)
+            let correctCount = 0;
+            let svCount = 0;
+
+            STATE.points.forEach(pt => {
+                const distanceToPlane = (wx * pt.x + wy * pt.y + wz * pt.z + bias) / wLen;
+                const functionalMargin = pt.label * distanceToPlane; // should be > 0 for correct classification
+
+                // Accuracy calculation
+                if (functionalMargin > 0) {
+                    correctCount++;
+                    pt.mesh.material.opacity = 1.0;
+                    pt.mesh.material.transparent = false;
+                } else {
+                    // Dim incorrect classifications or flash them
+                    pt.mesh.material.opacity = 0.3;
+                    pt.mesh.material.transparent = true;
+                }
+
+                // Support Vector threshold (points closest to or within margin boundaries)
+                // Threshold = marginWidth + small epsilon
+                const isSV = Math.abs(distanceToPlane) <= STATE.marginWidth + 0.02;
+
+                if (isSV) {
+                    svCount++;
+                    pt.svOutline.visible = true;
+
+                    // Calculate point projection on separating hyperplane
+                    const projX = pt.x - distanceToPlane * normal.x;
+                    const projY = pt.y - distanceToPlane * normal.y;
+                    const projZ = pt.z - distanceToPlane * normal.z;
+
+                    // Update projection line positions
+                    const positions = pt.line.geometry.attributes.position;
+                    positions.setXYZ(0, pt.x, pt.y, pt.z);
+                    positions.setXYZ(1, projX, projY, projZ);
+                    positions.needsUpdate = true;
+                    pt.line.visible = true;
+                } else {
+                    pt.svOutline.visible = false;
+                    pt.line.visible = false;
+                }
+            });
+
+            // 4. Update Stats GUI
+            const accuracyVal = Math.round((correctCount / STATE.pointsCount) * 100);
+            statAccuracy.textContent = `${accuracyVal}%`;
+            statSV.textContent = svCount;
+            statPoints.textContent = STATE.pointsCount;
+            statMargin.textContent = `±${STATE.marginWidth.toFixed(2)}`;
+
+            // Style warning if accuracy is low
+            if (accuracyVal < 90) {
+                statAccuracy.className = "text-lg font-black text-red-500 block mt-1";
+            } else if (accuracyVal < 100) {
+                statAccuracy.className = "text-lg font-black text-amber-500 block mt-1";
+            } else {
+                statAccuracy.className = "text-lg font-black text-emerald-600 block mt-1";
+            }
+        }
+
+        // --- 6. CONTROLS & INTERACTION HANDLERS ---
+        function updateSlidersUI() {
+            sliderMargin.value = STATE.marginWidth;
+            valMargin.textContent = STATE.marginWidth.toFixed(2);
+
+            sliderWx.value = STATE.hyperplane.wx;
+            valWx.textContent = STATE.hyperplane.wx.toFixed(1);
+
+            sliderWy.value = STATE.hyperplane.wy;
+            valWy.textContent = STATE.hyperplane.wy.toFixed(1);
+
+            sliderWz.value = STATE.hyperplane.wz;
+            valWz.textContent = STATE.hyperplane.wz.toFixed(1);
+
+            sliderBias.value = STATE.hyperplane.bias;
+            valBias.textContent = STATE.hyperplane.bias.toFixed(2);
+        }
+
+        // Dimension toggle switcher
+        function setDimensionMode(mode) {
+            if (mode === STATE.viewMode) return;
+            STATE.viewMode = mode;
+            dimLabel.textContent = `${mode} View`;
+            statSeparator.textContent = mode === '3D' ? '3D Plane' : '2D Line';
+
+            if (mode === '2D') {
+                // Adjust camera for direct frontal orthographic-like view
+                controls.reset();
+                camera.position.set(0, 0, 4.5);
+                controls.target.set(0, 0, 0);
+                controls.enableRotate = false; // Restrict rotation in 2D
+
+                // Hide 3D elements
+                gridHelper3D.visible = false;
+                gridHelper2D.visible = true;
+                ctrlWz.style.opacity = '0.3';
+                sliderWz.disabled = true;
+                STATE.hyperplane.wz = 0.0;
+            } else {
+                // Return to perspective 3D
+                camera.position.set(3.5, 3.5, 4.5);
+                controls.target.set(0, 0, 0);
+                controls.enableRotate = true;
+
+                // Show 3D elements
+                gridHelper3D.visible = true;
+                gridHelper2D.visible = false;
+                ctrlWz.style.opacity = '1.0';
+                sliderWz.disabled = false;
+                STATE.hyperplane.wz = 1.0;
+            }
+
+            controls.update();
+            generateDataPoints();
+        }
+
+        // --- 7. EVENT LISTENERS SETUP ---
+        function setupEventListeners() {
+            // Dimension navigation arrows
+            dimPrevBtn.addEventListener('click', () => setDimensionMode(STATE.viewMode === '3D' ? '2D' : '3D'));
+            dimNextBtn.addEventListener('click', () => setDimensionMode(STATE.viewMode === '3D' ? '2D' : '3D'));
+
+            // Margin Width
+            sliderMargin.addEventListener('input', (e) => {
+                STATE.marginWidth = parseFloat(e.target.value);
+                valMargin.textContent = STATE.marginWidth.toFixed(2);
+                updateVisualization();
+            });
+
+            // Auto Rotation speed slider
+            sliderRotation.addEventListener('input', (e) => {
+                STATE.rotationSpeed = parseFloat(e.target.value);
+                valRotation.textContent = STATE.rotationSpeed.toFixed(1);
+            });
+
+            // Hyperplane boundary parameters
+            sliderWx.addEventListener('input', (e) => {
+                STATE.hyperplane.wx = parseFloat(e.target.value);
+                valWx.textContent = STATE.hyperplane.wx.toFixed(1);
+                updateVisualization();
+            });
+
+            sliderWy.addEventListener('input', (e) => {
+                STATE.hyperplane.wy = parseFloat(e.target.value);
+                valWy.textContent = STATE.hyperplane.wy.toFixed(1);
+                updateVisualization();
+            });
+
+            sliderWz.addEventListener('input', (e) => {
+                if (STATE.viewMode === '2D') return;
+                STATE.hyperplane.wz = parseFloat(e.target.value);
+                valWz.textContent = STATE.hyperplane.wz.toFixed(1);
+                updateVisualization();
+            });
+
+            sliderBias.addEventListener('input', (e) => {
+                STATE.hyperplane.bias = parseFloat(e.target.value);
+                valBias.textContent = STATE.hyperplane.bias.toFixed(2);
+                updateVisualization();
+            });
+
+            // Points regenerator
+            regenBtn.addEventListener('click', generateDataPoints);
+        }
+
+        function onWindowResize() {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        // --- 8. ANIMATION LOOP ---
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Handle auto-rotation in 3D Mode
+            if (STATE.viewMode === '3D' && STATE.rotationSpeed > 0) {
+                const time = Date.now() * 0.0005 * STATE.rotationSpeed;
+                
+                // Slow orbit trajectory rotation
+                planeGroup.rotation.y = Math.sin(time * 0.2) * 0.15;
+                pointsGroup.rotation.y = time * 0.15;
+                gridHelper3D.rotation.y = time * 0.15;
+                axesHelper.rotation.y = time * 0.15;
+            } else {
+                // Reset rotations when stationary
+                planeGroup.rotation.y = 0;
+                pointsGroup.rotation.y = 0;
+                gridHelper3D.rotation.y = 0;
+                axesHelper.rotation.y = 0;
+            }
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // Run setup
+        initEngine();
+        setupEventListeners();
+        animate();
+    </script>
+</body>
+</html>
+
