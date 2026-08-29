@@ -893,6 +893,25 @@ flowchart TD
     *(where $a(i)$ is the mean distance between point $i$ and all other points in the same cluster, and $b(i)$ is the mean distance from $i$ to the nearest cluster it is not a part of).*
     *   A high average Silhouette Score near $+1$ indicates well-separated, dense clusters.
 
+##### 🔍 K-Means Model Validation & Prediction Workflow
+To choose $K$, train the model, and evaluate its clustering quality, we follow this chronological workflow:
+
+```mermaid
+flowchart TD
+    K[1. Select Range of Candidate K] --> Elbow[2. Apply Elbow Method]
+    Elbow --> WCSS[3. Calculate WCSS / Inertia]
+    WCSS --> Fit[4. Initialize & Fit K-Means]
+    Fit --> Predict[5. Generate Predictions / Cluster Labels]
+    Predict --> Silhouette[6. Evaluate with Silhouette Score]
+```
+
+![K-Means Evaluation Workflow](../images/kmeans_evaluation_workflow.png)
+
+*   **Step 1 to 3 (Elbow Method / WCSS)**: Focuses on **closeness/distance**. It measures how tightly grouped the points are within each cluster. WCSS always decreases as $K$ increases, so we look for the "elbow" point where the rate of drop slows down.
+*   **Step 4 to 6 (K-Means Fitting & Silhouette)**: Focuses on **separability**. After fitting the model and generating predictions (cluster labels), we calculate the Silhouette Score. A score near $+1$ validates that the clusters are distinct and do not overlap.
+
+---
+
 #### B. K-Medoids Clustering
 
 > 💡 **Layman Analogy**:
@@ -916,9 +935,11 @@ K-Medoids is a clustering algorithm similar to K-Means, but instead of using the
 >
 > Unlike K-Means, Hierarchical Clustering does not require specifying the number of clusters in advance. It builds a hierarchical tree representation called a **Dendrogram**.
 
-##### Approaches:
+###### Approaches:
 1.  **Agglomerative (Bottom-Up)**: Starts with each data point as a single cluster and successively merges the closest pairs of clusters until only one cluster remains.
 2.  **Divisive (Top-Down)**: Starts with all data points in one single cluster and recursively splits clusters into smaller sub-clusters.
+
+![Hierarchical Agglomerative vs. Divisive Concept](../images/hierarchical_clustering_concept.png)
 
 ##### Linkage Criteria:
 Determines how the distance between two clusters is calculated during merging/splitting:
@@ -926,11 +947,17 @@ Determines how the distance between two clusters is calculated during merging/sp
 *   **Complete Linkage**: Maximum distance between any point in Cluster A and any point in Cluster B.
 *   **Average Linkage**: Average distance between all pairs of points from Cluster A and Cluster B.
 *   **Centroid Linkage**: Distance between the centroids (mean vectors) of Cluster A and Cluster B.
+*   **Ward Linkage (Variance Minimization)**: The default and most robust linkage criterion in Scikit-Learn. Instead of measuring pure minimum/maximum distances, it merges clusters in a way that minimizes the **Within-Cluster Variance (sum of squared differences)**.
 
-##### Reading a Dendrogram:
-*   **Leaves**: The individual data points at the bottom.
-*   **Branches**: Represent cluster merges; the vertical height of a horizontal merge line represents the distance between the merged clusters.
-*   **Determining Clusters**: Identify the longest vertical line in the dendrogram that does not cross any horizontal merge lines. Drawing a horizontal line through this section determines the optimal number of clusters.
+##### 📊 Anatomy & Interpretation of a Dendrogram
+A dendrogram is a tree diagram showing the taxonomic relationships of merges.
+
+![Dendrogram Anatomy and Labels](../images/dendrogram_anatomy.png)
+
+*   **Leaves (Observations)**: The individual data points at the very bottom (representing raw records/samples).
+*   **Height / Inter-Cluster Distance (Y-Axis)**: The vertical axis represents the distance/height of the merges. A higher vertical line means the merged clusters were very different from each other.
+*   **Clusters (Horizontal Links)**: The horizontal brackets showing which groups were merged at that height.
+*   **Determining Optimal Clusters**: Identify the longest vertical line in the dendrogram that does not cross any horizontal merge lines. Drawing a horizontal line through this section determines the optimal number of clusters.
 
 #### D. DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
 
