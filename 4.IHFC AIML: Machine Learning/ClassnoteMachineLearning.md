@@ -883,14 +883,31 @@ flowchart TD
 > 3.  **Update Step**: Recompute the centroid of each cluster as the mean of all points assigned to it.
 > 4.  **Repeat**: Iterate steps 2 and 3 until centroids converge (no longer shift significantly) or max iterations are reached.
 
-##### Choosing the Optimal Number of Clusters ($K$):
+###### Choosing the Optimal Number of Clusters ($K$):
 *   **The Elbow Method**: Plot the **Within-Cluster Sum of Squares (WCSS) / Inertia** against different values of $K$. WCSS measures the compactness of clusters. The "elbow" point is where WCSS decrease slows down dramatically, indicating the optimal balance.
+    > 💡 **Layman Analogy (Elbow Method)**:
+    > Think of setting up delivery hubs in a city. Having only 1 hub means delivery boys travel huge distances (high WCSS). Adding a 2nd or 3rd hub drops the travel distance drastically. But opening 20 hubs is extremely expensive and barely reduces travel distance any further.
+    > The "Elbow" point on the graph represents that sweet spot (optimal $K$) where you get the maximum benefit before adding more hubs becomes redundant.
 *   **Silhouette Score**: Measures how similar a point is to its own cluster compared to other clusters. The score ranges from $-1$ to $+1$:
     $$s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}$$
     *(where $a(i)$ is the mean distance between point $i$ and all other points in the same cluster, and $b(i)$ is the mean distance from $i$ to the nearest cluster it is not a part of).*
     *   A high average Silhouette Score near $+1$ indicates well-separated, dense clusters.
 
-#### B. Hierarchical Clustering
+#### B. K-Medoids Clustering
+
+> 💡 **Layman Analogy**:
+> Imagine you want to select a class monitor (representative) who represents the average weight of the class. 
+> *   **K-Means approach**: You calculate the average weight of the class (e.g. 57.3 kg) and declare this exact number as the center. But no actual student might weigh exactly 57.3 kg—it is a calculated virtual centroid.
+> *   **K-Medoids approach**: You must select an **actual student** from the class whose weight is closest to the average. This real student is the **Medoid**.
+
+K-Medoids is a clustering algorithm similar to K-Means, but instead of using the average (mean) vector of points as a centroid, it uses **actual data points** (medoids) as cluster centers.
+
+##### Why use K-Medoids over K-Means?
+1.  **Robustness to Outliers**: Since it uses medoids (which are actual data points) rather than means, extreme outliers do not distort the cluster center.
+2.  **Custom Distance Metrics**: K-Medoids can be used with any arbitrary distance metric (e.g., Manhattan distance, Cosine similarity), whereas K-Means is mathematically tied to Euclidean distance.
+3.  **Real-world representation**: The cluster center is a real data point, making it highly interpretable (e.g., in customer segmentation, the medoid represents a real customer profile).
+
+#### C. Hierarchical Clustering
 
 > 💡 **Layman Analogy**:
 > Imagine building a family tree of animals. 
@@ -915,7 +932,7 @@ Determines how the distance between two clusters is calculated during merging/sp
 *   **Branches**: Represent cluster merges; the vertical height of a horizontal merge line represents the distance between the merged clusters.
 *   **Determining Clusters**: Identify the longest vertical line in the dendrogram that does not cross any horizontal merge lines. Drawing a horizontal line through this section determines the optimal number of clusters.
 
-#### C. DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
+#### D. DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
 
 > 💡 **Layman Analogy**:
 > Imagine you are a security analyst mapping out crowds in a busy airport terminal:
