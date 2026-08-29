@@ -1056,6 +1056,30 @@ An unsupervised linear transformation technique that projects data into a lower-
 A supervised dimensionality reduction method that projects features to maximize class separability.
 *   **Objective**: Maximize between-class variance ($S_B$) while minimizing within-class variance ($S_W$).
 
+##### 🔍 PCA vs. LDA: The Core Differences (in Simple Language)
+
+To understand when to use PCA vs. LDA, we look at their mathematical objectives and how they handle class labels:
+
+![PCA vs LDA Infographic](../images/pca_vs_lda.png)
+
+*   **Principal Component Analysis (PCA) — Unsupervised**:
+    *   **How it works**: PCA does not care about target class labels ($y$). It looks at the entire dataset as one single group and finds the direction of **maximum variance** (where the data spreads out the most, labeled PC1).
+    *   **Simple Analogy**: Imagine you are taking a photo of a large crowd of people. You want to adjust your camera angle to capture the maximum spread/width of the crowd so that everyone is visible in the frame, regardless of which group or family they belong to.
+    *   **Output**: Projects the data to preserve raw features' information, but different classes (e.g., red and blue points) might end up completely mixed together along the new axis.
+*   **Linear Discriminant Analysis (LDA) — Supervised**:
+    *   **How it works**: LDA actively uses target class labels ($y$). It projects the data onto a new axis that **maximizes separation** between different classes (increasing the distance between class means) while **minimizing variance** within each individual class (keeping same-class points grouped tightly together).
+    *   **Simple Analogy**: Imagine you are an airport security officer and need to separate domestic travelers from international travelers. You draw a dividing line on the floor that maximizes the gap (separation) between the two groups, making it extremely clear who belongs to which group.
+    *   **Output**: Projects the data in a way that separates different classes as cleanly as possible along the new axis.
+
+| Aspect | PCA (Principal Component Analysis) | LDA (Linear Discriminant Analysis) |
+| :--- | :--- | :--- |
+| **Learning Type** | **Unsupervised** (does not use target labels $y$). | **Supervised** (requires target labels $y$). |
+| **Primary Goal** | **Maximize variance/information representation**. | **Maximize class separability** (distinct boundaries). |
+| **Focus** | Finds directions of maximum spread in the features. | Finds directions that maximize the distance between groups. |
+| **Limitations** | May mix different classes together when projecting. | Cannot be used when target labels are unavailable. |
+
+---
+
 #### D. t-SNE (t-Distributed Stochastic Neighbor Embedding)
 A non-linear dimensionality reduction technique primarily used for 2D/3D visualization of high-dimensional data.
 *   **Objective**: Maps similarities between points in high-dimensional space to conditional probabilities, preserving local structure (close neighbors stay close in the projection).
