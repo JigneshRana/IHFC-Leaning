@@ -825,9 +825,44 @@ An interactive, 3D visual demonstration of SVM Hyperplane Classification has bee
 
 ## 3. Unsupervised Learning
 
-![Unsupervised Learning Method & Workflow](../images/unsupervised_learning_diagram.png)
+### 3.0 Introduction to Unsupervised Learning
+In Unsupervised Learning, the model works with **unlabeled datasets**. There is **no target variable ($y$)** to predict. Instead, the algorithm searches for hidden patterns, structures, or relationships within the input features ($X$).
 
-> **Key Concept**: Unsupervised Learning automatically groups raw unlabeled data into distinct categories or clusters based on inherent similarities (such as age group, demographic traits, or feature density) without any prior target labels.
+```
+Supervised Learning:    X ➔ y  (Mapping features to known labels)
+Unsupervised Learning:  X ➔ ?  (Discovering hidden structure; no target label y exists)
+```
+
+---
+
+#### ❓ The 3 Core Questions of Unsupervised Learning
+
+To understand which Unsupervised Learning method to apply, we look at the three fundamental questions:
+
+```mermaid
+flowchart TD
+    Q["3 Fundamental Questions of Unsupervised Learning"] --> Q1["1. Similar observations into groups?<br><b>(Observations ➔ Similar ➔ Groups?)</b>"]
+    Q --> Q2["2. Compress high dimensions?<br><b>(100 columns ➔ 2 dimensions?)</b>"]
+    Q --> Q3["3. Identify co-occurrence tendencies?<br><b>(Co-occurrence Tendency?)</b>"]
+    
+    Q1 --> A1["🎯 <b>Clustering</b><br>Group similar data points.<br><i>Examples: K-Means, Hierarchical Clustering, DBSCAN.</i>"]
+    Q2 --> A2["🎯 <b>Dimensionality Reduction</b><br>Reduce features while retaining maximum variance.<br><i>Examples: PCA, t-SNE, LDA.</i>"]
+    Q3 --> A3["🎯 <b>Association Rules</b><br>Discover item co-occurrence rules.<br><i>Examples: Apriori, Eclat.</i>"]
+
+    style Q fill:#f9f,stroke:#333,stroke-width:2px
+    style Q1 fill:#dfd,stroke:#333,stroke-width:1px
+    style Q2 fill:#dfd,stroke:#333,stroke-width:1px
+    style Q3 fill:#dfd,stroke:#333,stroke-width:1px
+    style A1 fill:#bbf,stroke:#333,stroke-width:1px
+    style A2 fill:#bbf,stroke:#333,stroke-width:1px
+    style A3 fill:#bbf,stroke:#333,stroke-width:1px
+```
+
+| Question / Query | Machine Learning Approach | Description & Examples |
+| :--- | :--- | :--- |
+| **1. Observations ➔ Similar ➔ Groups?** | **Clustering** | Groups similar observations together based on distance or density metrics. <br> *Examples: Customer segmentation, fraud detection.* |
+| **2. 100 columns ➔ 2 dimensions?** | **Dimensionality Reduction** | Compresses high-dimensional feature spaces into fewer variables while preserving variance. <br> *Examples: PCA (Principal Component Analysis), t-SNE.* |
+| **3. Co-occurrence Tendency?** | **Association Rules** | Identifies rules and probabilities of items appearing together in transactional datasets. <br> *Examples: Market Basket Analysis (e.g., 'purchasing bread links to buying butter').* |
 
 ---
 
