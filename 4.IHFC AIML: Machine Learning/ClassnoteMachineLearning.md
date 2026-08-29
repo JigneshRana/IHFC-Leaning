@@ -959,6 +959,51 @@ Determines how the distance between two clusters is calculated during merging/sp
 *   Can find clusters of arbitrary, non-linear shapes (unlike K-Means).
 *   Robust to outliers and noise.
 
+#### E. Comparison of Different Clustering Algorithms
+To select the best clustering algorithm for a specific dataset, we analyze their behavior across different shapes (concentric rings, moons, dense groups, varying densities, etc.).
+
+![Comparison of Clustering Algorithms in Scikit-Learn](../images/clustering_comparison.png)
+
+##### 1. MiniBatch KMeans / KMeans
+*   **Logical Behavior**: Partitions data by minimizing the variance of points to centroids (spherical assumption).
+*   **Result**: Fails completely on concentric circles and interlocking moons, splitting them radially into blocks. Highly sensitive to outliers.
+
+##### 2. Affinity Propagation
+*   **Logical Behavior**: Selects "exemplars" by sending real-valued messages of responsibility and availability between data points.
+*   **Result**: Does not require pre-specifying $K$, but over-segments nested circles and moons into too many small, non-linear blocks based on similarity parameters.
+
+##### 3. MeanShift
+*   **Logical Behavior**: A non-parametric density-based method that finds centroids by shifting points toward local maxima of density.
+*   **Result**: Fails on moons and concentric circles, dividing them into radial sections due to its reliance on a spherical kernel window.
+
+##### 4. Spectral Clustering
+*   **Logical Behavior**: Projects the data graph using Laplacian eigenvalues (dimensionality reduction) before running K-Means.
+*   **Result**: Highly effective at identifying complex, non-spherical structures (like concentric circles and moons). Computational cost is very high ($O(N^3)$), making it unusable for massive datasets.
+
+##### 5. Ward / Agglomerative Clustering
+*   **Logical Behavior**: Hierarchical bottom-up merging minimizing within-cluster variance.
+*   **Result**: Fails on non-linear moons and nested rings, dividing them into block-like segments, but performs exceptionally well on standard dense Gaussian blobs.
+
+##### 6. DBSCAN
+*   **Logical Behavior**: Follows dense continuous paths within an $\epsilon$-radius and tags low-density isolated points as noise/outliers.
+*   **Result**: Perfect at identifying concentric circles and moons, isolating outliers cleanly (black points). Fails to cluster correctly when datasets have varying density zones.
+
+##### 7. HDBSCAN
+*   **Logical Behavior**: Extends DBSCAN by calculating cluster stability across a range of variable epsilon values.
+*   **Result**: Outperforms DBSCAN on real-world datasets because it natively handles clusters of varying densities and noise without requiring a single global `eps` parameter.
+
+##### 8. OPTICS
+*   **Logical Behavior**: Identifies clustering structures by sorting points sequentially based on reachability distance.
+*   **Result**: Similar to DBSCAN but handles varying density regions much better. Computationally slower due to ordering calculations.
+
+##### 9. BIRCH
+*   **Logical Behavior**: Generates a tree structure of clustering feature nodes to handle extremely large datasets.
+*   **Result**: Very fast and memory-efficient, but restricted to spherical shapes. Fails on non-linear structures like nested rings and moons.
+
+##### 10. Gaussian Mixture Models (GMM)
+*   **Logical Behavior**: Probabilistic model assuming data is generated from a mixture of several Gaussian distributions with unknown parameters.
+*   **Result**: Extremely flexible; can handle elongated, elliptical clusters (unlike K-Means). However, fails on highly curved, non-elliptical shapes (nested rings/moons).
+
 ---
 
 ### 3.2 Dimensionality Reduction Techniques
@@ -1256,6 +1301,8 @@ from sklearn.metrics import classification_report, roc_auc_score
 | :--- | :--- | :--- |
 | **Deep Learning with Python** | [deeplearningwithpython.io](https://deeplearningwithpython.io) | Official website for François Chollet's foundational book on deep learning concepts, representation transformations, and Keras practices. |
 | **Scikit-learn** | [scikit-learn.org](https://scikit-learn.org) | Official documentation, tutorials, user guides, and API specifications for classical Machine Learning algorithms in Python. |
+| **Scikit-Learn Clustering Comparison** | [sklearn.org/clustering](https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html) | Comparison of different clustering algorithms on toy 2D datasets, illustrating their shapes, boundaries, and speeds. |
+| **Scikit-Learn Clustering Comparison Image** | [sklearn.org/images](https://scikit-learn.org/stable/_images/sphx_glr_plot_cluster_comparison_001.png) | Visual plot showing spatial outputs of MiniBatchKMeans, DBSCAN, OPTICS, and GMM on concentric rings and moon shapes. |
 | **TensorFlow** | [tensorflow.org](https://www.tensorflow.org) | Google's official platform, tutorials, API docs, and deployment ecosystem (TF Lite, TF Serving, Keras) for deep learning. |
 | **PyTorch** | [pytorch.org](https://pytorch.org) | Meta / PyTorch Foundation official documentation, tutorials, PyTorch Hub, dynamic graph autograd reference, and deep learning framework ecosystem. |
 | **Keras API** | [keras.io](https://keras.io) | Official portal for Keras 3 multi-backend deep learning API supporting TensorFlow, PyTorch, and JAX. |
