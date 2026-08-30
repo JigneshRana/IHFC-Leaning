@@ -1071,18 +1071,38 @@ To understand when to use PCA vs. LDA, we look at their mathematical objectives 
     *   **Simple Analogy**: Imagine you are an airport security officer and need to separate domestic travelers from international travelers. You draw a dividing line on the floor that maximizes the gap (separation) between the two groups, making it extremely clear who belongs to which group.
     *   **Output**: Projects the data in a way that separates different classes as cleanly as possible along the new axis.
 
-| Aspect | PCA (Principal Component Analysis) | LDA (Linear Discriminant Analysis) |
-| :--- | :--- | :--- |
-| **Learning Type** | **Unsupervised** (does not use target labels $y$). | **Supervised** (requires target labels $y$). |
-| **Primary Goal** | **Maximize variance/information representation**. | **Maximize class separability** (distinct boundaries). |
-| **Focus** | Finds directions of maximum spread in the features. | Finds directions that maximize the distance between groups. |
-| **Limitations** | May mix different classes together when projecting. | Cannot be used when target labels are unavailable. |
+| Aspect | PCA (Principal Component Analysis) | LDA (Linear Discriminant Analysis) | t-SNE (t-Distributed Stochastic Neighbor Embedding) |
+| :--- | :--- | :--- | :--- |
+| **Learning Type** | **Unsupervised** (does not use target labels $y$). | **Supervised** (requires target labels $y$). | **Unsupervised** (does not use target labels $y$). |
+| **Linearity** | **Linear** transformation. | **Linear** transformation. | **Non-Linear** transformation. |
+| **Primary Goal** | **Maximize variance/information representation**. | **Maximize class separability** (distinct boundaries). | **Preserve local neighborhood structure** (neighbors stay close). |
+| **Focus** | Finds directions of maximum spread in the features. | Finds directions that maximize the distance between groups. | Maps relationships to conditional probabilities to visualize clusters in 2D/3D. |
+| **Main Use Case** | Feature engineering, dimensionality reduction, noise reduction. | Pre-classification feature projection. | **Data visualization only** (exploring structures/clusters). |
+| **Limitations** | May mix different classes together when projecting. | Cannot be used when target labels are unavailable. | Very slow computationally; has no `transform()` function for test data. |
 
 ---
 
 #### D. t-SNE (t-Distributed Stochastic Neighbor Embedding)
-A non-linear dimensionality reduction technique primarily used for 2D/3D visualization of high-dimensional data.
-*   **Objective**: Maps similarities between points in high-dimensional space to conditional probabilities, preserving local structure (close neighbors stay close in the projection).
+
+> 💡 **Layman Analogy**:
+> Imagine you are trying to flatten a spherical 3D globe of the earth onto a flat 2D sheet of paper:
+> *   You want to make sure that cities that are very close to each other in 3D (like Ahmedabad and Gandhinagar) stay right next to each other on the 2D paper.
+> *   To keep these close neighbors together, you are willing to let far-away distances (like Ahmedabad to New York) get slightly stretched or warped.
+> *   t-SNE does exactly this: it ignores far-away distances and focuses heavily on keeping **close neighbors clustered together**.
+
+t-SNE is a non-linear, unsupervised dimensionality reduction technique primarily used for **2D/3D visualization** of high-dimensional datasets.
+
+##### How it works:
+1.  **High-Dimensional Space**: Computes probability distributions over pairs of high-dimensional objects in such a way that similar objects have a high probability of being chosen, while dissimilar points have an infinitesimal probability.
+2.  **Low-Dimensional Space**: Defines a similar probability distribution over the points in the low-dimensional map, using a **Student-t distribution** (which has heavier tails than a Gaussian distribution to solve the *crowding problem*, preventing points from collapsing into a single cluster).
+3.  **Optimization**: Minimizes the difference between these two probability distributions (using Kullback-Leibler divergence via gradient descent).
+
+##### Key Characteristics:
+*   **Non-Linear**: Can capture complex, manifold structures (e.g., Swiss rolls or concentric circles) that linear methods like PCA or LDA fail to project properly.
+*   **No Projection Formula**: Unlike PCA, t-SNE does not output a transformation matrix or projection equation. Therefore, you **cannot** use it to transform new out-of-sample data points (there is no `transform()` method for test data in Scikit-Learn; you must run `fit_transform()` on the entire dataset).
+*   **Purely for Visualization**: Due to its non-linear warping of global distances and high computational complexity, it is used for visual exploratory analysis rather than as a preprocessing step for model features.
+
+---
 
 ---
 
