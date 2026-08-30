@@ -825,6 +825,60 @@ An interactive, 3D visual demonstration of SVM Hyperplane Classification has bee
 
 ## 3. Unsupervised Learning
 
+### 🔍 Machine Learning & Unsupervised Learning Hierarchy Mindmap
+Here is the visual mapping of Machine Learning categories, highlighting the branches of Supervised and Unsupervised Learning along with their core algorithms and evaluation metrics:
+
+```mermaid
+flowchart TD
+    ML["🤖 Machine Learning (ML)"] --> Sup["📊 Supervised Learning<br><b>y = f(X) ➔ Target/Labels</b>"]
+    ML --> Unsup["🔍 Unsupervised Learning<br><b>Only X ➔ Patterns ➔ No Target</b>"]
+    
+    %% Supervised branches
+    Sup --> Reg["📈 Regression"]
+    Sup --> Clf["🎯 Classification"]
+    
+    %% Unsupervised branches
+    Unsup --> Cluster["📦 Clustering<br><i>(Group similar observations)</i>"]
+    Unsup --> DimRed["📉 Dimensionality Reduction<br><i>(Compress features)</i>"]
+    Unsup --> Assoc["🛒 Association Rules<br><i>(Recommendation Systems)</i>"]
+    Unsup --> Anom["⚠️ Anomaly Detection<br><i>(Identify outliers)</i>"]
+    
+    %% Clustering Algorithms
+    Cluster --> KMeans["K-Means"]
+    Cluster --> Hier["Hierarchical Clustering"]
+    Cluster --> DBScan["DBSCAN"]
+    DBScan --> Sil["📏 Silhouette Score<br><i>(Model Evaluation)</i>"]
+    
+    %% Dimensionality Reduction Algorithms
+    DimRed --> PCA["PCA"]
+    DimRed --> LDA["LDA"]
+    DimRed --> TSNE["t-SNE"]
+    
+    %% Association Algorithms
+    Assoc --> Apri["Apriori"]
+    Assoc --> Eclat["ECLAT"]
+    
+    %% Anomaly Detection Algorithms
+    Anom --> IsoFor["Isolation Forest"]
+    
+    %% Styling
+    style ML fill:#f39c12,stroke:#333,stroke-width:3px,color:#fff
+    style Sup fill:#3498db,stroke:#333,stroke-width:2px,color:#fff
+    style Unsup fill:#9b59b6,stroke:#333,stroke-width:2px,color:#fff
+    
+    style Reg fill:#85c1e9,stroke:#333,stroke-width:1px
+    style Clf fill:#85c1e9,stroke:#333,stroke-width:1px
+    
+    style Cluster fill:#d7bde2,stroke:#333,stroke-width:1.5px
+    style DimRed fill:#d7bde2,stroke:#333,stroke-width:1.5px
+    style Assoc fill:#d7bde2,stroke:#333,stroke-width:1.5px
+    style Anom fill:#d7bde2,stroke:#333,stroke-width:1.5px
+    
+    style Sil fill:#2ecc71,stroke:#333,stroke-width:1px,color:#fff
+```
+
+---
+
 ### 3.0 Introduction to Unsupervised Learning
 In Unsupervised Learning, the model works with **unlabeled datasets**. There is **no target variable ($y$)** to predict. Instead, the algorithm searches for hidden patterns, structures, or relationships within the input features ($X$).
 
