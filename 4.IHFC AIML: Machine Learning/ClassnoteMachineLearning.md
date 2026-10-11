@@ -13,19 +13,44 @@ Welcome to **`ClassnoteMachineLearning.md`**! This document serves as a comprehe
    - [1.3 Modern AI Architectural Spectrum & Learning Path](#13-modern-ai-industry-architectural-spectrum--learning-path)
    - [1.4 Core ML & Deep Learning Libraries Ecosystem](#14-core-ml--deep-learning-libraries-ecosystem)
 2. [Supervised Learning](#2-supervised-learning)
-   - [2.0 Standard 6-Step Execution Blueprint](#20-standard-6-step-execution-blueprint-for-any-supervised-ml-model)
+   - [2.0 Complete End-to-End Supervised Machine Learning Pipeline](#20-complete-end-to-end-supervised-machine-learning-pipeline)
    - [2.1 Regression Analysis & Applications](#21-regression-analysis--applications)
-   - [2.2 Classification Models & Thresholding](#classification-models)
+   - [2.2 Classification Models & Thresholding](#22-classification-models--thresholding)
 3. [Unsupervised Learning](#3-unsupervised-learning)
-   - [Clustering](#clustering)
-   - [Dimensionality Reduction](#dimensionality-reduction)
-4. [Feature Engineering & Data Preprocessing](#4-feature-engineering--data-preprocessing)
-5. [Model Evaluation & Validation](#5-model-evaluation--validation)
-6. [Bias-Variance Tradeoff & Regularization](#6-bias-variance-tradeoff--regularization)
-7. [Ensemble Techniques](#7-ensemble-techniques)
-8. [Practical Machine Learning Workflow](#8-practical-machine-learning-workflow)
-9. [Code Snippets & Cheatsheets](#9-code-snippets--cheatsheets)
-10. [Reference Links & External Learning Resources](#10-reference-links--external-learning-resources)
+   - [3.0 Introduction to Unsupervised Learning](#30-introduction-to-unsupervised-learning)
+   - [3.1 Clustering Techniques](#31-clustering-techniques)
+     - [A. K-Means Clustering](#a-k-means-clustering)
+     - [B. K-Medoids Clustering](#b-k-medoids-clustering)
+     - [C. Hierarchical Clustering](#c-hierarchical-clustering)
+     - [D. DBSCAN](#d-dbscan-density-based-spatial-clustering-of-applications-with-noise)
+     - [E. Comparison of Different Clustering Algorithms](#e-comparison-of-different-clustering-algorithms)
+   - [3.2 Dimensionality Reduction Techniques](#32-dimensionality-reduction-techniques)
+     - [A. Feature Selection vs Feature Extraction](#a-feature-selection-vs-feature-extraction)
+     - [B. Principal Component Analysis (PCA)](#b-principal-component-analysis-pca)
+     - [C. Linear Discriminant Analysis (LDA)](#c-linear-discriminant-analysis-lda)
+     - [D. t-SNE](#d-t-sne-t-distributed-stochastic-neighbor-embedding)
+   - [3.3 Association Rule Learning](#33-association-rule-learning)
+   - [3.4 Anomaly Detection Techniques](#34-anomaly-detection-techniques)
+   - [3.5 Semi-Supervised Learning](#35-semi-supervised-learning)
+4. [Recommendation Systems](#4-recommendation-systems)
+   - [4.0 Introduction & Core Mathematical Formulation](#40-introduction--core-mathematical-formulation)
+   - [4.1 Real-World Industry Applications](#41-real-world-industry-applications)
+   - [4.2 Collaborative Filtering (CF)](#42-collaborative-filtering-cf)
+     - [A. Memory-Based Collaborative Filtering (UBCF & IBCF)](#a-memory-based-collaborative-filtering)
+     - [B. Model-Based Collaborative Filtering (Matrix Factorization & SVD)](#b-model-based-collaborative-filtering)
+   - [4.3 Content-Based Filtering](#43-content-based-filtering)
+   - [4.4 Hybrid Filtering](#44-hybrid-filtering)
+   - [4.5 Advanced Techniques & Model Evaluation (GetTopN & Hit Rate)](#45-advanced-techniques--model-evaluation)
+   - [4.6 Addressing Key Industry Challenges (Cold Start & Feedback)](#46-addressing-key-industry-challenges)
+5. [Feature Engineering & Data Preprocessing](#5-feature-engineering--data-preprocessing)
+6. [Model Evaluation & Validation](#6-model-evaluation--validation)
+7. [Bias-Variance Tradeoff & Regularization](#7-bias-variance-tradeoff--regularization)
+8. [Ensemble Techniques](#8-ensemble-techniques)
+   - [8.1 Bagging (Bootstrap Aggregating)](#81-bagging-bootstrap-aggregating--parallel-execution)
+   - [8.2 Boosting](#82-boosting--sequential-execution)
+9. [Practical Machine Learning Workflow](#9-practical-machine-learning-workflow)
+10. [Code Snippets & Cheatsheets](#10-code-snippets--cheatsheets)
+11. [Reference Links & External Learning Resources](#11-reference-links--external-learning-resources)
 
 ---
 
@@ -344,15 +369,13 @@ flowchart TD
 | **Traditional Custom ML** | **Higher Time ($\uparrow$)**: Requires manual feature engineering, custom training & tuning. | **Lower Resources ($\downarrow$)**: Runs efficiently on standard CPUs / lightweight servers. | Deployed via MLOps pipelines to Local, Server, or API Gateways. | Structured tabular data, Fraud scoring, Churn prediction, Sensor metrics. |
 | **Foundation Models / GenAI** | **Lower Time ($\downarrow$)**: Pre-trained Base LLMs provide immediate out-of-the-box capabilities. | **Higher Resources ($\uparrow$)**: Requires GPU clusters, high memory, and token budget. | Deployed on Cloud Servers, Vector DBs (RAG), and Autonomous Agent Runtimes. | Text generation, Document Q&A (RAG), Code synthesis, Multi-Agent decision-making. |
 
----
-
 ### Primary Types of Machine Learning
 
 ```
-                               ┌───────────────────────────┐
-                               │ Machine Learning Types    │
-                               └─────────────┬─────────────┘
-                                             │
+                                ┌───────────────────────────┐
+                                │ Machine Learning Types    │
+                                └─────────────┬─────────────┘
+                                              │
        ┌──────────────────────┬──────────────┴───────────────┬──────────────────────┐
        ▼                      ▼                              ▼                      ▼
 ┌──────────────┐       ┌──────────────┐              ┌──────────────┐       ┌──────────────┐
@@ -368,11 +391,51 @@ flowchart TD
 └─────────────┘ └──────────────┘                                            └──────────────┘
        ▲               ▲
        └───────┬───────┘
-               │ (Meta-Technique)
-        ┌──────────────┐
+               │ (Meta-Technique / Multi-Model Cooperation)
+        ┌──────▼───────┐
         │   Ensemble   │
         │   Learning   │
-        └──────────────┘
+        └──────┬───────┘
+               ├───────────────────────────────┼───────────────────────────────┐
+               ▼                               ▼                               ▼
+       ┌───────────────┐               ┌───────────────┐               ┌───────────────┐
+       │    Bagging    │               │   Boosting    │               │   Stacking    │
+       │  (Parallel)   │               │ (Sequential)  │               │(Heterogeneous)│
+       └───────┬───────┘               └───────┬───────┘               └───────┬───────┘
+               │ (Reduces Variance)            │ (Reduces Bias)                │ (Meta-learner)
+               ▼                               ▼                               ▼
+       ┌───────────────┐               ┌───────────────┐               ┌───────────────┐
+       │ Random Forest │               │XGBoost / Ada- │               │Combining KNN, │
+       │ (Multi-Trees) │               │Boost / LightGB│               │SVM via Linear │
+       └───────────────┘               └───────────────┘               └───────────────┘
+```
+
+```mermaid
+graph TD
+    ML["🤖 Machine Learning Types"] --> Sup["📈 1. Supervised Learning<br><i>(Labeled Data)</i>"]
+    ML --> Unsup["🔍 2. Unsupervised Learning<br><i>(Unlabeled Data)</i>"]
+    ML --> Semi["🧬 3. Semi-Supervised Learning<br><i>(Small Labeled + Large Unlabeled)</i>"]
+    ML --> RL["🎮 4. Reinforcement Learning<br><i>(Agent-Environment Feedback)</i>"]
+
+    Sup --> Reg["Continuous Output<br><b>Regression</b><br><i>(e.g., House Price)</i>"]
+    Sup --> Clf["Categorical Output<br><b>Classification</b><br><i>(e.g., Spam Detection)</i>"]
+
+    %% Link Supervised sub-types to Ensemble Learning meta-technique
+    Reg --> Ens["👥 Ensemble Learning<br><i>(Meta-Technique: Multiple Models)</i>"]
+    Clf --> Ens
+
+    %% Ensemble branches
+    Ens --> Bagging["<b>Bagging (Parallel)</b><br>• Trains independent base estimators in parallel on bootstrapped subsets.<br>• Reduces <b>variance</b> via voting/averaging.<br>• <i>Example: <b>Random Forest</b> (multiple Decision Trees)</i>"]
+    Ens --> Boosting["<b>Boosting (Sequential)</b><br>• Trains base estimators sequentially in series.<br>• Each model corrects mistakes/residuals of the previous one.<br>• Reduces <b>bias</b>.<br>• <i>Examples: <b>AdaBoost, XGBoost, LightGBM, CatBoost</b></i>"]
+    Ens --> Stacking["<b>Stacking (Stacked Generalization)</b><br>• Combines heterogeneous base models (e.g., SVM, KNN, Random Forest).<br>• A <b>Meta-Learner</b> takes their predictions as features to output the final prediction.<br>• Combines diverse model strengths.<br>• <i>Example: Combining <b>Logistic Regression + SVM</b> via a <b>Random Forest</b> meta-model.</i>"]
+
+    %% Styling
+    style ML fill:#f39c12,stroke:#333,stroke-width:2px,color:#fff
+    style Sup fill:#3498db,stroke:#333,stroke-width:2px,color:#fff
+    style Unsup fill:#9b59b6,stroke:#333,stroke-width:1.5px,color:#fff
+    style Semi fill:#16a085,stroke:#333,stroke-width:1.5px,color:#fff
+    style RL fill:#e67e22,stroke:#333,stroke-width:1.5px,color:#fff
+    style Ens fill:#2ecc71,stroke:#333,stroke-width:2px,color:#fff
 ```
 
 | # | Type / Paradigm | Data & Signal Source | Learning Mechanism & Objective | Key Examples & Use Cases |
@@ -388,10 +451,19 @@ flowchart TD
 
 1. **Regression (Sub-type)**: Output is a continuous numerical value (e.g., salary, price, temperature).
 2. **Classification (Sub-type)**: Maps continuous inputs/probabilities into discrete groups/categories (e.g., $0$ vs $1$, Cat vs Dog).
-3. **Ensemble Learning (Meta-type / Multi-model Synergy)**: A powerful approach where **multiple models work together** to produce a single, superior prediction:
-   * **Bagging (Parallel)**: Trains multiple models independently on different data subsets and averages their votes (e.g., Random Forest).
-   * **Boosting (Sequential)**: Trains models in series, where each new model focuses on correcting the errors/feedback of previous models (e.g., XGBoost, LightGBM).
-   * **Stacking (Heterogeneous)**: Combines predictions of completely different model types using a meta-model.
+3. **Ensemble Learning (Meta-type / Multi-model Synergy)**: A powerful approach where **multiple models (weak learners) work together** to produce a single, superior prediction (strong learner):
+   * **Bagging (Bootstrap Aggregating - Parallel)**:
+     * **How it works**: It creates multiple random training subsets (with replacement) from the original dataset. It then trains independent base estimators (usually of the same type, like Decision Trees) on these subsets in parallel. The final prediction is computed by averaging the predictions (for regression) or via majority voting (for classification).
+     * **Analytical Effect**: Reduces model **variance** (prevents overfitting) without increasing bias.
+     * **Concrete Example**: **Random Forest**, which trains multiple independent Decision Trees on random rows and feature subsets.
+   * **Boosting (Sequential/Serial)**:
+     * **How it works**: It trains base models in series (one after another). The first model makes predictions, and the errors (residuals or misclassified samples) are calculated. The second model is then trained specifically to correct those errors (by weighting hard samples higher or fitting raw residuals). This process is repeated. The final prediction is a weighted sum of all base models' predictions.
+     * **Analytical Effect**: Reduces model **bias** (corrects underfitting) and builds a strong learner from simple weak learners.
+     * **Concrete Examples**: **AdaBoost** (adapts sample weights), **XGBoost** and **LightGBM** (sequentially fit residuals using gradient descent on loss functions).
+   * **Stacking (Stacked Generalization - Heterogeneous)**:
+     * **How it works**: It trains completely different types of base models (e.g., a Support Vector Machine, a K-Nearest Neighbors model, and a Random Forest) on the original dataset. Their predictions are collected and used as input features to train a final model (called a **Meta-Learner** or **Blender**). The Meta-Learner learns how to best combine the predictions to get the final result.
+     * **Analytical Effect**: Maximizes predictive accuracy by combining the diverse strengths of entirely different model classes.
+     * **Concrete Example**: Training a **Logistic Regression** meta-model to combine the outputs of a **Random Forest** and an **SVM** classifier.
 
 ---
 
@@ -670,10 +742,10 @@ param_grid = {
 
 ---
 
-### Classification Models
+### 2.2 Classification Models & Thresholding
 Predicting discrete class labels $y \in \{0, 1, \dots, K-1\}$.
 
-#### Logistic Regression
+#### A. Logistic Regression
 * **Sigmoid Function**:
   $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 * **Decision Boundary**: $\hat{p} \ge 0.5 \implies \hat{y} = 1$
@@ -682,7 +754,7 @@ Predicting discrete class labels $y \in \{0, 1, \dots, K-1\}$.
 
 ---
 
-#### Naive Bayes Classifier
+#### B. Naive Bayes Classifier
 * **Bayes' Theorem**:
   $$P(y|X) = \frac{P(X|y)P(y)}{P(X)}$$
 * **Naive Assumption**: Assumes conditional independence between features given the class:
@@ -690,7 +762,7 @@ Predicting discrete class labels $y \in \{0, 1, \dots, K-1\}$.
 
 ---
 
-#### K-Nearest Neighbors (KNN)
+#### C. K-Nearest Neighbors (KNN)
 * **Mechanism**: Distance-based instance learning (lazy learner). Computes distance (Euclidean, Manhattan) from test point to all training points and votes among $K$ nearest neighbors.
 * **Minkowski Distance**:
   $$D(x, y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{1/p}$$
@@ -701,7 +773,7 @@ Predicting discrete class labels $y \in \{0, 1, \dots, K-1\}$.
 
 ---
 
-#### Decision Tree Classifier (CART)
+#### D. Decision Tree Classifier (CART)
 A non-parametric supervised learning algorithm that splits data recursively based on feature thresholds to maximize node purity.
 
 ##### 1. Anatomy of a Decision Tree
@@ -764,7 +836,7 @@ An interactive, animated visual calculator for Gini Index and Entropy splits has
 
 ---
 
-#### Support Vector Machine (SVM)
+#### E. Support Vector Machine (SVM)
 A powerful supervised machine learning algorithm used for classification, regression, and outlier detection. It constructs an optimal decision boundary (hyperplane) that separates classes with the maximum possible margin.
 
 ##### 1. Historical Background
@@ -1110,6 +1182,12 @@ An unsupervised linear transformation technique that projects data into a lower-
 A supervised dimensionality reduction method that projects features to maximize class separability.
 *   **Objective**: Maximize between-class variance ($S_B$) while minimizing within-class variance ($S_W$).
 
+##### ⚠️ 4 Key Assumptions & Constraints of LDA:
+1. **Gaussian Distribution**: The input features follow a Gaussian (normal) distribution within each class.
+2. **Equal Covariance**: The covariance matrices of the different classes are equal.
+3. **Linear Separability**: The classes are linearly separable, allowing for an accurate linear decision boundary.
+4. **Dimensionality Limit**: It can reduce the dimensionality to a maximum of $k - 1$ components, where $k$ is the number of classes in the target variable.
+
 ##### 🔍 PCA vs. LDA: The Core Differences (in Simple Language)
 
 To understand when to use PCA vs. LDA, we look at their mathematical objectives and how they handle class labels:
@@ -1176,16 +1254,25 @@ Used to discover interesting relationships (rules) between variables in large da
     *   $\text{Lift} < 1$: Negative relationship (substitute goods).
 
 #### B. Algorithms
-*   **Apriori Algorithm**: Uses a bottom-up approach where frequent subsets are extended one at a time. Employs the *Apriori property*: any subset of a frequent itemset must also be frequent.
-*   **Eclat Algorithm**: Equivalence Class Transformation. Uses a depth-first search approach on a vertical data layout (lists of transaction IDs containing each item) to quickly count support.
+*   **Apriori Algorithm**: Uses a bottom-up, breadth-first search approach to find frequent itemsets. It starts with single items, calculates their support, and expands them iteratively to larger candidate groups.
+    *   **Apriori Property**: If an itemset is infrequent, all of its subsets must also be infrequent, and any superset of it is also infrequent (used to prune/discard candidate itemsets to save computation).
+    *   **Implementation**: Uses a **Hash Tree** structure to compute support counts efficiently.
+*   **Eclat Algorithm (Equivalence Class Clustering and bottom-up Lattice Traversal)**: A more efficient and scalable alternative to Apriori.
+    *   **Vertical Data Layout**: Unlike Apriori's horizontal search, Eclat lists the transaction IDs (tids) containing each item.
+    *   **Depth-First Search (DFS)**: It traverses the lattice of itemsets vertically using DFS, calculating intersections of transaction ID lists to compute support directly, bypassing candidate generation.
 
 ---
 
 ### 3.4 Anomaly Detection Techniques
 
 #### Isolation Forest
-An unsupervised anomaly detection algorithm that isolates anomalies rather than profiling normal data points.
-*   **Mechanism**: Builds an ensemble of isolation trees (randomly partitioning features). Because anomalies have unusual feature values, they require fewer random splits to isolate and appear much closer to the root of the tree (shorter average path lengths).
+An unsupervised anomaly detection algorithm that isolates outliers rather than profiling normal data points.
+*   **Unique Approach**: Does not rely on distance/density metrics. Instead, it isolates observations by randomly partitioning the feature space.
+*   **Mechanism**:
+    1. Randomly selects a feature from the dataset.
+    2. Randomly selects a split value between the minimum and maximum values of the selected feature.
+    3. Builds an ensemble of **Isolation Trees** (iTree).
+    4. **Detection**: Because anomalies are few and different, they require fewer random splits to isolate and appear much closer to the root of the tree (shorter average path lengths). Normal clustered observations require many more splits to isolate.
 
 ---
 
@@ -1202,55 +1289,294 @@ An unsupervised anomaly detection algorithm that isolates anomalies rather than 
 
 ## 4. Recommendation Systems
 
-Recommendation Systems predict the rating or preference a user would give to an item.
+### 4.0 Introduction & Core Mathematical Formulation
 
-### 4.1 Collaborative Filtering
-Recommends items based on user-item interaction histories.
+> 💡 **Layman Analogy**:
+> Imagine walking into a massive library containing 10 million books. Without a librarian or catalog, finding a book you will genuinely enjoy is almost impossible (Information Overload).
+> A **Recommendation System** acts as your personal digital librarian: it studies what books you have read and enjoyed in the past, looks at what other readers with similar tastes are enjoying, and hands you a personalized stack of 5 books tailored specifically for you.
+
+A **Recommendation System** is an algorithmic engine designed to predict the preference, utility, or rating a user would assign to an item, filtering vast catalogs down to personalized recommendations.
+
+#### 📐 The Mathematical Formulation
+The fundamental objective of a recommendation system can be formally expressed as a mapping function:
+
+$$f: \text{User} \times \text{Item} \to \text{Rating}$$
+
+*   **$f$**: The predictive utility function estimating how much a given user will like an item.
+*   **$\text{User}$ ($U$)**: The universe of all users $\{u_1, u_2, \dots, u_M\}$.
+*   **$\text{Item}$ ($I$)**: The catalog of all available items $\{i_1, i_2, \dots, i_N\}$ (movies, products, songs, books).
+*   **$\text{Rating}$ ($R$)**: The predicted preference score (e.g., $1$ to $5$ stars, or probability of clicking/purchasing).
+
+#### 🌐 High-Level Taxonomy of Recommendation Systems
+```mermaid
+graph TD
+    RecSys["🎯 Recommendation Systems<br><i>f(User, Item) ➔ Rating</i>"] --> CF["👥 Collaborative Filtering<br><i>(User-Item Interaction History)</i>"]
+    RecSys --> CB["🏷️ Content-Based Filtering<br><i>(Item Features & User Profile)</i>"]
+    RecSys --> Hybrid["🔀 Hybrid Filtering<br><i>(Combines CF + Content-Based)</i>"]
+
+    %% Collaborative Filtering sub-branches
+    CF --> Memory["🧠 Memory-Based CF<br><i>(Direct Matrix Neighborhoods)</i>"]
+    CF --> Model["📐 Model-Based CF<br><i>(Latent Factor Models)</i>"]
+
+    Memory --> UBCF["👤 User-Based (UBCF)<br><i>'Users like you also liked...'</i>"]
+    Memory --> IBCF["📦 Item-Based (IBCF)<br><i>'Items similar to your picks...'</i>"]
+
+    Model --> MF["🔢 Matrix Factorization (MF)<br><i>R ≈ P × Q</i>"]
+    Model --> SVD["📊 Singular Value Decomposition (SVD)<br><i>R ≈ U Σ Vᵀ</i>"]
+
+    %% Styling
+    style RecSys fill:#f39c12,stroke:#333,stroke-width:2px,color:#fff
+    style CF fill:#3498db,stroke:#333,stroke-width:2px,color:#fff
+    style CB fill:#9b59b6,stroke:#333,stroke-width:2px,color:#fff
+    style Hybrid fill:#2ecc71,stroke:#333,stroke-width:2px,color:#fff
+    style Memory fill:#85c1e9,stroke:#333,stroke-width:1px
+    style Model fill:#85c1e9,stroke:#333,stroke-width:1px
+```
+
+---
+
+### 4.1 Real-World Industry Applications
+
+Recommendation systems drive customer engagement and revenue across leading global platforms:
+
+| # | Industry Domain | Real-World Application | How It Works & Algorithm Used |
+| :--- | :--- | :--- | :--- |
+| **1** | **Enhanced Book Discovery** | **Goodreads** ("*Readers Also Enjoyed*", "*See Similar Books*") | Measures correlation between reading lists across millions of readers using **Pearson Correlation** or **Cosine Similarity** on rating patterns. |
+| **2** | **Hyper-Personalized Media** | **Netflix & Spotify** ("*Top Picks for You*", "*Discover Weekly*") | Continuously analyzes viewing/listening history, genres, tempo, completion rates, and time-of-day habits to dynamically personalize user feeds. |
+| **3** | **Viewed Items Suggestions** | **Amazon** ("*Customers who viewed this item also viewed...*") | Tracks session browsing co-occurrences and item-to-item affinities to show relevant alternatives before checkout. |
+| **4** | **Enhanced Product Discovery** | **Retail E-Commerce** (Cross-selling, Bundling, Search Re-ranking) | Uses collaborative patterns to recommend complementary products (e.g., suggesting a tripod and memory card when a user browses DSLR cameras). |
+
+---
+
+### 4.2 Collaborative Filtering (CF)
+
+> 💡 **Core Premise**: *"People who agreed in the past will agree in the future."*
+> Collaborative Filtering recommends items to User $A$ based exclusively on the historical ratings and behaviors of other users who share similar taste profiles with User $A$. It requires **zero domain knowledge or metadata** about the items themselves.
+
+Collaborative filtering is split into two major methodologies: **Memory-Based** and **Model-Based**.
+
+```
+                           ┌─────────────────────────────────────────┐
+                           │         Collaborative Filtering         │
+                           └────────────────────┬────────────────────┘
+                                                │
+                 ┌──────────────────────────────┴──────────────────────────────┐
+                 ▼                                                             ▼
+   ┌───────────────────────────┐                                 ┌───────────────────────────┐
+   │        Memory-Based       │                                 │        Model-Based        │
+   │ (Uses entire data matrix) │                                 │ (Learns latent variables) │
+   └─────────────┬─────────────┘                                 └─────────────┬─────────────┘
+                 │                                                             │
+        ┌────────┴────────┐                                           ┌────────┴────────┐
+        ▼                 ▼                                           ▼                 ▼
+ ┌─────────────┐   ┌─────────────┐                             ┌─────────────┐   ┌─────────────┐
+ │ User-Based  │   │ Item-Based  │                             │   Matrix    │   │     SVD     │
+ │    (UBCF)   │   │   (IBCF)    │                             │Factorization│   │(Decomposit.)│
+ └─────────────┘   └─────────────┘                             └─────────────┘   └─────────────┘
+```
+
+---
 
 #### A. Memory-Based Collaborative Filtering
-Calculates similarity between users or items directly from the interaction matrix:
-*   **User-Based Collaborative Filtering**: Recommends items liked by users who are similar to the target user. Cosine Similarity between user vectors $u$ and $v$:
-    $$\text{Sim}(u, v) = \frac{\mathbf{r}_u \cdot \mathbf{r}_v}{\|\mathbf{r}_u\| \|\mathbf{r}_v\|} = \frac{\sum_i r_{u,i} r_{v,i}}{\sqrt{\sum_i r_{u,i}^2} \sqrt{\sum_i r_{v,i}^2}}$$
-*   **Item-Based Collaborative Filtering**: Recommends items similar to those the target user has interacted with in the past. Calculates similarity between item rating vectors.
+
+Memory-based methods compute recommendations on-the-fly directly from the recorded user-item interaction matrix.
+
+##### 1. User-Based Collaborative Filtering (UBCF)
+*   **Intuition**: *"Find users similar to me, and recommend items they loved that I haven't seen yet."*
+*   **Real-World Example**: If Alice and Bob both gave 5-star ratings to *The Dark Knight* and *Inception*, they have high user similarity. If Bob later rates *Interstellar* with 5 stars, the system immediately recommends *Interstellar* to Alice.
+*   **Similarity Metric (Cosine Similarity)**:
+    $$\text{sim}(u, v) = \cos(\theta) = \frac{\mathbf{r}_u \cdot \mathbf{r}_v}{\|\mathbf{r}_u\| \|\mathbf{r}_v\|} = \frac{\sum_{i \in I} r_{u,i} \cdot r_{v,i}}{\sqrt{\sum_{i \in I} r_{u,i}^2} \cdot \sqrt{\sum_{i \in I} r_{v,i}^2}}$$
+    *(where $I$ is the set of items co-rated by both user $u$ and user $v$)*.
+*   **Rating Prediction Formula (Normalized Weighted Average)**:
+    $$\hat{r}_{u,i} = \bar{r}_u + \frac{\sum_{v \in U} \text{sim}(u, v) \cdot (r_{v,i} - \bar{r}_v)}{\sum_{v \in U} |\text{sim}(u, v)|}$$
+    *(Subtracting user mean rating $\bar{r}_u$ compensates for user bias, such as harsh critics who give 3 stars vs lenient users who give 5 stars)*.
+
+##### 2. Item-Based Collaborative Filtering (IBCF)
+*   **Intuition**: *"Find items similar to the items I liked, and recommend them."*
+*   **Real-World Example**: Rather than comparing you to thousands of other shoppers, Amazon looks at the specific mechanical keyboard you just added to your cart. It notices that thousands of previous buyers of that keyboard also bought a specific wrist rest, so it recommends that wrist rest directly.
+*   **Item-to-Item Similarity (Cosine Similarity)**:
+    $$\text{sim}(i, j) = \cos(\theta) = \frac{\sum_{u \in U} r_{u,i} \cdot r_{u,j}}{\sqrt{\sum_{u \in U} r_{u,i}^2} \cdot \sqrt{\sum_{u \in U} r_{u,j}^2}}$$
+    *(where $U$ is the set of users who rated both item $i$ and item $j$)*.
+*   **Rating Prediction Formula (Weighted Sum of Similar Items)**:
+    $$\hat{r}_{u,i} = \frac{\sum_{j \in S} \text{sim}(i, j) \cdot r_{u,j}}{\sum_{j \in S} |\text{sim}(i, j)|}$$
+    *(where $S$ is the set of items rated by user $u$ that are most similar to target item $i$, and $r_{u,j}$ is user $u$'s rating for item $j$)*.
+
+##### ⚖️ User-Based vs. Item-Based Collaborative Filtering: Comprehensive Comparison
+| Comparison Dimension | User-Based Collaborative Filtering (UBCF) | Item-Based Collaborative Filtering (IBCF) |
+| :--- | :--- | :--- |
+| **Core Question** | *"Which users have similar tastes to User A?"* | *"Which items have similar rating patterns to Item X?"* |
+| **Profile Stability** | **Dynamic & Volatile**: User tastes and browsing habits change frequently over time. | **Static & Stable**: Item characteristics and global user perceptions change very slowly. |
+| **Computational Complexity** | Scales with users: $O(M^2)$ where $M = N_{\text{users}}$. Prohibitive when $M$ is in the millions. | Scales with items: $O(N^2)$ where $N = N_{\text{items}}$. In e-commerce, $N \ll M$. |
+| **Precomputation** | Hard to precompute offline because users are constantly active. | **Offline Precomputation**: Item similarity matrix can be pre-computed offline and cached. |
+| **Sparsity Sensitivity** | High: Fails when users have few or no overlapping rated items. | Lower: Popular items receive many ratings, creating stable similarity vectors. |
+| **Dominant Industry Use** | Social networks, niche collaborative platforms. | **Amazon, Netflix, YouTube** (industry standard for large catalogs). |
+
+---
 
 #### B. Model-Based Collaborative Filtering
-Learns underlying mathematical patterns (latent factors) to predict missing ratings.
-*   **Matrix Factorization**: Decomposes the user-item rating matrix $\mathbf{R} \in \mathbb{R}^{M \times N}$ into two lower-rank matrices: user latent factors $\mathbf{P} \in \mathbb{R}^{M \times K}$ and item latent factors $\mathbf{Q} \in \mathbb{R}^{K \times N}$ such that:
-    $$\mathbf{R} \approx \mathbf{P} \times \mathbf{Q}$$
-*   **Singular Value Decomposition (SVD)**: Decomposes the rating matrix $\mathbf{R}$ into three matrices:
-    $$\mathbf{R} \approx \mathbf{U} \mathbf{\Sigma} \mathbf{V}^T$$
-    *   $\mathbf{U}$: User-to-latent-factor association.
-    *   $\mathbf{\Sigma}$: Singular values indicating factor importance.
-    *   $\mathbf{V}^T$: Item-to-latent-factor association.
+
+> 💡 **The Sparsity Problem**:
+> In real-world platforms (like Netflix with 20,000 titles and 250M users), an individual user watches at most a few hundred movies. The user-item rating matrix $R$ is **over 99% empty (sparse)**. Memory-based neighborhood searches become slow and inaccurate.
+> **Model-Based CF** resolves this by training a compact mathematical model that discovers underlying **latent factors** (hidden concepts) connecting users and items.
+
+##### 1. Matrix Factorization (MF)
+Matrix Factorization maps both users and items into a joint **latent factor space** of dimensionality $K$ ($K \ll M, N$):
+*   **Latent Factors ($K$)**: Unobserved hidden dimensions representing abstract concepts (e.g., in movies: $k_1 = \text{Action intensity}$, $k_2 = \text{Comedy quotient}$, $k_3 = \text{Cerebral/Sci-Fi complexity}$).
+*   **Matrix Decomposition**:
+    $$R \approx P \times Q$$
+    *   $R \in \mathbb{R}^{M \times N}$: The original sparse rating matrix ($M$ users $\times$ $N$ items).
+    *   $P \in \mathbb{R}^{M \times K}$: User latent factor matrix (strength of affinity between each user and latent factor).
+    *   $Q \in \mathbb{R}^{K \times N}$: Item latent factor matrix (degree to which each item possesses each latent factor).
+*   **Predicted Rating Calculation**:
+    The estimated rating user $u$ gives to item $i$ is the dot product of their latent vectors:
+    $$\hat{r}_{u,i} = \mathbf{p}_u \cdot \mathbf{q}_i^T = \sum_{k=1}^K p_{u,k} \cdot q_{k,i}$$
+*   **Regularized Objective Function**:
+    To prevent overfitting on known ratings, we minimize regularized squared error:
+    $$\min_{P, Q} \sum_{(u, i) \in \text{Observed}} \left( r_{u,i} - \mathbf{p}_u \mathbf{q}_i^T \right)^2 + \lambda \left( \|\mathbf{p}_u\|_2^2 + \|\mathbf{q}_i\|_2^2 \right)$$
+
+##### 2. Singular Value Decomposition (SVD)
+SVD is a linear algebra factorization technique that breaks the rating matrix $R$ into three fundamental matrices:
+
+$$R \approx U \mathbf{\Sigma} V^T$$
+
+*   **$U \in \mathbb{R}^{M \times K}$**: Left singular vectors representing **Users' relationship with latent factors**.
+*   **$\mathbf{\Sigma} \in \mathbb{R}^{K \times K}$**: Diagonal matrix of singular values indicating the **relative importance/strength** of each latent factor.
+*   **$V^T \in \mathbb{R}^{K \times N}$**: Right singular vectors representing **Items' relationship with latent factors**.
+*   **Truncated SVD / Dimensionality Reduction**:
+    By keeping only the top $K$ largest singular values and discarding the rest, Truncated SVD removes noise, compresses the matrix, and reconstructs the full matrix to reveal predicted ratings for unrated cells.
 
 ---
 
-### 4.2 Content-Based Filtering
-Recommends items similar to those a user liked in the past based on item descriptors (features) and user preferences:
-*   Uses **Cosine Similarity** between the **User Profile Vector** (aggregated vector of features of items the user liked) and **Item Feature Vectors** (TF-IDF keyword vectors, genre tags).
+### 4.3 Content-Based Filtering
+
+> 💡 **Core Premise**: *"Recommend items that are similar in features and attributes to what the user liked in the past."*
+> Content-based filtering relies on item metadata (genres, actors, authors, text descriptions, keywords) rather than other users' ratings.
+
+```
+┌─────────────────────────┐
+│     Item Metadata       │──► Extract Features (TF-IDF, One-Hot) ──► Item Profiles
+└─────────────────────────┘                                                │
+                                                                           ▼
+┌─────────────────────────┐                                        Cosine Similarity
+│  User Rating History    │──► Weighted Average of Liked Items   ──► User Profile
+└─────────────────────────┘                                                │
+                                                                           ▼
+                                                                  Top Recommended Items
+```
+
+#### Step-by-Step Implementation Mechanism:
+1.  **Item Profile Construction**: Every item is represented as a feature vector $\mathbf{v}_i$ (e.g. $[Genre, Duration, Director]$).
+2.  **User Profile Vector**: Computed as the weighted average of the feature vectors of items the user previously enjoyed:
+    $$\mathbf{u}_{\text{profile}} = \frac{\sum_{j \in \text{Rated}} r_{u,j} \cdot \mathbf{v}_j}{\sum_{j \in \text{Rated}} r_{u,j}}$$
+3.  **Recommendation Scoring**: Compute Cosine Similarity between the User Profile vector and unseen Candidate Item vectors:
+    $$\text{Score}(u, i) = \cos(\mathbf{u}_{\text{profile}}, \mathbf{v}_i) = \frac{\mathbf{u}_{\text{profile}} \cdot \mathbf{v}_i}{\|\mathbf{u}_{\text{profile}}\| \|\mathbf{v}_i\|}$$
+
+#### 🔍 Practical Numerical Example:
+*   Suppose items have 3 features: $[\text{Action}, \text{Comedy}, \text{Sci-Fi}]$.
+    *   Item 1: $[1, 0, 1]$ (Rating = $5$)
+    *   Item 2: $[0, 1, 1]$ (Rating = $3$)
+    *   Item 3: $[1, 1, 0]$ (Rating = $4$)
+*   **User Profile Vector**:
+    $$\mathbf{u}_{\text{profile}} = \frac{5 \cdot [1,0,1] + 3 \cdot [0,1,1] + 4 \cdot [1,1,0]}{5 + 3 + 4} = \frac{[9, 7, 8]}{12} \approx [0.75, 0.58, 0.67]$$
+*   A new candidate movie arrives with attributes $[1, 0, 1]$. The cosine similarity with $\mathbf{u}_{\text{profile}}$ is high ($\approx 0.82$), triggering a positive recommendation.
+
+#### Pros & Cons of Content-Based Filtering:
+*   ✅ **No Item Cold Start**: A new item added today can be recommended immediately once its metadata/features are known.
+*   ✅ **Explainability**: Clear transparency ("*Recommended because you watched films starring Tom Hanks*").
+*   ✅ **Independence**: Does not rely on other users' opinions or activities.
+*   ❌ **No Serendipity (Filter Bubble)**: Never recommends surprising or novel items outside what the user has previously consumed.
+*   ❌ **Heavy Metadata Dependency**: Requires rich, accurate feature engineering and tag annotations for every single item.
 
 ---
 
-### 4.3 Hybrid Filtering
-Combines collaborative and content-based filtering strategies to leverage the advantages of both and overcome individual limitations (e.g., blending scores linearly or using meta-classifiers).
+### 4.4 Hybrid Filtering
+
+> 💡 **Core Premise**: Combine Collaborative Filtering and Content-Based Filtering to harness the strengths of both while canceling out their respective weaknesses.
+
+#### Mathematical Formulation (Linear Weighted Blend):
+A simple and effective hybrid formulation computes a weighted combination of predicted scores:
+
+$$\text{Score}_{\text{Hybrid}}(u, i) = \alpha \cdot \text{Score}_{\text{CF}}(u, i) + (1 - \alpha) \cdot \text{Score}_{\text{CB}}(u, i)$$
+
+*   $\text{Score}_{\text{CF}}(u, i)$: Normalized rating predicted by Collaborative Filtering.
+*   $\text{Score}_{\text{CB}}(u, i)$: Normalized similarity score predicted by Content-Based Filtering.
+*   $\alpha \in [0, 1]$: Weight hyperparameter balancing social interaction patterns ($\alpha$) vs item content features ($1 - \alpha$).
+
+#### Why Use Hybrid Filtering?
+1.  **Overcomes Cold Start**: If a user or item is brand new ($\text{Score}_{\text{CF}}$ unavailable), the system dynamically shifts weight to $\text{Score}_{\text{CB}}$ using metadata.
+2.  **Enables Serendipity & Precision**: Once sufficient interaction history is accumulated, collaborative signals introduce discovery of unexpected items without losing content alignment.
 
 ---
 
-### 4.4 Metrics & Evaluation
-*   **GetTopN**: Extracts the top $N$ items with the highest predicted scores for a user.
-*   **Hit Rate**: Evaluates whether the top $N$ recommendations contain at least one item that the user actually interacted with/liked:
-    $$\text{Hit Rate} = \frac{\text{Number of Hits}}{\text{Total Users Evaluated}}$$
+### 4.5 Advanced Techniques & Model Evaluation
+
+#### 1. The `GetTopN` Function
+Recommendation engines do not present raw predicted rating numbers to users; they generate ranked lists. The `GetTopN` function:
+1. Takes the full matrix of predicted ratings across all items for each user.
+2. Filters out items the user has already consumed/rated.
+3. Sorts the remaining items in descending order of predicted score and extracts the top $N$ items.
+
+#### 2. Evaluation Metrics for Recommender Systems
+
+##### A. Hit Rate @ N
+Measures whether the recommendation system is successfully hitting the target by recommending at least one item the user actually liked:
+
+$$\text{Hit Rate@N} = \frac{\text{Number of Users with } \ge 1 \text{ Relevant Recommendation in Top N}}{\text{Total Number of Evaluated Users}}$$
+
+*   *Example*: If you evaluate 100 users, and 85 of them have at least one recommended item in their Top-10 list that they rated above 3.5 stars, the Hit Rate is $\frac{85}{100} = 0.85$ (or 85%).
+
+##### B. Root Mean Squared Error (RMSE) & Mean Absolute Error (MAE)
+Quantifies the exact rating prediction accuracy on held-out test ratings $\mathcal{T}$:
+
+$$\text{RMSE} = \sqrt{\frac{1}{|\mathcal{T}|} \sum_{(u, i) \in \mathcal{T}} \left( r_{u,i} - \hat{r}_{u,i} \right)^2}, \quad \text{MAE} = \frac{1}{|\mathcal{T}|} \sum_{(u, i) \in \mathcal{T}} |r_{u,i} - \hat{r}_{u,i}|$$
+
+##### C. Precision@K and Recall@K
+*   **Precision@K**: What proportion of items in the top $K$ recommendations are relevant?
+    $$\text{Precision@K} = \frac{|\text{Top } K \text{ Recommendations} \cap \text{Relevant Items}|}{K}$$
+*   **Recall@K**: What proportion of all possible relevant items did the system successfully capture in the top $K$?
+    $$\text{Recall@K} = \frac{|\text{Top } K \text{ Recommendations} \cap \text{Relevant Items}|}{|\text{Total Relevant Items}|}$$
 
 ---
 
-### 4.5 Challenges in Recommenders
-*   **Cold Start Problem**:
-    *   *User Cold Start*: Unable to recommend items to new users because they have no interaction history.
-    *   *Item Cold Start*: New items have no user ratings/interactions, so they are not recommended.
-    *   *Mitigation*: Ask for initial user preferences during onboarding, use popular items as fallbacks, or rely on content-based filtering until enough data is collected.
-*   **Feedback Types**:
-    *   *Explicit Feedback*: Direct actions indicating preference (ratings, reviews, likes).
-    *   *Implicit Feedback*: Indirect behavioral signals (page views, clicks, purchase history, dwell time).
+### 4.6 Addressing Key Industry Challenges
+
+#### 1. The Cold Start Problem
+The Cold Start problem occurs when a recommender system cannot generate accurate recommendations due to insufficient interaction data.
+
+```
+                            ┌─────────────────────────────────────────┐
+                            │           Cold Start Problem            │
+                            └────────────────────┬────────────────────┘
+                                                 │
+                  ┌──────────────────────────────┴──────────────────────────────┐
+                  ▼                                                             ▼
+    ┌───────────────────────────┐                                 ┌───────────────────────────┐
+    │      User Cold Start      │                                 │      Item Cold Start      │
+    │   (New user with 0 data)  │                                 │   (New item with 0 data)  │
+    └─────────────┬─────────────┘                                 └─────────────┬─────────────┘
+                  │                                                             │
+                  ▼                                                             ▼
+     • Onboarding survey/genres                                    • Use Content-Based Filtering
+     • Recommend popular/trending                                  • Extract metadata (TF-IDF)
+     • Demographic/location priors                                 • Multi-armed bandit explore
+```
+
+*   **User Cold Start**: A new user signs up. The system has zero rating history for them.
+    *   *Mitigation*: Ask user for favorite genres/artists during initial onboarding (e.g., Netflix profile setup, Spotify artist selection), display globally trending/popular items, or use demographic heuristics.
+*   **Item Cold Start**: A new movie or product is added to the catalog. No users have rated or viewed it yet.
+    *   *Mitigation*: Rely on **Content-Based Filtering** to match item attributes/tags with user preferences, or allocate exploratory exposure slots (Multi-Armed Bandits).
+*   **System Bootstrapping**: A newly launched platform with few users and few items.
+    *   *Mitigation*: Seed the database with public datasets (e.g. IMDb, MovieLens), employ hybrid filtering, and leverage external social graph data.
+
+#### 2. Implicit vs. Explicit Feedback
+
+| Feature / Dimension | Explicit Feedback | Implicit Feedback |
+| :--- | :--- | :--- |
+| **Definition** | Direct, deliberate expressions of preference provided consciously by the user. | Passive behavioral signals inferred automatically from user interactions with the platform. |
+| **Examples** | 1-to-5 star ratings, textual reviews, Thumbs Up / Thumbs Down, Liked songs. | Clicks, page views, purchase history, search queries, video watch completion %, dwell time. |
+| **Data Quality** | **High Precision**: Unambiguous signal of user sentiment. | **Noisy**: A click does not guarantee satisfaction; accidental clicks and bounces happen. |
+| **Data Volume** | **Extremely Sparse**: < 1% of users consistently take time to leave ratings. | **Extremely Abundant**: Generated continuously with every interaction in real time. |
+| **Negative Signals** | Clear: Explicit 1-star or thumbs-down rating. | Ambiguous: Did the user not click because they disliked it, or because they never saw it? |
 
 ---
 
@@ -1416,6 +1742,196 @@ from sklearn.metrics import classification_report, roc_auc_score
 # 5. Evaluation
 # y_pred = model.predict(X_test_scaled)
 # print(classification_report(y_test, y_pred))
+```
+
+### Python Unsupervised Learning Models Cheatsheet
+```python
+# ----------------------------------------------------
+# 1. Principal Component Analysis (PCA)
+# ----------------------------------------------------
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+# Standardize features first (highly recommended for PCA/LDA)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Instantiate and fit PCA to reduce to 2 components
+pca = PCA(n_components=2, random_state=42)
+X_pca = pca.fit_transform(X_scaled)
+print(f"Explained Variance Ratio: {pca.explained_variance_ratio_}")
+
+# ----------------------------------------------------
+# 2. Linear Discriminant Analysis (LDA)
+# ----------------------------------------------------
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+
+# LDA is supervised, requires target labels 'y'
+# Max components = min(n_features, n_classes - 1)
+lda = LDA(n_components=1)
+X_lda = lda.fit_transform(X_scaled, y)
+
+# ----------------------------------------------------
+# 3. t-Distributed Stochastic Neighbor Embedding (t-SNE)
+# ----------------------------------------------------
+from sklearn.manifold import TSNE
+
+# t-SNE is non-linear and doesn't support separate transform() on test data
+tsne = TSNE(n_components=2, perplexity=30, n_iter=1000, random_state=42)
+X_tsne = tsne.fit_transform(X)
+
+# ----------------------------------------------------
+# 4. Association Rule Learning (Apriori & Association Rules)
+# ----------------------------------------------------
+from mlxtend.preprocessing import TransactionEncoder
+from mlxtend.frequent_patterns import apriori, association_rules
+
+# Convert transactional list of lists to one-hot DataFrame
+te = TransactionEncoder()
+te_ary = te.fit(transactions).transform(transactions)
+df_trans = pd.DataFrame(te_ary, columns=te.columns_)
+
+# Generate frequent itemsets (min_support = 1%)
+frequent_itemsets = apriori(df_trans, min_support=0.01, use_colnames=True)
+
+# Generate rules based on confidence or lift
+rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1.0)
+print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
+
+# ----------------------------------------------------
+# 5. Eclat Algorithm
+# ----------------------------------------------------
+from pyECLAT import ECLAT
+
+# Instantiate and fit ECLAT vertical transactional algorithm
+eclat_instance = ECLAT(data=data_df, verbose=True)
+get_ECLAT_indexes, get_ECLAT_supports = eclat_instance.fit(min_support=0.01, min_combination=1, max_combination=2)
+
+# ----------------------------------------------------
+# 6. Anomaly Detection (Isolation Forest)
+# ----------------------------------------------------
+from sklearn.ensemble import IsolationForest
+
+# Instantiate and fit Isolation Forest
+# contamination: proportion of outliers expected in data
+iso_forest = IsolationForest(contamination=0.01, random_state=42)
+iso_forest.fit(X_train)
+
+# Predictions: -1 for anomaly/outlier, 1 for normal
+y_pred_train = iso_forest.predict(X_train)
+anomaly_scores = iso_forest.decision_function(X_train)
+
+# ----------------------------------------------------
+# 7. Model Evaluation (Silhouette Score)
+# ----------------------------------------------------
+from sklearn.metrics import silhouette_score
+from sklearn.cluster import KMeans
+
+# Calculate silhouette score for clustering models (e.g., K-Means)
+kmeans = KMeans(n_clusters=3, random_state=42).fit(X_scaled)
+score = silhouette_score(X_scaled, kmeans.labels_)
+print(f"Silhouette Score: {score}")
+```
+
+### Python Recommendation Systems Cheatsheet
+```python
+# ----------------------------------------------------
+# 1. Memory-Based Collaborative Filtering (Cosine Similarity)
+# ----------------------------------------------------
+import pandas as pd
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+
+# Sample user-item interaction matrix (Users x Items)
+# Rows: Users, Columns: Items, Values: Ratings (0 = unrated)
+ratings_matrix = np.array([
+    [5, 3, 0, 1],
+    [4, 0, 0, 1],
+    [1, 1, 0, 5],
+    [0, 0, 5, 4],
+    [0, 1, 5, 4],
+])
+
+# 1A. User-Based Similarity (Cosine similarity between user rows)
+user_sim = cosine_similarity(ratings_matrix)
+print("User Similarity Matrix:\n", user_sim)
+
+# 1B. Item-Based Similarity (Cosine similarity between item columns)
+item_sim = cosine_similarity(ratings_matrix.T)
+print("Item Similarity Matrix:\n", item_sim)
+
+# ----------------------------------------------------
+# 2. Model-Based SVD (Singular Value Decomposition)
+# ----------------------------------------------------
+from scipy.sparse.linalg import svds
+
+# Decompose rating matrix into U, Sigma, Vt with K latent factors
+K = 2  # Number of latent factors
+U, sigma, Vt = svds(ratings_matrix.astype(float), k=K)
+
+# Convert singular values array to diagonal matrix
+sigma_diag = np.diag(sigma)
+
+# Reconstruct approximate full rating matrix
+predicted_ratings = np.dot(np.dot(U, sigma_diag), Vt)
+print("Reconstructed Predicted Ratings:\n", predicted_ratings)
+
+# ----------------------------------------------------
+# 3. Content-Based Filtering (User Profile Vector Matching)
+# ----------------------------------------------------
+# Item attribute vectors: Shape (n_items, n_features)
+item_features = np.array([
+    [1, 0, 1],  # Item 0 (e.g. Action, Comedy, Sci-Fi)
+    [0, 1, 1],  # Item 1
+    [1, 1, 0],  # Item 2
+])
+user_ratings = np.array([5, 3, 4])  # User ratings for items 0, 1, 2
+
+# Construct User Profile as weighted average of liked item attributes
+user_profile = np.dot(user_ratings, item_features) / np.sum(user_ratings)
+
+# Candidate item feature vector
+candidate_item = np.array([[1, 0, 1]])
+similarity = cosine_similarity([user_profile], candidate_item)[0][0]
+print(f"Content Match Score: {similarity:.4f}")
+
+# ----------------------------------------------------
+# 4. GetTopN Recommendations Function
+# ----------------------------------------------------
+def get_top_n(predictions, n=3):
+    """
+    Extracts top N recommended item indices for each user based on predicted scores.
+    """
+    top_n = {}
+    for user_id in range(predictions.shape[0]):
+        user_scores = predictions[user_id]
+        # Sort scores in descending order and select top N items
+        top_n[user_id] = np.argsort(user_scores)[::-1][:n]
+    return top_n
+
+top_recs = get_top_n(predicted_ratings, n=2)
+print("Top-2 Recommendations per user:", top_recs)
+
+# ----------------------------------------------------
+# 5. Hit Rate Evaluation Metric
+# ----------------------------------------------------
+def hit_rate_at_n(top_n_recommendations, true_ratings, threshold=3.5):
+    """
+    Computes Hit Rate@N: Proportion of users who have at least one 
+    recommended item rated >= threshold in ground-truth data.
+    """
+    hits = 0
+    total_users = len(top_n_recommendations)
+    
+    for user_id, item_indices in top_n_recommendations.items():
+        # Check if any recommended item has an actual rating >= threshold
+        if any(true_ratings[user_id, item] >= threshold for item in item_indices):
+            hits += 1
+            
+    return hits / total_users
+
+hr = hit_rate_at_n(top_recs, ratings_matrix, threshold=3.0)
+print(f"Hit Rate: {hr:.2%}")
 ```
 
 ---
