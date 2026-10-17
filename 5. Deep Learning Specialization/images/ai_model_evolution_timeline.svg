@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bg)" rx="16"/>
+
+  <!-- Title Header -->
+  <text x="600" y="45" fill="#f8fafc" font-size="24" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">MASTER AI &amp; SEQUENCE MODEL EVOLUTION TIMELINE</text>
+  <text x="600" y="72" fill="#94a3b8" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">From Recurrent Memory Loops (1997) to Parallel Foundation Transformers (2017+)</text>
+
+  <!-- Connecting Timeline Bar -->
+  <line x1="80" y1="120" x2="1120" y2="120" stroke="#334155" stroke-width="4" stroke-dasharray="8 8"/>
+  <line x1="100" y1="120" x2="1100" y2="120" stroke="#38bdf8" stroke-width="3"/>
+
+  <!-- Milestones Nodes -->
+  <!-- 1997: LSTM -->
+  <circle cx="140" cy="120" r="14" fill="#38bdf8" stroke="#0f172a" stroke-width="3"/>
+  <text x="140" y="100" fill="#38bdf8" font-size="15" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">1997</text>
+  <rect x="50" y="150" width="180" height="320" rx="12" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="50" y="150" width="180" height="36" rx="12" fill="#0284c7"/>
+  <text x="140" y="173" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">LSTM Network</text>
+  <text x="140" y="205" fill="#cbd5e1" font-size="12" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Hochreiter &amp; Schmidhuber</text>
+  <line x1="65" y1="220" x2="215" y2="220" stroke="#334155" stroke-width="1"/>
+  <text x="65" y="245" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• Solved Vanishing Gradients</text>
+  <text x="65" y="270" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• Cell State Conveyor (Ct)</text>
+  <text x="65" y="295" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• 3 Gating Circuits:</text>
+  <text x="75" y="315" fill="#38bdf8" font-size="11" font-family="system-ui, sans-serif">- Forget Gate (ft)</text>
+  <text x="75" y="335" fill="#38bdf8" font-size="11" font-family="system-ui, sans-serif">- Input Gate (it)</text>
+  <text x="75" y="355" fill="#38bdf8" font-size="11" font-family="system-ui, sans-serif">- Output Gate (ot)</text>
+  <text x="65" y="390" fill="#f43f5e" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">❌ Sequential: O(N)</text>
+  <text x="65" y="410" fill="#64748b" font-size="10" font-family="system-ui, sans-serif">Slow step-by-step loop</text>
+
+  <!-- 2014: GRU & Seq2Seq -->
+  <circle cx="370" cy="120" r="14" fill="#a78bfa" stroke="#0f172a" stroke-width="3"/>
+  <text x="370" y="100" fill="#a78bfa" font-size="15" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">2014</text>
+  <rect x="280" y="150" width="180" height="320" rx="12" fill="url(#cardGrad)" stroke="#a78bfa" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="280" y="150" width="180" height="36" rx="12" fill="#7c3aed"/>
+  <text x="370" y="173" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">GRU &amp; Seq2Seq</text>
+  <text x="370" y="205" fill="#cbd5e1" font-size="12" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Cho et al. &amp; Sutskever</text>
+  <line x1="295" y1="220" x2="445" y2="220" stroke="#334155" stroke-width="1"/>
+  <text x="295" y="245" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• GRU: 2 Gates (Reset, Update)</text>
+  <text x="295" y="270" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• 25% fewer weights, faster</text>
+  <text x="295" y="295" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• Seq2Seq Framework:</text>
+  <text x="305" y="315" fill="#a78bfa" font-size="11" font-family="system-ui, sans-serif">- Encoder compresses input</text>
+  <text x="305" y="335" fill="#a78bfa" font-size="11" font-family="system-ui, sans-serif">- Decoder generates target</text>
+  <text x="295" y="370" fill="#f59e0b" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">⚠️ The 50-Word Bottleneck:</text>
+  <text x="295" y="390" fill="#64748b" font-size="10" font-family="system-ui, sans-serif">Fixed 512-vector squeezed data</text>
+
+  <!-- 2014/15: Bahdanau Attention -->
+  <circle cx="600" cy="120" r="14" fill="#fbbf24" stroke="#0f172a" stroke-width="3"/>
+  <text x="600" y="100" fill="#fbbf24" font-size="15" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">2014 / 2015</text>
+  <rect x="510" y="150" width="180" height="320" rx="12" fill="url(#cardGrad)" stroke="#fbbf24" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="510" y="150" width="180" height="36" rx="12" fill="#d97706"/>
+  <text x="600" y="173" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Bahdanau Attention</text>
+  <text x="600" y="205" fill="#cbd5e1" font-size="12" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Bahdanau, Bengio, Cho</text>
+  <line x1="525" y1="220" x2="675" y2="220" stroke="#334155" stroke-width="1"/>
+  <text x="525" y="245" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• Broke the Seq2Seq bottleneck</text>
+  <text x="525" y="270" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• Dynamic spotlight window</text>
+  <text x="525" y="295" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• Additive Alignment Score:</text>
+  <text x="535" y="320" fill="#fbbf24" font-size="11" font-family="system-ui, sans-serif">ci = Σ αij hj</text>
+  <text x="525" y="355" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• Direct encoder state links</text>
+  <text x="525" y="390" fill="#f43f5e" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">❌ Recurrence Still Present</text>
+  <text x="525" y="410" fill="#64748b" font-size="10" font-family="system-ui, sans-serif">Still chained to RNN step loops</text>
+
+  <!-- June 12, 2017: Transformer -->
+  <circle cx="830" cy="120" r="16" fill="#34d399" stroke="#0f172a" stroke-width="4"/>
+  <text x="830" y="100" fill="#34d399" font-size="15" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">JUNE 12, 2017</text>
+  <rect x="740" y="150" width="180" height="320" rx="12" fill="url(#cardGrad)" stroke="#34d399" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="740" y="150" width="180" height="36" rx="12" fill="#059669"/>
+  <text x="830" y="173" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Original Transformer</text>
+  <text x="830" y="205" fill="#cbd5e1" font-size="12" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Vaswani et al. (Google Brain)</text>
+  <line x1="755" y1="220" x2="905" y2="220" stroke="#334155" stroke-width="1"/>
+  <text x="755" y="245" fill="#34d399" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">"Attention Is All You Need"</text>
+  <text x="755" y="270" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• NO recurrence! NO convs!</text>
+  <text x="755" y="295" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• Scaled Dot-Product:</text>
+  <text x="765" y="318" fill="#34d399" font-size="11" font-family="system-ui, sans-serif">Softmax(QKᵀ / √dk) V</text>
+  <text x="755" y="345" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">• Multi-Head Attention</text>
+  <text x="755" y="380" fill="#34d399" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">✅ FULL PARALLEL: O(1)</text>
+  <text x="755" y="405" fill="#64748b" font-size="10" font-family="system-ui, sans-serif">Scales across 10,000+ GPUs</text>
+
+  <!-- 2018+: Modern 3 Branches -->
+  <circle cx="1060" cy="120" r="14" fill="#38bdf8" stroke="#0f172a" stroke-width="3"/>
+  <text x="1060" y="100" fill="#38bdf8" font-size="15" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">2018 - 2026+</text>
+  <rect x="970" y="150" width="180" height="320" rx="12" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="970" y="150" width="180" height="36" rx="12" fill="#0284c7"/>
+  <text x="1060" y="173" fill="#ffffff" font-size="13" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">3 Modern Branches</text>
+  <text x="1060" y="205" fill="#cbd5e1" font-size="12" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">BERT, GPT &amp; T5</text>
+  <line x1="985" y1="220" x2="1135" y2="220" stroke="#334155" stroke-width="1"/>
+  <text x="985" y="245" fill="#38bdf8" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">1. Encoder-Only (BERT):</text>
+  <text x="995" y="265" fill="#94a3b8" font-size="10" font-family="system-ui, sans-serif">Search ranking &amp; QA (MLM)</text>
+  <text x="985" y="295" fill="#34d399" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">2. Decoder-Only (GPT):</text>
+  <text x="995" y="315" fill="#94a3b8" font-size="10" font-family="system-ui, sans-serif">ChatGPT, LLMs &amp; Coding</text>
+  <text x="985" y="345" fill="#a78bfa" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">3. Hybrid (T5 / BART):</text>
+  <text x="995" y="365" fill="#94a3b8" font-size="10" font-family="system-ui, sans-serif">Unified Text-to-Text</text>
+  <text x="985" y="395" fill="#fbbf24" font-size="11" font-weight="bold" font-family="system-ui, sans-serif">4. Vision (ViT, CLIP):</text>
+  <text x="995" y="415" fill="#64748b" font-size="10" font-family="system-ui, sans-serif">Patch-based multimodal AI</text>
+</svg>

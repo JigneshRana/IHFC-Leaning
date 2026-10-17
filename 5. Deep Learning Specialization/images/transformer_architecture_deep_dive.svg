@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" width="1100" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="encGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="decGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#581c87"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="attnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="ffnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="normGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)" rx="16"/>
+
+  <text x="550" y="45" fill="#f8fafc" font-size="24" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">THE FULL TRANSFORMER ARCHITECTURE (VASWANI ET AL., 2017)</text>
+  <text x="550" y="70" fill="#94a3b8" font-size="14" font-family="system-ui, sans-serif" text-anchor="middle">Step-by-Step Anatomy: Encoder Stack, Decoder Stack &amp; Scaled Multi-Head Attention</text>
+
+  <!-- ENCODER CONTAINER (LEFT) -->
+  <rect x="80" y="100" width="420" height="580" rx="16" fill="url(#encGrad)" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="80" y="100" width="420" height="40" rx="16" fill="#0284c7"/>
+  <text x="290" y="126" fill="#ffffff" font-size="16" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">ENCODER (Repeated N = 6 Times)</text>
+
+  <!-- Encoder Elements (Bottom to Top) -->
+  <!-- Inputs & Positional Encoding -->
+  <rect x="150" y="620" width="280" height="40" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+  <text x="290" y="645" fill="#cbd5e1" font-size="13" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Input Embedding + Positional Encoding</text>
+  
+  <line x1="290" y1="620" x2="290" y2="585" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Encoder Multi-Head Attention -->
+  <rect x="150" y="525" width="280" height="55" rx="8" fill="url(#attnGrad)" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="290" y="550" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Multi-Head Self-Attention</text>
+  <text x="290" y="568" fill="#bae6fd" font-size="11" font-family="system-ui, sans-serif" text-anchor="middle">Q = K = V (Pairwise token relationships)</text>
+
+  <line x1="290" y1="525" x2="290" y2="495" stroke="#38bdf8" stroke-width="2"/>
+
+  <!-- Encoder Add & Norm 1 -->
+  <rect x="170" y="455" width="240" height="40" rx="8" fill="url(#normGrad)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="290" y="480" fill="#ffffff" font-size="13" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Add &amp; LayerNorm (Residual)</text>
+
+  <line x1="290" y1="455" x2="290" y2="425" stroke="#38bdf8" stroke-width="2"/>
+
+  <!-- Encoder Feed-Forward Network -->
+  <rect x="150" y="365" width="280" height="55" rx="8" fill="url(#ffnGrad)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="290" y="390" fill="#ffffff" font-size="14" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Feed-Forward Network (FFN)</text>
+  <text x="290" y="408" fill="#a7f3d0" font-size="11" font-family="system-ui, sans-serif" text-anchor="middle">Linear(d_model -> d_ff) -> ReLU -> Linear</text>
+
+  <line x1="290" y1="365" x2="290" y2="335" stroke="#38bdf8" stroke-width="2"/>
+
+  <!-- Encoder Add & Norm 2 -->
+  <rect x="170" y="295" width="240" height="40" rx="8" fill="url(#normGrad)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="290" y="320" fill="#ffffff" font-size="13" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Add &amp; LayerNorm (Residual)</text>
+
+  <!-- Encoder Output Context Vector line -->
+  <line x1="290" y1="295" x2="290" y2="240" stroke="#38bdf8" stroke-width="3"/>
+  <line x1="290" y1="240" x2="570" y2="240" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4 4"/>
+  <circle cx="290" cy="240" r="4" fill="#38bdf8"/>
+  <text x="430" y="230" fill="#38bdf8" font-size="12" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Encoder Keys (K) &amp; Values (V)</text>
+
+
+  <!-- DECODER CONTAINER (RIGHT) -->
+  <rect x="600" y="100" width="420" height="580" rx="16" fill="url(#decGrad)" stroke="#c084fc" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="600" y="100" width="420" height="40" rx="16" fill="#9333ea"/>
+  <text x="810" y="126" fill="#ffffff" font-size="16" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">DECODER (Repeated N = 6 Times)</text>
+
+  <!-- Outputs & Positional Encoding -->
+  <rect x="670" y="620" width="280" height="40" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+  <text x="810" y="645" fill="#cbd5e1" font-size="13" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Target Embedding + Pos. Encoding</text>
+
+  <line x1="810" y1="620" x2="810" y2="590" stroke="#c084fc" stroke-width="2"/>
+
+  <!-- Decoder Masked Self-Attention -->
+  <rect x="670" y="535" width="280" height="50" rx="8" fill="#9333ea" stroke="#c084fc" stroke-width="1.5"/>
+  <text x="810" y="558" fill="#ffffff" font-size="13" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Masked Multi-Head Attention</text>
+  <text x="810" y="575" fill="#e9d5ff" font-size="11" font-family="system-ui, sans-serif" text-anchor="middle">Causal: Cannot look into the future</text>
+
+  <line x1="810" y1="535" x2="810" y2="505" stroke="#c084fc" stroke-width="2"/>
+
+  <!-- Decoder Add & Norm 1 -->
+  <rect x="690" y="470" width="240" height="35" rx="8" fill="url(#normGrad)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="810" y="493" fill="#ffffff" font-size="12" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Add &amp; LayerNorm</text>
+
+  <line x1="810" y1="470" x2="810" y2="440" stroke="#c084fc" stroke-width="2"/>
+
+  <!-- Decoder Multi-Head Cross Attention -->
+  <rect x="670" y="380" width="280" height="55" rx="8" fill="#7c3aed" stroke="#c084fc" stroke-width="1.5"/>
+  <text x="810" y="405" fill="#ffffff" font-size="13" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Multi-Head Cross-Attention</text>
+  <text x="810" y="423" fill="#e9d5ff" font-size="11" font-family="system-ui, sans-serif" text-anchor="middle">Query from Decoder, K &amp; V from Encoder</text>
+
+  <!-- Cross-attention link from encoder -->
+  <line x1="570" y1="240" x2="720" y2="380" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="3 3"/>
+
+  <line x1="810" y1="380" x2="810" y2="350" stroke="#c084fc" stroke-width="2"/>
+
+  <!-- Decoder Add & Norm 2 -->
+  <rect x="690" y="315" width="240" height="35" rx="8" fill="url(#normGrad)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="810" y="338" fill="#ffffff" font-size="12" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Add &amp; LayerNorm</text>
+
+  <line x1="810" y1="315" x2="810" y2="285" stroke="#c084fc" stroke-width="2"/>
+
+  <!-- Decoder Feed-Forward Network -->
+  <rect x="670" y="235" width="280" height="45" rx="8" fill="url(#ffnGrad)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="810" y="263" fill="#ffffff" font-size="13" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Feed-Forward Network (FFN)</text>
+
+  <line x1="810" y1="235" x2="810" y2="205" stroke="#c084fc" stroke-width="2"/>
+
+  <!-- Decoder Add & Norm 3 -->
+  <rect x="690" y="170" width="240" height="35" rx="8" fill="url(#normGrad)" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="810" y="193" fill="#ffffff" font-size="12" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Add &amp; LayerNorm</text>
+
+  <!-- Top Output Projection -->
+  <line x1="810" y1="170" x2="810" y2="100" stroke="#c084fc" stroke-width="2"/>
+  <rect x="670" y="700" width="280" height="50" rx="8" fill="#10b981" stroke="#34d399" stroke-width="1.5"/>
+  <text x="810" y="725" fill="#ffffff" font-size="13" font-weight="bold" font-family="system-ui, sans-serif" text-anchor="middle">Linear Layer + Softmax</text>
+  <text x="810" y="742" fill="#d1fae5" font-size="11" font-family="system-ui, sans-serif" text-anchor="middle">Generates Next Token Probabilities</text>
+
+  <!-- Bottom Explanatory Notes -->
+  <rect x="80" y="700" width="550" height="70" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="95" y="725" fill="#38bdf8" font-size="12" font-weight="bold" font-family="system-ui, sans-serif">KEY ADVANTAGES OVER RNNs:</text>
+  <text x="95" y="745" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">1. O(1) Sequential Path (No Recurrence) — Entire sequences processed in parallel on GPUs.</text>
+  <text x="95" y="760" fill="#94a3b8" font-size="11" font-family="system-ui, sans-serif">2. Constant Max Path Length — Direct attention connects words regardless of sentence distance.</text>
+</svg>
