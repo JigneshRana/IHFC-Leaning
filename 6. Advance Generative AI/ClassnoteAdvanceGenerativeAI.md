@@ -61,6 +61,13 @@ Welcome to **`ClassnoteAdvanceGenerativeAI.md`**! This is the comprehensive, seq
   - [7.2 Academic Benchmarks: ROUGE, GLUE, SuperGLUE & HELM](#72-academic-benchmarks-rouge-glue-superglue--helm)
   - [7.3 [Industry Upgrade] Modern Evaluation: LLM-as-a-Judge & RAGAS](#73-industry-upgrade-modern-evaluation-llm-as-a-judge--ragas)
   - [7.4 [Industry Upgrade] High-Throughput Serving: vLLM & PagedAttention](#74-industry-upgrade-high-throughput-serving-vllm--pagedattention)
+- [Module 8: Master Reference Links & Official Documentation](#module-8-master-reference-links--official-documentation)
+  - [8.1 LangChain & Orchestration Ecosystem](#81-langchain--orchestration-ecosystem)
+  - [8.2 Agentic AI, Multi-Agent Systems & Protocols](#82-agentic-ai-multi-agent-systems--protocols)
+  - [8.3 Foundational AI Research Papers (ArXiv)](#83-foundational-ai-research-papers-arxiv)
+  - [8.4 Vector Databases & Advanced Retrieval](#84-vector-databases--advanced-retrieval)
+  - [8.5 Model Customization, Fine-Tuning & Evaluation](#85-model-customization-fine-tuning--evaluation)
+  - [8.6 High-Performance Serving, LLMOps & Security](#86-high-performance-serving-llmops--security)
 
 ---
 
@@ -242,7 +249,7 @@ Building a modern foundation model follows three distinct sequential steps:
 
 > [!NOTE] Layman Analogy: The Lego Modular Toolkit
 > Using an LLM directly via raw API calls is like buying raw plastic pellets. You have to write boilerplate code for prompts, JSON parsing, database queries, and retry logic.
-> **LangChain** provides pre-built, interlocking Lego bricks: Snap together a Prompt brick, a Model brick, a Memory brick, and an Output Parser brick to build complete AI systems in minutes.
+> **[LangChain (langchain.com)](https://www.langchain.com/)** provides pre-built, interlocking Lego bricks: Snap together a Prompt brick, a Model brick, a Memory brick, and an Output Parser brick to build complete AI systems in minutes. Check out the official documentation at [python.langchain.com](https://python.langchain.com/).
 
 ### 2.4 LangChain Framework Architecture (Infographic)
 ![Architecture of LangChain Framework](images/lesson2_langchain_framework_architecture.png)
@@ -540,6 +547,65 @@ N-gram overlap metrics (like ROUGE and BLEU) fail to evaluate reasoning and flue
 In production, running raw HuggingFace pipelines is too slow and suffers from GPU memory fragmentation.
 - **vLLM with PagedAttention:** Manages the KV-cache like operating system virtual memory pages.
 - Enables continuous batching and yields **5x–10x higher serving throughput**, drastically cutting enterprise GPU cloud hosting costs.
+
+---
+
+## Module 8: Master Reference Links & Official Documentation
+
+### 8.1 LangChain & Orchestration Ecosystem
+- **LangChain Official Website:** [langchain.com](https://www.langchain.com/) — The primary home for the LangChain project and enterprise products.
+- **LangChain Documentation (Python):** [python.langchain.com](https://python.langchain.com/) — Comprehensive guides, API references, tutorials, and ecosystem integrations.
+- **LangChain Expression Language (LCEL):** [LCEL Conceptual Guide](https://python.langchain.com/docs/concepts/lcel/) — The modern declarative way to compose production chains using `|`.
+- **LangChain Hub:** [smith.langchain.com/hub](https://smith.langchain.com/hub) — Community repository for sharing and discovering reusable system prompts and chains.
+- **LangServe (Deployment Engine):** [python.langchain.com/docs/langserve/](https://python.langchain.com/docs/langserve/) — Deploy LangChain runnables as production-ready REST APIs.
+- **LangSmith:** [www.langchain.com/langsmith](https://www.langchain.com/langsmith) — Full observability, latency tracing, token cost monitoring, and dataset testing for LLM pipelines.
+- **LlamaIndex:** [docs.llamaindex.ai](https://docs.llamaindex.ai/) — Advanced data framework and ingestion pipelines specialized for LLM indexing and RAG.
+
+### 8.2 Agentic AI, Multi-Agent Systems & Protocols
+- **LangGraph:** [langchain-ai.github.io/langgraph](https://langchain-ai.github.io/langgraph/) — Industry standard for building cyclic, stateful multi-agent systems with human-in-the-loop controls.
+- **Model Context Protocol (MCP) by Anthropic:** [modelcontextprotocol.io](https://modelcontextprotocol.io/) — The open standard for connecting AI models to tools, file systems, and enterprise data repositories.
+- **Anthropic Computer Use API:** [docs.anthropic.com/en/docs/build-with-claude/computer-use](https://docs.anthropic.com/en/docs/build-with-claude/computer-use) — Official guide to enabling agents to interact with desktops, browsers, and GUI elements.
+- **OpenAI Tool / Function Calling Guide:** [platform.openai.com/docs/guides/function-calling](https://platform.openai.com/docs/guides/function-calling) — Native JSON-schema function execution with GPT models.
+- **Microsoft AutoGen:** [microsoft.github.io/autogen](https://microsoft.github.io/autogen/) — Multi-agent conversation framework for complex autonomous workflows.
+- **CrewAI Framework:** [docs.crewai.com](https://docs.crewai.com/) — Role-playing multi-agent collaboration framework.
+
+### 8.3 Foundational AI Research Papers (ArXiv)
+- **Transformers & Attention:** *Attention Is All You Need* (Vaswani et al., 2017) — [arXiv:1706.03762](https://arxiv.org/abs/1706.03762)
+- **Variational Autoencoders:** *Auto-Encoding Variational Bayes* (Kingma & Welling, 2013) — [arXiv:1312.6114](https://arxiv.org/abs/1312.6114)
+- **Generative Adversarial Networks:** *Generative Adversarial Nets* (Goodfellow et al., 2014) — [arXiv:1406.2661](https://arxiv.org/abs/1406.2661)
+- **Retrieval-Augmented Generation:** *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks* (Lewis et al., 2020) — [arXiv:2005.11401](https://arxiv.org/abs/2005.11401)
+- **Chain-of-Thought Reasoning:** *Chain-of-Thought Prompting Elicits Reasoning in Large Language Models* (Wei et al., 2022) — [arXiv:2201.11903](https://arxiv.org/abs/2201.11903)
+- **Self-Consistency Prompting:** *Self-Consistency Improves Chain of Thought Reasoning in Language Models* (Wang et al., 2022) — [arXiv:2203.11171](https://arxiv.org/abs/2203.11171)
+- **Tree of Thoughts:** *Tree of Thoughts: Deliberate Problem Solving with Large Language Models* (Yao et al., 2023) — [arXiv:2305.10601](https://arxiv.org/abs/2305.10601)
+- **ReAct Agent Pattern:** *ReAct: Synergizing Reasoning and Acting in Language Models* (Yao et al., 2022) — [arXiv:2210.03629](https://arxiv.org/abs/2210.03629)
+- **LoRA (Low-Rank Adaptation):** *LoRA: Low-Rank Adaptation of Large Language Models* (Hu et al., 2021) — [arXiv:2106.09685](https://arxiv.org/abs/2106.09685)
+- **QLoRA (Quantized LoRA):** *QLoRA: Efficient Finetuning of Quantized LLMs* (Dettmers et al., 2023) — [arXiv:2305.14314](https://arxiv.org/abs/2305.14314)
+- **Direct Preference Optimization:** *Direct Preference Optimization: Your Language Model is Secretly a Reward Model* (Rafailov et al., 2023) — [arXiv:2305.18290](https://arxiv.org/abs/2305.18290)
+- **Microsoft GraphRAG:** *From Local to Global: A Graph RAG Approach to Query-Focused Summarization* (Edge et al., 2024) — [arXiv:2404.16130](https://arxiv.org/abs/2404.16130)
+
+### 8.4 Vector Databases & Advanced Retrieval
+- **ChromaDB:** [trychroma.com](https://www.trychroma.com/) — Lightweight open-source embedding database for prototyping and production.
+- **Qdrant Vector Database:** [qdrant.tech](https://qdrant.tech/) — High-performance Rust-based vector search engine with rich payload filtering.
+- **Pinecone:** [pinecone.io](https://www.pinecone.io/) — Managed serverless vector database designed for hyperscale RAG.
+- **Milvus:** [milvus.io](https://milvus.io/) — Open-source distributed vector database built for massive enterprise datasets.
+- **FAISS (Facebook AI Similarity Search):** [github.com/facebookresearch/faiss](https://github.com/facebookresearch/faiss) — Foundational C++ / Python library for dense vector clustering and similarity search.
+- **Microsoft GraphRAG Documentation:** [microsoft.github.io/graphrag](https://microsoft.github.io/graphrag/) — Extracting knowledge graphs and community summaries from unstructured text.
+
+### 8.5 Model Customization, Fine-Tuning & Evaluation
+- **Hugging Face Hub & Transformers:** [huggingface.co](https://huggingface.co/) — The epicenter of open-source AI models, datasets, and pipelines.
+- **Hugging Face TRL (Transformer Reinforcement Learning):** [huggingface.co/docs/trl](https://huggingface.co/docs/trl) — Framework for training SFT, DPO, and PPO models.
+- **Unsloth:** [unsloth.ai](https://unsloth.ai/) — High-speed, low-memory LoRA and QLoRA fine-tuning (2x–5x faster, 80% less VRAM).
+- **Axolotl:** [github.com/OpenAccess-AI-Collective/axolotl](https://github.com/OpenAccess-AI-Collective/axolotl) — Streamlined configuration-driven fine-tuning tool for top open-weights models.
+- **DeepSpeed:** [deepspeed.ai](https://www.deepspeed.ai/) — Microsoft library for distributed training and ZeRO memory optimization.
+- **RAGAS (Automated RAG Evaluation):** [docs.ragas.io](https://docs.ragas.io/) — Industry-standard evaluation framework for measuring RAG faithfulness, answer relevance, and context recall.
+- **TruLens:** [trulens.org](https://www.trulens.org/) — Instrumentation and feedback functions evaluating the RAG Triad.
+
+### 8.6 High-Performance Serving, LLMOps & Security
+- **vLLM:** [docs.vllm.ai](https://docs.vllm.ai/) — High-throughput LLM serving engine featuring PagedAttention and continuous batching.
+- **SGLang:** [sgl-project.github.io](https://sgl-project.github.io/) — High-performance structured execution engine with RadixAttention for KV-cache reuse.
+- **Ollama:** [ollama.com](https://ollama.com/) — Run Llama 3, Mistral, and DeepSeek locally on macOS, Linux, and Windows.
+- **Langfuse:** [langfuse.com](https://langfuse.com/) — Open-source observability and analytics platform for LLM applications.
+- **OWASP Top 10 for LLMs:** [genai.owasp.org](https://genai.owasp.org/) — Industry standard security vulnerabilities guide for GenAI applications (Prompt Injection, Insecure Output Handling, Data Poisoning).
 
 ---
 
